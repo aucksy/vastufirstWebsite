@@ -47,48 +47,45 @@ npm run deploy     # astro build && wrangler pages deploy
 ```
 
 Static output goes to `dist/` and is served by Cloudflare's asset server. The only code that runs
-is `functions/api/notify.ts`, which stores addresses in a Cloudflare KV namespace bound as
-`WAITLIST`, and `functions/_middleware.ts`, which sends the bare domain to `www`.
+anywhere on this site is `functions/api/notify.ts`, which stores addresses in a Cloudflare KV
+namespace bound as `WAITLIST`. Every page and asset is a file.
 
 ### How the domain is wired, and why it is wired that way
 
 `vastufirst.com` keeps its DNS at **Namecheap**, because the domain's **email forwarding** lives
-there — the `contact@vastufirst.com` address on the privacy page depends on those MX records.
-Moving the zone's nameservers to Cloudflare would mean re-creating them, and a silent mail outage is
-not worth the tidiness.
+there — the MX records behind `contact@vastufirst.com`, the address the app's privacy policy
+publishes. Moving the zone's nameservers to Cloudflare would mean re-creating them, and a silent
+mail outage is not worth the tidiness. That is also why this is a **Pages** project rather than a
+Worker: a Pages custom domain attaches with a single CNAME, a Worker custom domain needs the whole
+zone.
 
-So the site is a **Cloudflare Pages** project with two custom domains, reached by two Namecheap
-records:
+Two records at Namecheap, and nothing else in that zone is touched:
 
 | Host | Type | Value |
 |---|---|---|
-| `www` | CNAME | `vastufirst-website.pages.dev` |
-| `@` | ALIAS | `vastufirst-website.pages.dev` |
+| `www` | CNAME | `vastufirst-website.pages.dev` — the site itself |
+| `@` | URL Redirect Record | `https://www.vastufirst.com` — set from the domain's **Redirect Domain** panel, not from Advanced DNS |
 
-Everything else in that zone — the MX records and the SPF line — is untouched.
+`www.vastufirst.com` is the only custom domain on the Pages project, and the only canonical host.
 
-Both hostnames are registered as custom domains on the Pages project. `www` validated immediately.
-The apex takes longer, because Cloudflare's verifier looks for a literal **CNAME** and an apex cannot
-have one — the ALIAS resolves to the right addresses but does not read as a CNAME, so its
-verification sits at "CNAME record not set" while the certificate is issued by the HTTP challenge
-instead. `functions/_middleware.ts` is what sends the apex to `www` once it is live.
+**Why the bare domain is NOT a Pages custom domain.** It was tried. Cloudflare verifies a custom
+domain by looking for a literal **CNAME** record, and an apex cannot have one — an ALIAS record
+resolves to the right addresses but does not read as a CNAME, so verification sits at
+`"CNAME record not set"` forever while `www`, which has a real CNAME, went active in minutes. An
+apex pointed at Cloudflare with no active custom domain is worse than useless: it answers **409** on
+http and fails the TLS handshake on https. Do not re-add it.
 
-**If the apex never goes active**, the fallback needs no code: at Namecheap, change the `@` record
-from ALIAS to a **URL Redirect Record** pointing at `https://www.vastufirst.com` with type
-**Permanent (301)**, and remove `vastufirst.com` from the Pages project. Then delete
-`functions/_middleware.ts`, which becomes dead weight that costs a function call on every request.
+**Two traps, both paid for:**
 
-**One trap, paid for once.** The apex was originally a Namecheap *URL Redirect Record* pointing at
-`www`. Changing the `www` CNAME away from Namecheap's parking page silently withdrew the apex's
-address record with it, and `vastufirst.com` stopped resolving at all. The ALIAS record above does
-not depend on Namecheap's parking service, so it cannot fail the same way. If the apex ever goes
-dark again, that is the first thing to look at.
-
-**And the tail of that trap:** the zone's negative-cache time is 3601 seconds. Any resolver that
-asked for the apex during the minutes it had no record will keep answering "no such name" for up to
-an hour after the fix, so `check-headers.mjs` can report the bare domain as broken while the
-authoritative nameserver is already answering correctly. Check the source of truth before believing
-a resolver:
+- The apex redirect is **tied to Namecheap's parking service**. Changing the `www` CNAME away from
+  `parkingpage.namecheap.com` silently withdrew the apex's address record with it, and the bare
+  domain stopped resolving at all. If the bare domain ever goes dark, re-add the redirect from the
+  **Domain** tab's *Redirect Domain* panel — the record-type dropdown in Advanced DNS is a custom
+  widget that resists automation, and that panel writes the same record without it.
+- The zone's negative-cache time is **3601 seconds**. Any resolver that asked while a record was
+  missing keeps answering "no such name" for up to an hour after the fix, so a checker can call the
+  bare domain broken while the authoritative nameserver is already correct. Check the source of
+  truth before believing a resolver:
 
 ```bash
 nslookup -type=A vastufirst.com dns1.registrar-servers.com
