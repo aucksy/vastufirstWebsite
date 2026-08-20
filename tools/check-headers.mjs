@@ -23,6 +23,17 @@ const ok = (pass, label, extra = '') => {
   console.log(`${pass ? 'PASS' : 'FAIL'}  ${label}${extra ? '  ' + extra : ''}`);
 };
 
+// A deployment that is seconds old answers a cold edge with a 522 or a stale
+// body, which reads as a broken site and is not one. Warm it first.
+for (let i = 0; i < 12; i++) {
+  try {
+    const warm = await fetch(BASE + '/', { cache: 'no-store' });
+    const body = await warm.text();
+    if (warm.ok && body.includes('vfZoneWrap')) break;
+  } catch {}
+  await new Promise((r) => setTimeout(r, 2500));
+}
+
 const res = await fetch(BASE + '/');
 ok(res.status === 200, 'GET / is 200', String(res.status));
 

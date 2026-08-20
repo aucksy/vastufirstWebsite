@@ -1,12 +1,16 @@
 /**
- * VastuFirst website Worker.
+ * POST /api/notify — the launch list.
  *
- * Serves the built static site and handles exactly one dynamic thing: the
- * launch-list signup. Everything else is a file.
+ * The only dynamic thing on the site. Everything else is a file, served
+ * straight from Cloudflare's asset server with the headers in public/_headers.
+ *
+ * Two callers, and both must work:
+ *   - the page's fetch, which sends JSON and expects JSON
+ *   - the plain <form> when JavaScript is off, which sends form-encoded data
+ *     and expects a page it can read
  */
 
 interface Env {
-  ASSETS: Fetcher;
   /** KV namespace holding the launch list. One key per address. */
   WAITLIST?: KVNamespace;
 }
@@ -24,8 +28,8 @@ const json = (body: unknown, status = 200) =>
 
 /** The no-JavaScript path: a plain page in the site's own colours. */
 function htmlReply(title: string, message: string, status: number) {
-  const esc = (s: string) => s.replace(/[&<>"]/g, (c) =>
-    ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c] as string));
+  const esc = (s: string) =>
+    s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c] as string);
   return new Response(
     `<!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -54,7 +58,8 @@ async function readEmail(request: Request): Promise<string> {
   return typeof v === 'string' ? v : '';
 }
 
-async function handleNotify(request: Request, env: Env): Promise<Response> {
+/** One handler for every method, so there is no precedence question. */
+export const onRequest: PagesFunction<Env> = async ({ request, env }) => {
   const wantsJson = (request.headers.get('accept') || '').includes('application/json');
 
   if (request.method !== 'POST') {
@@ -95,28 +100,5 @@ async function handleNotify(request: Request, env: Env): Promise<Response> {
 
   return wantsJson
     ? json({ ok: true, already: Boolean(existing) })
-    : htmlReply(
-        'You’re on the list',
-        'We will send one message when VastuFirst goes live — nothing else.',
-        200,
-      );
-}
-
-export default {
-  async fetch(request: Request, env: Env): Promise<Response> {
-    const url = new URL(request.url);
-
-    if (url.pathname === '/api/notify') return handleNotify(request, env);
-
-    // One canonical host. www is the canonical in every meta tag on the site.
-    if (url.hostname === 'vastufirst.com') {
-      url.hostname = 'www.vastufirst.com';
-      return Response.redirect(url.toString(), 301);
-    }
-
-    // Security and cache headers live in public/_headers, not here: a request
-    // that matches a static asset is served by the asset server and never
-    // reaches this Worker, so headers set here would silently do nothing.
-    return env.ASSETS.fetch(request);
-  },
-} satisfies ExportedHandler<Env>;
+    : htmlReply('You’re on the list', 'We will send one message when VastuFirst goes live — nothing else.', 200);
+};

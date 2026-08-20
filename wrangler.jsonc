@@ -1,20 +1,22 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "vastufirst-website",
-  "main": "worker/index.ts",
   "compatibility_date": "2026-08-01",
-  "compatibility_flags": ["nodejs_compat"],
-  "assets": {
-    "directory": "./dist",
-    "binding": "ASSETS",
-    "html_handling": "auto-trailing-slash",
-    "not_found_handling": "404-page"
-  },
-  "observability": { "enabled": true },
+  "pages_build_output_dir": "./dist",
+
+  // Cloudflare Pages, not a standalone Worker, for one reason: vastufirst.com
+  // keeps its DNS at Namecheap, where the domain's email forwarding lives. A
+  // Pages custom domain attaches with a single CNAME record; a Worker custom
+  // domain would require moving the whole zone's nameservers to Cloudflare and
+  // re-creating the mail records, which risks the address on the privacy page.
+  //
+  // Static files are served by the asset server with the headers in
+  // public/_headers. The only code that runs is functions/api/notify.ts.
+
   "kv_namespaces": [
     {
       "binding": "WAITLIST",
-      "id": "PLACEHOLDER_FILLED_BY_DEPLOY"
+      "id": "9c0c11aa41294b4f93cdb3a144b402d2"
     }
   ]
 }
