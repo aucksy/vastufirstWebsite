@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "description": "Marketing site for VastuFirst \u2014 vastu before you build.",
+  "description": "Marketing site for VastuFirst — vastu before you build.",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
@@ -17,6 +17,8 @@
     "astro": "7.2.4"
   },
   "devDependencies": {
+    "@astrojs/check": "^0.9.10",
+    "typescript": "^6.0.3",
     "wrangler": "4.124.0"
   }
 }
