@@ -145,6 +145,14 @@ img, svg { max-width: 100%; }
 
 h1, h2 { font-family: var(--display); font-weight: 400; margin: 0; }
 
+/* Every paragraph on this page is a design element with a stated margin — the
+   badge pill, the kickers, the meta row, the zone counter. The browser's
+   default 1em top and bottom silently added ~11px to each of them, which is
+   drift against the handoff in a dozen places at once. Reset once here; the
+   two that want spacing (`.prose p`, and the ones with an explicit margin
+   below) set their own. */
+p { margin: 0; }
+
 .h1 {
   font-size: clamp(52px, 6.4vw, 92px);
   line-height: 1.02;
