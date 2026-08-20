@@ -23,3 +23,5 @@ Thumbs.db
 
 # screenshots from tools/shots.mjs — regenerate them, never commit them
 shots/
+how-shots*/
+how-new/
