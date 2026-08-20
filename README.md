@@ -75,6 +75,21 @@ privacy policy publishes and Google Play reads — silently went nowhere. It is 
 Routing rule: `contact@vastufirst.com` → `vastufirst13@gmail.com`. The stale Namecheap MX and SPF
 records were deleted; Email Routing refuses to configure itself while another MX exists.
 
+**One thing is still wrong, and it is one toggle.** Proxying `www` through the zone makes Cloudflare
+rewrite the HTML on its way out. Two injections arrived with it:
+
+- **Email Address Obfuscation** rewrote the footer's Contact link into `/cdn-cgi/l/email-protection#…`,
+  which needs a decoder script the site's own CSP blocks. The Contact link was dead. Turned off, fixed.
+- **An analytics beacon** (`static.cloudflareinsights.com/beacon.min.js`) is still injected. The CSP
+  blocks it, so it never runs and collects nothing, but it logs a console error on every page load and
+  `smoke.mjs` fails on it. Real user monitoring reads *Disabled* for this zone and no matching site
+  exists in the account's Web Analytics, so the toggle is not where it should be.
+
+The fix is to stop proxying `www`: set that CNAME to **DNS only** in Cloudflare's DNS records. That is
+exactly how `www` was served before this move — straight to Pages, which holds its own certificate for
+it — and the zone cannot rewrite what it does not carry. The apex must stay **proxied**; that is where
+the certificate and the redirect rule live.
+
 **Two traps, if this ever has to be redone:**
 
 - **Cloudflare will not configure Email Routing until the zone is active AND no other MX records

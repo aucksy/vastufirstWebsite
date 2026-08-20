@@ -7,7 +7,34 @@
 // were absent from every real response: Cloudflare serves a matching static
 // asset without invoking the Worker at all. Only a real response proves it.
 
+import { request as httpsRequest } from 'node:https';
+import { Resolver } from 'node:dns/promises';
+
 const BASE = process.argv[2] || 'http://127.0.0.1:8799';
+
+/**
+ * Ask a public resolver where a host lives, then talk to that address directly
+ * with the right SNI and Host header.
+ *
+ * The machine you run this on is not the internet. After a nameserver move, an
+ * ISP resolver can keep handing back the old address for its full TTL, so a
+ * plain fetch reports the site broken while every other resolver on earth sees
+ * it working. This asks 1.1.1.1 instead.
+ */
+async function fetchViaPublicDns(host, path = '/') {
+  const r = new Resolver();
+  r.setServers(['1.1.1.1', '8.8.8.8']);
+  const [ip] = await r.resolve4(host);
+  return new Promise((res, rej) => {
+    const req = httpsRequest(
+      { host: ip, servername: host, port: 443, path, headers: { Host: host }, timeout: 15000 },
+      (r2) => { res({ status: r2.statusCode, location: r2.headers.location || '', ip }); r2.resume(); },
+    );
+    req.on('timeout', () => { req.destroy(); rej(new Error(`timed out talking to ${ip}`)); });
+    req.on('error', rej);
+    req.end();
+  });
+}
 const REQUIRED = {
   'x-content-type-options': 'nosniff',
   'referrer-policy': 'strict-origin-when-cross-origin',
@@ -86,12 +113,15 @@ ok(
 // site; skipped locally, and said out loud rather than passing silently.
 if (BASE.includes('vastufirst.com')) {
   try {
-    const apex = await fetch('http://vastufirst.com/', { redirect: 'manual' });
-    const to = apex.headers.get('location') || '';
+    // Followed, not read one hop at a time. Over http it now takes two hops —
+    // Cloudflare upgrades the scheme first, then the redirect rule moves it to
+    // www — and asserting on the first Location header called that a failure
+    // while a visitor was landing in exactly the right place.
+    const apex = await fetch('http://vastufirst.com/', { redirect: 'follow' });
     ok(
-      apex.status >= 300 && apex.status < 400 && to.includes('www.vastufirst.com'),
-      'the bare domain redirects to www over http',
-      `${apex.status} -> ${to || 'no Location header'}`,
+      apex.url === 'https://www.vastufirst.com/',
+      'the bare domain lands on www over http',
+      `${apex.status} at ${apex.url}`,
     );
     // Asserted, not merely reported. This was once a console note, on the
     // grounds that whether the registrar answers on 443 is their business —
@@ -100,21 +130,20 @@ if (BASE.includes('vastufirst.com')) {
     // "This site can't be reached". A quiet note let that sit behind an
     // "all good" until someone typed the address by hand.
     try {
-      const s = await fetch('https://vastufirst.com/', { redirect: 'manual' });
-      const sTo = s.headers.get('location') || '';
+      const s = await fetchViaPublicDns('vastufirst.com', '/');
       ok(
-        s.status >= 300 && s.status < 400 && sTo.includes('www.vastufirst.com'),
+        s.status >= 300 && s.status < 400 && s.location.includes('www.vastufirst.com'),
         'the bare domain answers on https too',
-        `${s.status} -> ${sTo || 'no Location header'}`,
+        `${s.status} -> ${s.location || 'no Location header'} (via ${s.ip})`,
+      );
+      const deep = await fetchViaPublicDns('vastufirst.com', '/privacy');
+      ok(
+        deep.location === 'https://www.vastufirst.com/privacy',
+        'the bare domain keeps the path when it redirects',
+        `${deep.status} -> ${deep.location || 'no Location header'}`,
       );
     } catch (e) {
-      ok(
-        false,
-        'the bare domain answers on https too',
-        // A stale local resolver fails this while the world sees it working.
-        // Check a public resolver before believing it: nslookup vastufirst.com 1.1.1.1
-        `${e.cause?.code || e.message} — check a public resolver before believing this`,
-      );
+      ok(false, 'the bare domain answers on https too', e.message);
     }
   } catch (e) {
     ok(false, 'the bare domain redirects to www', String(e.cause?.code || e.message));
