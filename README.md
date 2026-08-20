@@ -135,7 +135,6 @@ is a deliberate change and each is reversible in one line.
 
 | The handoff said | The site says | Why |
 |---|---|---|
-| Headline **"India's No. 1 Vastu App"** | **"Vastu before the concrete."** | The app is pre-launch with no users, and the product document names three competitors and states plainly that we are not first. An unsubstantiated "No. 1" is also an ASCI advertising problem in India. |
 | **"Six languages"** card, and a marquee of the tagline in six Indian scripts | **"Nothing to sign up for"**, and a marquee of the nine Sanskrit zone names | The app is English only, permanently — a decision, not a phase. Nothing may imply another language is coming. The same rule explicitly protects the Sanskrit and Vastu vocabulary, so the band keeps its motion and its Devanagari. |
 | **"16-zone analysis"** and **"16-zone precision"** | **"81-pada grid"** and **"The square grid, not pie slices"** | The engine scores on the 81-pada square grid. The 16-zone angular model is a separate, incompatible geometry that is not shipped and is gated on an unresolved review question. |
 | **"Consultant-reviewed rules"** | **"Every rule sourced"** | The disputed rulings are our own most-attested reading, waiting for an expert to overturn any of them. Calling them consultant-reviewed today would not be true. |
@@ -156,3 +155,10 @@ to be visible rather than buried.
   `src/components/LogoMark.astro` and re-run `node tools/make-images.mjs` — the nav, the footer, the
   share card and the touch icon all read from that one file.
 - **No price is quoted** anywhere on the site.
+- The headline reads **"India's No. 1 Vastu App"**, restored on the owner's instruction on
+  20 August 2026 after a spell as "Vastu before the concrete." Two things are on the record and
+  neither is settled: the app is pre-launch with no users, and the product document names three
+  competitors and says plainly that we are not first; and an unsubstantiated "No. 1" is a claim the
+  Advertising Standards Council of India can be asked to rule on. It is the owner's call and it is
+  reversible in one line, in two files — `src/components/Hero.astro` and `tools/og-source.html`,
+  the second followed by `node tools/make-images.mjs`.
