@@ -1,0 +1,1036 @@
+/* ==========================================================================
+   VastuFirst — Sage & Gold
+   Tokens transcribed from handoff/tokens.json + the landing-page design file.
+   Every value here is the design contract; do not "tidy" a number.
+   ========================================================================== */
+
+:root {
+  /* Surfaces */
+  --ivory: #F8F6F0;
+  --ivory-warm: #F2EEE4;
+  --ink: #232A22;
+  --ink-raised: #2C352B;
+  --ink-raised-2: #3B4433;
+
+  /* Brand */
+  --sage: #7A9E7E;
+  --sage-hover: #8FB093;
+  --sage-deep: #4C7355;
+  --sage-deep-hover: #3B5E45;
+
+  /* Accent — decorative only. Never body text on ivory (fails contrast). */
+  --gold: #C9A227;
+  --gold-tint: #F5EFDA;
+  --gold-border: #EAD9A6;
+  --bronze: #6F5410; /* the readable gold-family text colour */
+
+  /* Neutrals */
+  --text-secondary: #4B5347;
+  --text-muted: #6B7064;
+  --text-faint: #98A08C;
+  --border: #DDDED3;
+  --border-2: #D3D6C9;
+  --border-sage: #C4D0BE;
+  --sage-tint: #E4EBE1;
+  --sage-tint-2: #E7EEE6;
+  --sage-tint-3: #EFF2EA;
+
+  /* On ink */
+  --on-ink-body: #B8BFAF;
+  --on-ink-chip: #A9C3AC;
+
+  /* States */
+  --success-text: #2E5539;
+  --error-border: #B3452E;
+
+  /* Type */
+  --display: 'Marcellus', Georgia, 'Times New Roman', serif;
+  --body: 'DM Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --mono: 'DM Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+  --deva: 'Noto Serif Devanagari', 'Nirmala UI', var(--display);
+
+  /* Layout */
+  --gutter: clamp(20px, 4vw, 48px);
+  --maxw: 1280px;
+  --nav-h: 72px;
+
+  /* Motion */
+  --ease-out: cubic-bezier(.22, .8, .36, 1);
+}
+
+* { box-sizing: border-box; }
+
+/* Components below set `display` on classes that are also toggled with the
+   `hidden` attribute. A class beats the attribute, so say it once, here. */
+[hidden] { display: none !important; }
+
+html {
+  scroll-behavior: auto;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--ivory);
+  color: var(--ink);
+  font-family: var(--body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a { color: var(--sage-deep); text-decoration: none; }
+a:hover { color: var(--sage-deep-hover); }
+::selection { background: var(--gold-border); }
+
+img, svg { max-width: 100%; }
+
+/* The page root. `clip` (not hidden) so it never creates a scroll container,
+   which would break every `position: sticky` beneath it. */
+.page { overflow-x: clip; }
+
+/* Screen-reader-only, but focusable (used by the skip link + input label). */
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+.skip-link:focus {
+  position: fixed;
+  top: 8px; left: 8px;
+  width: auto; height: auto;
+  clip: auto; clip-path: none;
+  z-index: 100;
+  background: var(--ink);
+  color: var(--ivory);
+  padding: 12px 20px;
+  border-radius: 100px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* A visible focus ring everywhere. The design file has none; a keyboard user
+   needs one and it costs the mouse user nothing. */
+:focus-visible {
+  outline: 2px solid var(--sage-deep);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ==========================================================================
+   Keyframes
+   ========================================================================== */
+
+@keyframes vfMarquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@keyframes vfFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-14px); } }
+@keyframes vfPulse { 0%, 100% { opacity: .45; } 50% { opacity: 1; } }
+
+/* ==========================================================================
+   Shared type
+   ========================================================================== */
+
+.kicker {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--sage-deep);
+  margin: 0;
+}
+.kicker--gold { color: var(--gold); }
+
+h1, h2 { font-family: var(--display); font-weight: 400; margin: 0; }
+
+.h1 {
+  font-size: clamp(52px, 6.4vw, 92px);
+  line-height: 1.02;
+  letter-spacing: -.01em;
+  text-wrap: balance;
+}
+.h2 {
+  font-size: clamp(36px, 3.6vw, 54px);
+  line-height: 1.08;
+  text-wrap: balance;
+}
+
+/* ==========================================================================
+   0. Fixed chrome — progress hairline + nav
+   ========================================================================== */
+
+.progress-track {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  z-index: 60;
+  background: transparent;
+  pointer-events: none;
+}
+.progress-bar { height: 100%; width: 0%; background: var(--gold); }
+
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: clamp(12px, 2vw, 18px) clamp(18px, 4vw, 48px);
+  background: rgba(248, 246, 240, .82);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(211, 214, 201, .6);
+}
+.nav__brand { display: flex; align-items: center; gap: 12px; }
+.wordmark {
+  font-family: var(--display);
+  font-size: 22px;
+  letter-spacing: .01em;
+  color: var(--ink);
+}
+.wordmark em { font-style: normal; color: var(--sage); }
+
+.nav__links {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  font-size: 14px;
+  font-weight: 500;
+}
+.nav__link { color: var(--text-secondary); }
+.nav__link:hover { color: var(--ink); }
+
+.nav__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--ink);
+  color: var(--ivory);
+  padding: 10px 22px;
+  border-radius: 100px;
+  white-space: nowrap;
+}
+.nav__cta:hover { background: var(--ink-raised-2); color: var(--ivory); }
+.nav__cta-short { display: none; }
+
+.pulse-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--gold);
+  flex: 0 0 6px;
+  animation: vfPulse 2.4s ease-in-out infinite;
+}
+
+/* ==========================================================================
+   1. Hero
+   ========================================================================== */
+
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: clamp(100px, 12vw, 140px) var(--gutter) clamp(56px, 8vw, 80px);
+  background: var(--ivory);
+}
+.hero__grid {
+  position: absolute;
+  inset: -8%;
+  pointer-events: none;
+  opacity: .5;
+  will-change: transform;
+}
+.hero__grid svg { width: 100%; height: 100%; }
+
+.hero__dial {
+  position: absolute;
+  right: -260px;
+  top: 50%;
+  width: 920px; height: 920px;
+  margin-top: -460px;
+  pointer-events: none;
+  opacity: .6;
+  will-change: transform;
+}
+.hero__dial svg { width: 100%; height: 100%; }
+
+.hero__cols {
+  position: relative;
+  max-width: var(--maxw);
+  margin: 0 auto;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1.15fr .85fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.badge-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid var(--border-sage);
+  border-radius: 100px;
+  padding: 8px 18px;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--sage-deep);
+  background: rgba(228, 235, 225, .5);
+}
+
+.hero h1 { margin: 26px 0 0; }
+.hero h1 em { font-style: normal; color: var(--sage); }
+
+.hero__sub {
+  font-size: 19px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  max-width: 520px;
+  margin: 26px 0 0;
+  text-wrap: pretty;
+}
+
+.hero__actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 38px;
+  flex-wrap: wrap;
+}
+
+.store-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--ink);
+  color: var(--ivory);
+  border-radius: 14px;
+  padding: 12px 22px;
+}
+.store-badge__over {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.store-badge__name { font-size: 17px; font-weight: 500; margin-top: 1px; }
+
+.text-link {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--sage-deep);
+  border-bottom: 1px solid var(--border-sage);
+  padding-bottom: 2px;
+}
+
+.meta-row {
+  display: flex;
+  align-items: center;
+  gap: 26px;
+  margin-top: 44px;
+  font-family: var(--mono);
+  font-size: 11.5px;
+  letter-spacing: .06em;
+  color: var(--text-muted);
+  flex-wrap: wrap;
+}
+.meta-dot {
+  width: 4px; height: 4px;
+  border-radius: 50%;
+  background: var(--gold);
+  flex: 0 0 4px;
+}
+
+.hero__phone-cell { display: flex; justify-content: center; }
+.float-wrap { animation: vfFloat 7s ease-in-out infinite; }
+
+.scroll-hint {
+  position: absolute;
+  left: 50%;
+  bottom: 26px;
+  margin-left: -11px;
+  color: var(--text-faint);
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   Phone shell — one component, used by the hero and by "How it works".
+   ========================================================================== */
+
+.phone {
+  width: min(330px, 88vw);
+  background: #0c0c0c;
+  border-radius: 44px;
+  padding: 10px;
+  box-shadow: 0 50px 90px -36px rgba(35, 42, 34, .55);
+}
+.phone__screen {
+  background: var(--ivory);
+  border-radius: 36px;
+  overflow: hidden;
+  height: 640px;
+  position: relative;
+}
+.phone__status {
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 26px;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--text-faint);
+}
+.phone__step {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.phone__title {
+  font-family: var(--display);
+  font-size: 24px;
+  margin-top: 6px;
+}
+
+/* Hero screen: mark-north */
+.mn__head { padding: 14px 22px 0; }
+.mn__deg {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  margin-top: 14px;
+}
+.mn__deg-num { font-family: var(--mono); font-size: 44px; color: var(--ink); }
+.mn__deg-dir { font-family: var(--mono); font-size: 12px; color: var(--sage-deep); }
+
+/* The dial is optically centred in the empty band between the readout and the
+   button — not pinned to the bottom. It self-centres and shrinks with the
+   screen, so no dial size is ever hard-coded. */
+.mn__dial {
+  position: absolute;
+  left: 10px; right: 10px;
+  top: 212px; bottom: 74px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.mn__dial svg { width: 100%; height: 100%; overflow: visible; }
+#vfPhoneDial { will-change: transform; }
+
+.phone__cta {
+  position: absolute;
+  left: 22px; right: 22px;
+  bottom: 18px;
+  background: var(--sage);
+  color: var(--ink);
+  border-radius: 12px;
+  text-align: center;
+  padding: 13px;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   2. Marquee (ink band)
+   ========================================================================== */
+
+.marquee {
+  background: var(--ink);
+  padding: 18px 0;
+  overflow: hidden;
+  position: relative;
+}
+.marquee__row {
+  display: flex;
+  gap: 64px;
+  width: max-content;
+  animation: vfMarquee 36s linear infinite;
+  font-size: 16px;
+  color: var(--text-faint);
+  white-space: nowrap;
+  align-items: center;
+}
+.marquee__item { display: inline-flex; align-items: baseline; gap: 12px; }
+.marquee__deva { font-family: var(--deva); color: var(--ivory); }
+.marquee__latin { font-family: var(--display); color: var(--ivory); }
+.marquee__gloss {
+  font-family: var(--mono);
+  font-size: .68em;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+.marquee__sep { color: var(--gold); }
+
+/* ==========================================================================
+   3. How it works — scroll-pinned phone
+   ========================================================================== */
+
+.how__wrap { height: 340vh; }
+.how__pane {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 90px var(--gutter) 40px;
+  background: var(--ivory-warm);
+  overflow: hidden;
+}
+.how__cols {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  width: 100%;
+  display: grid;
+  grid-template-columns: .9fr 1.1fr;
+  gap: 80px;
+  align-items: center;
+}
+.how__phone-cell {
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+.how__ring {
+  position: absolute;
+  width: 560px; height: 560px;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  pointer-events: none;
+}
+/* The scale + compensating negative margin are set from JS (fitPhone): they
+   depend on innerHeight arithmetic no media query can express. */
+.how__phone {
+  box-shadow: 0 50px 90px -36px rgba(35, 42, 34, .5);
+  transform-origin: top center;
+}
+
+.how__screen {
+  position: absolute;
+  inset: 42px 0 0;
+  padding: 16px 22px;
+  transition: opacity .45s, transform .45s;
+}
+
+.plan-chip {
+  font-family: var(--mono);
+  font-size: 10px;
+  padding: 5px 10px;
+  border-radius: 100px;
+}
+.plan-chip--sage { background: var(--sage-tint); color: var(--sage-deep); }
+.plan-chip--muted { background: var(--sage-tint-3); color: var(--text-muted); }
+
+.info-card {
+  margin-top: 14px;
+  background: var(--sage-tint-2);
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-size: 12px;
+  line-height: 1.45;
+  color: var(--text-secondary);
+}
+
+.score-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: var(--sage-tint-3);
+  border-radius: 14px;
+  padding: 14px 16px;
+}
+.score-verdict { font-family: var(--display); font-size: 18px; }
+.score-note { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+
+.fix-card { border-radius: 10px; padding: 10px 12px; }
+.fix-card--gold {
+  margin-top: 10px;
+  background: var(--gold-tint);
+  border-left: 3px solid var(--gold);
+}
+.fix-card--sage {
+  margin-top: 8px;
+  background: var(--sage-tint-2);
+  border-left: 3px solid var(--sage);
+}
+.fix-card__title { font-size: 12.5px; font-weight: 600; }
+.fix-card__body { font-size: 11.5px; color: var(--text-muted); margin-top: 2px; }
+
+.steps { display: flex; flex-direction: column; gap: 10px; margin-top: 36px; }
+.step {
+  display: flex;
+  gap: 18px;
+  padding: 20px 22px;
+  border-radius: 16px;
+  border: 1px solid transparent;
+  transition: background .4s, border-color .4s;
+}
+.step.is-active { background: var(--ivory); border-color: var(--border); }
+.step__num {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--gold);
+  padding-top: 3px;
+}
+.step__title { font-family: var(--display); font-size: 22px; }
+.step__body {
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--text-secondary);
+  margin: 6px 0 0;
+  max-width: 420px;
+}
+
+.dashes { display: flex; gap: 8px; margin-top: 28px; margin-left: 22px; }
+.dash {
+  height: 4px; width: 36px;
+  border-radius: 100px;
+  background: var(--border-2);
+  transition: background .3s;
+}
+.dash.is-active { background: var(--gold); }
+
+/* ==========================================================================
+   4. The zones — scroll-driven mandala
+   ========================================================================== */
+
+.zones__wrap { height: 360vh; }
+.zones__pane {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 90px var(--gutter) 40px;
+  background: var(--ink);
+  color: var(--ivory);
+  overflow: hidden;
+}
+.zones__cols {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+.zones__pane h2 { color: var(--ivory); margin: 14px 0 0; }
+
+.zones__live { margin-top: 36px; min-height: 200px; }
+.zones__name-row { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; }
+.zones__name { font-family: var(--display); font-size: 44px; color: var(--ivory); }
+.zones__deva { font-family: var(--deva); font-size: 22px; color: var(--text-faint); }
+.zones__chips { display: flex; gap: 10px; margin-top: 12px; flex-wrap: wrap; }
+.chip {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: .1em;
+  padding: 6px 13px;
+  border-radius: 100px;
+  white-space: nowrap;
+}
+.chip--sage {
+  text-transform: uppercase;
+  background: rgba(122, 158, 126, .18);
+  color: var(--on-ink-chip);
+}
+.chip--gold { background: rgba(201, 162, 39, .14); color: var(--gold-border); }
+
+.zones__desc {
+  font-size: 16.5px;
+  line-height: 1.6;
+  color: var(--on-ink-body);
+  margin: 16px 0 0;
+  max-width: 430px;
+}
+.zones__counter {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 18px;
+}
+
+.zones__wheel-cell { display: flex; justify-content: center; }
+.zones__box {
+  position: relative;
+  width: min(480px, 38vw, 46vh);
+  aspect-ratio: 1;
+}
+.zones__box svg { width: 100%; height: 100%; overflow: visible; }
+#vfWheel { will-change: transform; }
+.wedge { transition: fill .4s; }
+#vfCentre { transition: fill .4s, stroke .4s; }
+
+/* ==========================================================================
+   5. Why VastuFirst
+   ========================================================================== */
+
+.why {
+  padding: clamp(72px, 10vw, 120px) var(--gutter);
+  background: var(--ivory);
+}
+.why__inner { max-width: 1080px; margin: 0 auto; }
+.why__head { text-align: center; }
+.why h2 {
+  font-size: clamp(32px, 3.2vw, 46px);
+  line-height: 1.15;
+  margin: 14px auto 0;
+  max-width: 640px;
+  text-wrap: balance;
+}
+.why__cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(258px, 1fr));
+  gap: 20px;
+  margin-top: clamp(36px, 5vw, 56px);
+}
+.card {
+  background: var(--ivory-warm);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 30px 28px;
+}
+.card__title { font-family: var(--display); font-size: 21px; margin-top: 16px; }
+.card__body {
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  margin: 8px 0 0;
+}
+
+/* ==========================================================================
+   6. Notify CTA
+   ========================================================================== */
+
+.cta {
+  padding: clamp(80px, 10vw, 120px) var(--gutter) clamp(72px, 9vw, 100px);
+  background: var(--ivory-warm);
+  position: relative;
+  overflow: hidden;
+}
+.cta__dial {
+  position: absolute;
+  left: -200px; bottom: -260px;
+  width: 640px; height: 640px;
+  opacity: .4;
+  pointer-events: none;
+  will-change: transform;
+}
+.cta__dial svg { width: 100%; height: 100%; }
+.cta__inner {
+  max-width: 680px;
+  margin: 0 auto;
+  text-align: center;
+  position: relative;
+}
+.cta__pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--bronze);
+  background: var(--gold-tint);
+  border: 1px solid var(--gold-border);
+  padding: 8px 18px;
+  border-radius: 100px;
+}
+.cta h2 {
+  font-size: clamp(36px, 4vw, 56px);
+  line-height: 1.1;
+  margin: 22px 0 0;
+}
+.cta__promise {
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  margin: 18px auto 0;
+  max-width: 460px;
+}
+
+.notify-form {
+  margin-top: 34px;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.notify-form input {
+  width: 320px;
+  max-width: 100%;
+  font-family: var(--body);
+  font-size: 15px;
+  padding: 15px 22px;
+  border-radius: 100px;
+  border: 1px solid var(--border-sage);
+  background: var(--ivory);
+  color: var(--ink);
+  outline: none;
+  transition: border-color .2s;
+}
+.notify-form input::placeholder { color: var(--text-faint); }
+.notify-form input:focus { border-color: var(--sage-deep); }
+.notify-form input.is-error { border-color: var(--error-border); }
+.notify-form button {
+  font-family: var(--body);
+  font-size: 15px;
+  font-weight: 600;
+  padding: 15px 30px;
+  border-radius: 100px;
+  border: none;
+  background: var(--sage);
+  color: var(--ink);
+  cursor: pointer;
+  transition: background .2s;
+}
+.notify-form button:hover { background: var(--sage-hover); }
+.notify-form button[disabled] { opacity: .6; cursor: default; }
+
+.notify-success {
+  margin-top: 34px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--sage-tint-2);
+  border: 1px solid var(--sage);
+  color: var(--success-text);
+  border-radius: 100px;
+  padding: 14px 28px;
+  font-size: 15px;
+  font-weight: 500;
+}
+.notify-error {
+  margin: 14px 0 0;
+  font-size: 14px;
+  color: #8C3624;
+  min-height: 1.2em;
+}
+
+.cta__stores {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  margin-top: 30px;
+  opacity: .85;
+  flex-wrap: wrap;
+}
+.store-hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  padding: 7px 16px;
+}
+
+/* ==========================================================================
+   7. Footer
+   ========================================================================== */
+
+.footer {
+  background: var(--ink);
+  color: var(--text-faint);
+  padding: clamp(32px, 5vw, 44px) var(--gutter) clamp(26px, 4vw, 34px);
+}
+.footer__inner {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.footer__meta {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: .08em;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.footer__meta a { color: var(--text-faint); }
+.footer__meta a:hover { color: var(--ivory); }
+
+/* Required by the product's honesty position: vastu has no scientific
+   validation and the site never implies otherwise. */
+.footer__disclaimer {
+  max-width: var(--maxw);
+  margin: 22px auto 0;
+  padding-top: 20px;
+  border-top: 1px solid rgba(211, 214, 201, .14);
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: #7C836F;
+  max-inline-size: 78ch;
+}
+
+/* ==========================================================================
+   Reveal on scroll
+   ========================================================================== */
+
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity .7s var(--ease-out), transform .7s var(--ease-out);
+}
+[data-reveal].is-in { opacity: 1; transform: none; }
+
+/* ==========================================================================
+   Legal / content pages
+   ========================================================================== */
+
+.prose-page {
+  padding: calc(var(--nav-h) + clamp(40px, 8vw, 90px)) var(--gutter) clamp(64px, 9vw, 110px);
+  background: var(--ivory);
+}
+.prose {
+  max-width: 720px;
+  margin: 0 auto;
+  font-size: 16.5px;
+  line-height: 1.68;
+  color: var(--text-secondary);
+}
+.prose h1 {
+  font-size: clamp(38px, 5vw, 60px);
+  line-height: 1.06;
+  color: var(--ink);
+  margin: 0 0 8px;
+}
+.prose h2 {
+  font-size: clamp(22px, 2.4vw, 28px);
+  line-height: 1.25;
+  color: var(--ink);
+  margin: 44px 0 0;
+}
+.prose h2 + p { margin-top: 10px; }
+.prose p { margin: 16px 0 0; text-wrap: pretty; }
+.prose ul { margin: 16px 0 0; padding-left: 22px; }
+.prose li { margin: 8px 0 0; }
+.prose strong { color: var(--ink); font-weight: 600; }
+.prose__updated {
+  font-family: var(--mono);
+  font-size: 11.5px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin: 0 0 34px;
+}
+.prose__back { display: inline-block; margin-top: 48px; font-weight: 500; }
+
+/* ==========================================================================
+   RESPONSIVE
+   Two thresholds, two different meanings:
+     width  <= 900px  -> phone layout (stacking, type scale, chrome)
+     height <= 800px  -> release the pinned sections (short laptop windows too)
+   ========================================================================== */
+
+/* ---- Released pin: width <= 900px OR height <= 800px --------------------- */
+@media (max-width: 900px), (max-height: 800px) {
+  .how__wrap { height: auto; }
+  .how__pane {
+    position: relative;
+    height: auto;
+    display: block;
+    overflow: visible; /* an overflow:hidden ancestor would kill the sticky below */
+    padding: 64px var(--gutter) 76px;
+  }
+  /* The device holds its place while the step cards scroll past beneath it. */
+  .how__phone-cell {
+    position: sticky;
+    top: 72px;
+    z-index: 2;
+  }
+  .how__ring { display: none; }
+  /* Taller rows buy the scroll travel a released pin no longer gets for free. */
+  .step {
+    padding: 16px 18px;
+    min-height: 38vh;
+    align-items: center;
+  }
+
+  .zones__wrap { height: auto; }
+  .zones__pane {
+    position: relative;
+    height: auto;
+    min-height: 100vh;
+    min-height: 100svh;
+    align-items: flex-start;
+    overflow: visible;
+    padding: 78px var(--gutter) 36px;
+  }
+  .zones__live { min-height: 0; }
+}
+
+/* ---- Phone layout: width <= 900px --------------------------------------- */
+@media (max-width: 900px) {
+  :root { --gutter: 20px; }
+
+  .nav__links { gap: 12px; }
+  .nav__link { display: none; }
+  /* The handoff's 12px/18px padding lands the pill on 42px, not the 44px the
+     QA checklist asks for. The padding stays; min-height makes the promise true. */
+  .nav__cta { padding: 12px 18px; min-height: 44px; }
+  .nav__cta-full { display: none; }
+  .nav__cta-short { display: inline; }
+
+  .hero__cols { grid-template-columns: 1fr; gap: 40px; }
+  .hero__phone-cell { justify-content: flex-start; }
+  .hero__dial {
+    width: 560px; height: 560px;
+    margin-top: -280px;
+    right: -230px;
+    opacity: .4;
+  }
+
+  .marquee__row { font-size: 14px; gap: 44px; }
+
+  /* Block flow, not a one-column grid: a sticky grid item is bounded by its own
+     grid area, so in a stacked grid the phone would unstick immediately. */
+  .how__cols { display: block; }
+  .how__copy { margin-top: 26px; }
+
+  .zones__cols { grid-template-columns: 1fr; gap: 20px; }
+  .zones__pane h2 { font-size: clamp(27px, 4.6vh, 34px); }
+  .zones__live { margin-top: 22px; }
+  .zones__name { font-size: clamp(30px, 5vh, 40px); }
+  .zones__desc { font-size: clamp(13.5px, 2vh, 15.5px); margin-top: 12px; }
+  /* Sized in vh on purpose, so it survives short and landscape viewports. */
+  .zones__box { width: min(288px, 36vh); }
+
+  .cta__dial {
+    width: 420px; height: 420px;
+    left: -150px; bottom: -190px;
+  }
+}
+
+/* ==========================================================================
+   Reduced motion — every scroll-linked transform and looping animation off.
+   Reveals and the sticky screen swaps still work.
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  .marquee__row,
+  .float-wrap,
+  .pulse-dot {
+    animation: none !important;
+  }
+  html { scroll-behavior: auto !important; }
+  [data-reveal] { transition-duration: .01ms; }
+}

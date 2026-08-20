@@ -1,0 +1,30 @@
+---
+import { zones } from '../data/zones';
+
+/**
+ * The ink band.
+ *
+ * The design prototype ran the tagline through six Indian scripts. The product
+ * is English-only, permanently (VastuFirst/CLAUDE.md 2e) — a language marquee
+ * would promise a picker that is never coming. What the same rule explicitly
+ * protects is the Sanskrit and Vastu vocabulary, because that *is* the product.
+ * So the band keeps its motion and its Devanagari, and carries the nine zone
+ * names the app actually scores against.
+ */
+const items = zones.map((z) => ({ deva: z.deva, name: z.sanskrit, gloss: z.name }));
+const run = [...items, ...items];
+---
+<div class="marquee" aria-hidden="true">
+  <div class="marquee__row" id="vfMarquee">
+    {run.map((z) => (
+      <>
+        <span class="marquee__item">
+          <span class="marquee__deva">{z.deva}</span>
+          <span class="marquee__latin">{z.name}</span>
+          <span class="marquee__gloss">{z.gloss}</span>
+        </span>
+        <span class="marquee__sep">◆</span>
+      </>
+    ))}
+  </div>
+</div>

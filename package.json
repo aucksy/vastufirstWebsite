@@ -1,0 +1,22 @@
+{
+  "name": "vastufirst-website",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Marketing site for VastuFirst — vastu before you build.",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check",
+    "deploy": "astro build && wrangler deploy",
+    "cf:dev": "astro build && wrangler dev"
+  },
+  "dependencies": {
+    "@cloudflare/workers-types": "^5.20260820.1",
+    "astro": "7.2.4"
+  },
+  "devDependencies": {
+    "wrangler": "4.124.0"
+  }
+}

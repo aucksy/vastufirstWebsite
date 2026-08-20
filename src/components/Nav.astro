@@ -1,0 +1,21 @@
+---
+import LogoMark from './LogoMark.astro';
+---
+<div class="progress-track" aria-hidden="true"><div class="progress-bar" id="vfProgress"></div></div>
+
+<nav class="nav" id="vfNav" aria-label="Primary">
+  <a class="nav__brand" href="/" aria-label="VastuFirst — home">
+    <LogoMark size={34} />
+    <span class="wordmark">Vastu<em>First</em></span>
+  </a>
+
+  <div class="nav__links">
+    <a class="nav__link" href="#vfHow" data-jump="vfHow">How it works</a>
+    <a class="nav__link" href="#vfZones" data-jump="vfZones">The nine zones</a>
+    <a class="nav__cta" href="#vfNotify" data-jump="vfNotify">
+      <span class="pulse-dot" aria-hidden="true"></span>
+      <span class="nav__cta-full">Coming soon — get notified</span>
+      <span class="nav__cta-short">Get notified</span>
+    </a>
+  </div>
+</nav>

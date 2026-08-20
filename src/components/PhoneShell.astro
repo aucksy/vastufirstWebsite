@@ -1,0 +1,20 @@
+---
+/**
+ * The device. Bezel, screen and status bar in one place, so the hero phone and
+ * the "How it works" phone can never drift apart.
+ */
+interface Props {
+  id?: string;
+  class?: string;
+  screenClass?: string;
+}
+const { id, class: cls, screenClass } = Astro.props;
+---
+<div class:list={['phone', cls]} id={id}>
+  <div class:list={['phone__screen', screenClass]}>
+    <div class="phone__status" aria-hidden="true">
+      <span>9:41</span><span>VastuFirst</span>
+    </div>
+    <slot />
+  </div>
+</div>

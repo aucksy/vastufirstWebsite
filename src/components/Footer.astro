@@ -1,0 +1,23 @@
+---
+import LogoMark from './LogoMark.astro';
+const year = new Date().getFullYear();
+---
+<footer class="footer">
+  <div class="footer__inner">
+    <a class="nav__brand" href="/" aria-label="VastuFirst — home">
+      <LogoMark size={26} tone="ink" />
+      <span class="wordmark" style="font-size:17px;color:#F8F6F0">Vastu<em>First</em></span>
+    </a>
+    <div class="footer__meta">
+      <a href="/privacy">Privacy</a>
+      <a href="mailto:hello@vastufirst.com">Contact</a>
+      <span>Vastu before you build · © {year} VastuFirst</span>
+    </div>
+  </div>
+
+  <p class="footer__disclaimer">
+    Vastu Shastra is a traditional discipline, not a science, and nothing here is a prediction or a
+    promise about health, wealth, marriage or fortune. VastuFirst presents traditional prescription,
+    names the source behind every rule, and shows both readings where the schools genuinely disagree.
+  </p>
+</footer>

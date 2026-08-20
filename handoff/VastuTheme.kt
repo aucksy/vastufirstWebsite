@@ -1,0 +1,90 @@
+// VastuTheme.kt — commonMain · Sage & Gold · the single source of truth.
+// No colour, size, or radius appears anywhere downstream as a raw value.
+// Material3 ColorScheme cannot hold ~28 semantic colours, so this is an
+// OWNED theme exposed through CompositionLocals — not a MaterialTheme override.
+
+@Immutable
+data class VastuColors(
+    val paper: Color, val surface: Color, val surfaceRaised: Color,
+    val primary: Color, val primaryDark: Color, val onPrimary: Color,
+    val secondary: Color, val secondaryText: Color,
+    val textPrimary: Color, val textSecondary: Color, val textTertiary: Color,
+    val borderDefault: Color, val borderStrong: Color, val borderFocus: Color,
+    val zoneN: Color, val zoneNE: Color, val zoneE: Color, val zoneSE: Color,
+    val zoneS: Color, val zoneSW: Color, val zoneW: Color, val zoneNW: Color, val zoneCentre: Color,
+    val verdictIdeal: Color, val verdictAcceptable: Color, val verdictSuboptimal: Color,
+    val verdictDefect: Color, val verdictNotAssessed: Color,
+    val scoreStrong: Color, val scoreWorkable: Color, val scoreAttention: Color,
+    val provenanceText: Color, val provenanceDeriv: Color, val provenanceMod: Color, val provenanceDisp: Color,
+    val success: Color, val warning: Color, val error: Color, val info: Color,
+)
+
+val SageGold = VastuColors(
+    paper = Color(0xFFF8F6F0), surface = Color(0xFFF2EEE4), surfaceRaised = Color(0xFFFFFFFF),
+    primary = Color(0xFF7A9E7E), primaryDark = Color(0xFF5F8465), onPrimary = Color(0xFF232A22),
+    secondary = Color(0xFFC9A227), secondaryText = Color(0xFF6F5410),
+    textPrimary = Color(0xFF232A22), textSecondary = Color(0xFF4B5347), textTertiary = Color(0xFF6B7064),
+    borderDefault = Color(0xFFDDDED3), borderStrong = Color(0xFFB6BBA8), borderFocus = Color(0xFF4C7355),
+    zoneN = Color(0xFF2E8B8B), zoneNE = Color(0xFF2F6FBF), zoneE = Color(0xFFE0A21E), zoneSE = Color(0xFFE0662F),
+    zoneS = Color(0xFFC83B32), zoneSW = Color(0xFF8A6A45), zoneW = Color(0xFF6A5FB0), zoneNW = Color(0xFF4E9A55), zoneCentre = Color(0xFF9A57B0),
+    verdictIdeal = Color(0xFF3E9256), verdictAcceptable = Color(0xFF8FBE95), verdictSuboptimal = Color(0xFFD68C18),
+    verdictDefect = Color(0xFFC43F35), verdictNotAssessed = Color(0xFF948C84),
+    scoreStrong = Color(0xFF3E9256), scoreWorkable = Color(0xFFD68C18), scoreAttention = Color(0xFFC43F35),
+    provenanceText = Color(0xFF3F7D5E), provenanceDeriv = Color(0xFF9A6B33), provenanceMod = Color(0xFF5B7089), provenanceDisp = Color(0xFF7A5AA6),
+    success = Color(0xFF3E9256), warning = Color(0xFFD68C18), error = Color(0xFFC43F35), info = Color(0xFF2F6FBF),
+)
+
+@Immutable
+data class VastuSpacing(
+    val s1: Dp = 4.dp, val s2: Dp = 8.dp, val s3: Dp = 12.dp, val s4: Dp = 16.dp,
+    val s6: Dp = 24.dp, val s8: Dp = 32.dp, val s10: Dp = 40.dp, val s12: Dp = 48.dp, val s16: Dp = 64.dp,
+)
+
+@Immutable
+data class VastuShapes(
+    val sm: CornerBasedShape = RoundedCornerShape(8.dp),
+    val md: CornerBasedShape = RoundedCornerShape(14.dp),
+    val lg: CornerBasedShape = RoundedCornerShape(22.dp),
+    val full: CornerBasedShape = RoundedCornerShape(percent = 50),
+)
+
+@Immutable
+data class VastuElevation(
+    val flat: Dp = 0.dp, val raised: Dp = 2.dp, val overlay: Dp = 8.dp, val modal: Dp = 20.dp,
+)
+
+// display, sans and mono are bundled on BOTH platforms; per-script Noto faces
+// are selected by locale so Hindi and Tamil keep the same weight and rhythm.
+@Immutable
+data class VastuTypography(
+    val display: TextStyle, val h1: TextStyle, val h2: TextStyle, val h3: TextStyle,
+    val bodyLg: TextStyle, val body: TextStyle, val bodySm: TextStyle,
+    val label: TextStyle, val caption: TextStyle, val mono: TextStyle,
+)
+
+val LocalVastuColors     = staticCompositionLocalOf<VastuColors> { error("VastuTheme missing") }
+val LocalVastuSpacing    = staticCompositionLocalOf { VastuSpacing() }
+val LocalVastuShapes     = staticCompositionLocalOf { VastuShapes() }
+val LocalVastuElevation  = staticCompositionLocalOf { VastuElevation() }
+val LocalVastuTypography = staticCompositionLocalOf<VastuTypography> { error("VastuTheme missing") }
+
+@Composable
+fun VastuTheme(
+    typography: VastuTypography = vastuTypography(),   // locale-aware, see Typography section
+    content: @Composable () -> Unit,
+) = CompositionLocalProvider(
+    LocalVastuColors provides SageGold,
+    LocalVastuSpacing provides VastuSpacing(),
+    LocalVastuShapes provides VastuShapes(),
+    LocalVastuElevation provides VastuElevation(),
+    LocalVastuTypography provides typography,
+    content = content,
+)
+
+object VastuTheme {
+    val colors  @Composable get() = LocalVastuColors.current
+    val spacing @Composable get() = LocalVastuSpacing.current
+    val shapes  @Composable get() = LocalVastuShapes.current
+    val elevation @Composable get() = LocalVastuElevation.current
+    val type    @Composable get() = LocalVastuTypography.current
+}

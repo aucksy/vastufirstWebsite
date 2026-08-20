@@ -1,0 +1,69 @@
+---
+import { zones, wedges } from '../data/zones';
+
+const first = zones[0];
+const total = String(zones.length).padStart(2, '0');
+---
+<section id="vfZones">
+  <div class="zones__wrap" id="vfZoneWrap">
+    <div class="zones__pane" id="vfZonePane">
+      <div class="zones__cols" id="vfZoneCols">
+
+        <div>
+          <p class="kicker kicker--gold">The nine zones</p>
+          <h2 class="h2">Every direction<br />has a duty.</h2>
+
+          <div class="zones__live" id="vfZoneMin" aria-live="polite">
+            <div class="zones__name-row">
+              <span class="zones__name" id="vfZName">{first.name}</span>
+              <span class="zones__deva" id="vfZDeva">{first.deva}</span>
+            </div>
+            <div class="zones__chips">
+              <span class="chip chip--sage" id="vfZElem">{first.attribution}</span>
+              <span class="chip chip--gold" id="vfZDeg">{first.measure}</span>
+            </div>
+            <p class="zones__desc" id="vfZDesc">{first.desc}</p>
+          </div>
+
+          <p class="zones__counter">
+            <span id="vfZIdx">01</span> / {total} — keep scrolling to turn the dial
+          </p>
+        </div>
+
+        <div class="zones__wheel-cell">
+          <div class="zones__box" id="vfZoneBox">
+            <svg viewBox="-120 -120 240 240" aria-hidden="true" focusable="false">
+              <g id="vfWheel">
+                <circle r="112" fill="none" stroke="#3B4433" stroke-width="1" />
+                {wedges.map((w) => (
+                  <g>
+                    <path class="wedge" d={w.path} fill="#2C352B" stroke="#232A22" stroke-width="1.2" id={w.wid} />
+                    <text
+                      x={w.lx}
+                      y={w.ly}
+                      text-anchor="middle"
+                      fill="#B8BFAF"
+                      transform={w.rot}
+                      style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.18em"
+                    >{w.ab}</text>
+                  </g>
+                ))}
+              </g>
+              {/* The centre is the ninth zone, not a wedge — Brahma's own nine
+                  padas — and it sits OUTSIDE the rotating group. The prototype
+                  spun it with the wheel, which left "BRAHMA STHAN" printed
+                  upside down for half of every turn. The still point of a
+                  mandala does not turn. */}
+              <circle id="vfCentre" r="34" fill="#232A22" stroke="#3B4433" stroke-width="1" />
+              <text id="vfCentreT1" y="-2" text-anchor="middle" fill="#98A08C" style="font-family:'DM Mono',monospace;font-size:7px;letter-spacing:.2em">BRAHMA</text>
+              <text id="vfCentreT2" y="8" text-anchor="middle" fill="#6B7064" style="font-family:'DM Mono',monospace;font-size:6px;letter-spacing:.2em">STHAN</text>
+              {/* Fixed gold pointer at 12 o'clock, outside the rotating group. */}
+              <path d="M0 -118 L7 -100 L0 -105 L-7 -100 Z" fill="#C9A227" />
+            </svg>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>

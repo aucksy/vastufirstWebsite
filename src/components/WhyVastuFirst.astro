@@ -1,0 +1,71 @@
+---
+/**
+ * Card copy is built from the app's real rule dataset, counted at
+ * VastuFirst/rules/src/main/resources/ruleset/ on 20 Aug 2026:
+ *   30 defect checks — 1 TEXT, 27 DERIV, 1 MOD, 1 DISP
+ *   10 disputes shown both ways · 32 door positions · 81 padas · 9 zones
+ * If those counts change in the app, change them here in the same week.
+ */
+const cards = [
+  {
+    title: 'The square grid, not pie slices',
+    body:
+      'Your plan is laid on the 81-pada mandala grid the classical texts actually set out — nine squares to a zone. Angular pie-slices go wrong at the corners of a plan, which is exactly where rooms sit.',
+    icon: 'grid',
+  },
+  {
+    title: 'Sourced, not vague',
+    body:
+      'Thirty checks, every one tagged. One comes straight from the classical text; twenty-seven are honest modern derivations from it — and we say which is which. Where the schools split, you see both readings.',
+    icon: 'doc',
+  },
+  {
+    title: 'Nothing to sign up for',
+    body:
+      'No account, no phone number, no email before your score. The whole analysis runs on your phone and works with no internet at all — your plan stays on the device unless you ask us to read a photo.',
+    icon: 'phone',
+  },
+];
+---
+<section class="why" data-reveal="0">
+  <div class="why__inner">
+    <div class="why__head">
+      <p class="kicker">Why VastuFirst</p>
+      <h2>Advice you can trace, all the way back</h2>
+    </div>
+
+    <div class="why__cards">
+      {cards.map((c, i) => (
+        <div class="card" data-reveal={String(i + 1)}>
+          {c.icon === 'grid' && (
+            <svg viewBox="0 0 24 24" style="width:26px;height:26px" aria-hidden="true">
+              <g fill="none" stroke="#4C7355" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 4 h16 v16 h-16 Z" />
+                <path d="M4 9.33 h16 M4 14.67 h16 M9.33 4 v16 M14.67 4 v16" />
+              </g>
+            </svg>
+          )}
+          {c.icon === 'doc' && (
+            <svg viewBox="0 0 24 24" style="width:26px;height:26px" aria-hidden="true">
+              <g fill="none" stroke="#6F5410" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 3 h11 l3 3 v15 h-14 Z" />
+                <path d="M8 9 h8 M8 13 h8 M8 17 h5" />
+              </g>
+            </svg>
+          )}
+          {c.icon === 'phone' && (
+            <svg viewBox="0 0 24 24" style="width:26px;height:26px" aria-hidden="true">
+              <g fill="none" stroke="#4C7355" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="6" y="2.5" width="12" height="19" rx="2.5" />
+                <path d="M10.5 5.5 h3" />
+                <path d="M9 13.5 l2 2 l4 -4.5" />
+              </g>
+            </svg>
+          )}
+          <div class="card__title">{c.title}</div>
+          <p class="card__body">{c.body}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

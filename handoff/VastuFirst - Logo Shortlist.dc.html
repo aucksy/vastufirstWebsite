@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=DM+Sans:opsz,wght@9..40,400;9..40,500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#EDEEE7;color:#232A22;font-family:'DM Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:#4C7355;text-decoration:none}a:hover{color:#3B5E45}
+</style>
+</helmet>
+
+<svg style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true"><defs>
+
+<symbol id="vsq1" viewBox="0 0 48 48"><g fill="none"><path d="M6 17h36M6 31h36M17 6v36M31 6v36" stroke="#E2E5DB" stroke-width="1"/><rect x="6" y="6" width="36" height="36" rx="3" stroke="#232A22" stroke-width="2"/></g><path d="M24 31.6 L26.6 24 L21.4 24 Z" fill="#C4D0BE"/><path d="M24 16.4 L26.6 24 L21.4 24 Z" fill="#7A9E7E"/><circle cx="24" cy="24" r="1.8" fill="#C9A227"/><g fill="#4B5347" text-anchor="middle" style="font-family:'DM Mono',monospace;font-size:5.2px"><text x="37.4" y="25.8">E</text><text x="24" y="39.4">S</text><text x="10.6" y="25.8">W</text></g><text x="24" y="12.5" text-anchor="middle" fill="#6F5410" style="font-family:'DM Mono',monospace;font-size:5.2px;font-weight:500">N</text></symbol>
+
+<symbol id="vsq2" viewBox="0 0 48 48"><circle cx="24" cy="24" r="22" fill="none" stroke="#232A22" stroke-width="1.2"/><g stroke="#98A08C" stroke-width="1.1"><path d="M31.65 5.52 L32.42 3.67 M42.48 16.35 L44.33 15.58 M42.48 31.65 L44.33 32.42 M31.65 42.48 L32.42 44.33 M16.35 42.48 L15.58 44.33 M5.52 31.65 L3.67 32.42 M5.52 16.35 L3.67 15.58 M16.35 5.52 L15.58 3.67"/></g><path d="M37.44 10.56 L39.56 8.44 M37.44 37.44 L39.56 39.56 M10.56 37.44 L8.44 39.56 M10.56 10.56 L8.44 8.44" stroke="#232A22" stroke-width="1.5"/><path d="M24 13.5 L33.5 22.5 L33.5 32.5 L14.5 32.5 L14.5 22.5 Z" fill="#7A9E7E"/><g fill="#4B5347" text-anchor="middle" style="font-family:'DM Mono',monospace;font-size:6.5px"><text x="42.5" y="26.3">E</text><text x="24" y="44.8">S</text><text x="5.5" y="26.3">W</text></g><text x="24" y="7.8" text-anchor="middle" fill="#6F5410" style="font-family:'DM Mono',monospace;font-size:7px;font-weight:500">N</text></symbol>
+
+<symbol id="vsq3" viewBox="0 0 48 48"><circle cx="24" cy="24" r="22" fill="none" stroke="#232A22" stroke-width="1.2"/><circle cx="24" cy="24" r="15.5" fill="none" stroke="#C4D0BE" stroke-width=".8"/><path d="M37.44 10.56 L39.56 8.44 M37.44 37.44 L39.56 39.56 M10.56 37.44 L8.44 39.56 M10.56 10.56 L8.44 8.44" stroke="#98A08C" stroke-width="1.4"/><path d="M24 13.5 L33.5 22.5 H14.5 Z" fill="#7A9E7E"/><path d="M24 13.5 L33.5 22.5 L33.5 32.5 L14.5 32.5 L14.5 22.5 Z" fill="none" stroke="#232A22" stroke-width="1.8" stroke-linejoin="round"/><path d="M14.5 22.5 H33.5" stroke="#232A22" stroke-width="1.4"/><g fill="#4B5347" text-anchor="middle" style="font-family:'DM Mono',monospace;font-size:6.5px"><text x="42.5" y="26.3">E</text><text x="24" y="44.8">S</text><text x="5.5" y="26.3">W</text></g><text x="24" y="7.8" text-anchor="middle" fill="#6F5410" style="font-family:'DM Mono',monospace;font-size:7px;font-weight:500">N</text></symbol>
+
+<symbol id="vsq4" viewBox="0 0 48 48"><circle cx="24" cy="24" r="22" fill="none" stroke="#DDDED3" stroke-width="1"/><circle cx="24" cy="24" r="13.5" fill="#7A9E7E"/><g stroke="#98A08C" stroke-width="1.1"><path d="M31.65 5.52 L32.42 3.67 M42.48 16.35 L44.33 15.58 M42.48 31.65 L44.33 32.42 M31.65 42.48 L32.42 44.33 M16.35 42.48 L15.58 44.33 M5.52 31.65 L3.67 32.42 M5.52 16.35 L3.67 15.58 M16.35 5.52 L15.58 3.67"/></g><path d="M37.44 10.56 L39.56 8.44 M37.44 37.44 L39.56 39.56 M10.56 37.44 L8.44 39.56 M10.56 10.56 L8.44 8.44" stroke="#232A22" stroke-width="1.5"/><g transform="translate(24 24) scale(.72) translate(-24 -24)"><path d="M24 13.5 L33.5 22.5 L33.5 32.5 L14.5 32.5 L14.5 22.5 Z" fill="#F8F6F0"/></g><g fill="#4B5347" text-anchor="middle" style="font-family:'DM Mono',monospace;font-size:6.5px"><text x="42.5" y="26.3">E</text><text x="24" y="44.8">S</text><text x="5.5" y="26.3">W</text></g><text x="24" y="7.8" text-anchor="middle" fill="#6F5410" style="font-family:'DM Mono',monospace;font-size:7px;font-weight:500">N</text></symbol>
+
+<symbol id="vsq5" viewBox="0 0 48 48"><g stroke="#98A08C" stroke-width="1.2"><path d="M31.65 5.52 L32.42 3.67 M42.48 16.35 L44.33 15.58 M42.48 31.65 L44.33 32.42 M31.65 42.48 L32.42 44.33 M16.35 42.48 L15.58 44.33 M5.52 31.65 L3.67 32.42 M5.52 16.35 L3.67 15.58 M16.35 5.52 L15.58 3.67"/></g><path d="M37.44 10.56 L39.56 8.44 M37.44 37.44 L39.56 39.56 M10.56 37.44 L8.44 39.56 M10.56 10.56 L8.44 8.44" stroke="#232A22" stroke-width="1.6"/><path d="M24 13.5 L33.5 22.5 L33.5 32.5 L14.5 32.5 L14.5 22.5 Z" fill="#7A9E7E"/><rect x="22" y="27" width="4" height="5.5" fill="#C9A227"/><g fill="#4B5347" text-anchor="middle" style="font-family:'DM Mono',monospace;font-size:6.5px"><text x="42.5" y="26.3">E</text><text x="24" y="44.8">S</text><text x="5.5" y="26.3">W</text></g><text x="24" y="7.8" text-anchor="middle" fill="#6F5410" style="font-family:'DM Mono',monospace;font-size:7px;font-weight:500">N</text></symbol>
+
+<symbol id="vsq6" viewBox="0 0 48 48"><rect x="4" y="4" width="40" height="40" rx="4" fill="none" stroke="#232A22" stroke-width="1.6"/><g stroke="#98A08C" stroke-width="1.1"><path d="M12 4v3.5 M17 4v3.5 M31 4v3.5 M36 4v3.5"/><path d="M44 12h-3.5 M44 17h-3.5 M44 31h-3.5 M44 36h-3.5"/><path d="M12 44v-3.5 M17 44v-3.5 M31 44v-3.5 M36 44v-3.5"/><path d="M4 12h3.5 M4 17h3.5 M4 31h3.5 M4 36h3.5"/></g><path d="M7 7 L10 10 M41 7 L38 10 M41 41 L38 38 M7 41 L10 38" stroke="#232A22" stroke-width="1.5"/><path d="M24 13.5 L33.5 22.5 L33.5 32.5 L14.5 32.5 L14.5 22.5 Z" fill="#7A9E7E"/><g fill="#4B5347" text-anchor="middle" style="font-family:'DM Mono',monospace;font-size:6.5px"><text x="40.5" y="26.3">E</text><text x="24" y="42.8">S</text><text x="7.5" y="26.3">W</text></g><text x="24" y="9.8" text-anchor="middle" fill="#6F5410" style="font-family:'DM Mono',monospace;font-size:7px;font-weight:500">N</text></symbol>
+
+<symbol id="vsq7" viewBox="0 0 48 48"><rect x="2" y="2" width="44" height="44" rx="9" fill="#232A22"/><g stroke="#525A48" stroke-width="1.1"><path d="M13 6v3.5 M18 6v3.5 M30 6v3.5 M35 6v3.5"/><path d="M42 13h-3.5 M42 18h-3.5 M42 30h-3.5 M42 35h-3.5"/><path d="M13 42v-3.5 M18 42v-3.5 M30 42v-3.5 M35 42v-3.5"/><path d="M6 13h3.5 M6 18h3.5 M6 30h3.5 M6 35h3.5"/></g><path d="M9 9 L12 12 M39 9 L36 12 M39 39 L36 36 M9 39 L12 36" stroke="#98A08C" stroke-width="1.4"/><path d="M24 14.5 L33 23 L33 32.5 L15 32.5 L15 23 Z" fill="#7A9E7E"/><g fill="#98A08C" text-anchor="middle" style="font-family:'DM Mono',monospace;font-size:6.5px"><text x="38.5" y="26.3">E</text><text x="24" y="41.3">S</text><text x="9.5" y="26.3">W</text></g><text x="24" y="11.3" text-anchor="middle" fill="#C9A227" style="font-family:'DM Mono',monospace;font-size:7px;font-weight:500">N</text></symbol>
+
+<symbol id="vsq8" viewBox="0 0 48 48"><rect x="4" y="4" width="40" height="40" rx="4" fill="none" stroke="#232A22" stroke-width="1.6"/><path d="M7 7 L10.5 10.5 M41 7 L37.5 10.5 M41 41 L37.5 37.5 M7 41 L10.5 37.5" stroke="#7A9E7E" stroke-width="1.8"/><path d="M24 13.5 L33.5 22.5 H14.5 Z" fill="#7A9E7E"/><path d="M24 13.5 L33.5 22.5 L33.5 32.5 L14.5 32.5 L14.5 22.5 Z" fill="none" stroke="#232A22" stroke-width="1.8" stroke-linejoin="round"/><path d="M14.5 22.5 H33.5" stroke="#232A22" stroke-width="1.4"/><g fill="#4B5347" text-anchor="middle" style="font-family:'DM Mono',monospace;font-size:6.5px"><text x="40.5" y="26.3">E</text><text x="24" y="42.8">S</text><text x="7.5" y="26.3">W</text></g><text x="24" y="9.8" text-anchor="middle" fill="#6F5410" style="font-family:'DM Mono',monospace;font-size:7px;font-weight:500">N</text></symbol>
+
+<symbol id="vsq9" viewBox="0 0 48 48"><rect x="4" y="4" width="40" height="40" rx="4" fill="none" stroke="#232A22" stroke-width="1.6"/><g stroke="#98A08C" stroke-width="1.2"><path d="M14 4v3.5 M34 4v3.5 M44 14h-3.5 M44 34h-3.5 M14 44v-3.5 M34 44v-3.5 M4 14h3.5 M4 34h3.5"/></g><path d="M24 13.5 L33.5 22.5 L33.5 32.5 L14.5 32.5 L14.5 22.5 Z" fill="none" stroke="#232A22" stroke-width="1.8" stroke-linejoin="round"/><path d="M14.5 22.5 H33.5" stroke="#7A9E7E" stroke-width="1.6"/><rect x="22" y="27" width="4" height="5.5" fill="#C9A227"/><g fill="#4B5347" text-anchor="middle" style="font-family:'DM Mono',monospace;font-size:6.5px"><text x="40.5" y="26.3">E</text><text x="24" y="42.8">S</text><text x="7.5" y="26.3">W</text></g><text x="24" y="9.8" text-anchor="middle" fill="#6F5410" style="font-family:'DM Mono',monospace;font-size:7px;font-weight:500">N</text></symbol>
+
+<symbol id="vsr1" viewBox="0 0 48 48"><g fill="none" stroke="#232A22" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 25.9 L24 11 L42 25.9"/><path d="M9 24.5 V40.5"/><path d="M39 24.5 V40.5"/><path d="M9 40.5 H16.5"/><path d="M31.5 40.5 H39"/></g><g transform="rotate(45 24 29.2)"><path d="M24 25.2 L25.4 27.8 L28 29.2 L25.4 30.6 L24 33.2 L22.6 30.6 L20 29.2 L22.6 27.8 Z" fill="#C9A227"/></g><path d="M24 23.7 L25.9 27.3 L29.5 29.2 L25.9 31.1 L24 34.7 L22.1 31.1 L18.5 29.2 L22.1 27.3 Z" fill="#7A9E7E"/><circle cx="24" cy="29.2" r="1.3" fill="#F8F6F0"/><g fill="#4B5347" text-anchor="middle" style="font-family:'DM Mono',monospace;font-size:6.5px"><text x="33" y="31.5">E</text><text x="24" y="40.5">S</text><text x="15" y="31.5">W</text></g><text x="24" y="22.5" text-anchor="middle" fill="#6F5410" style="font-family:'DM Mono',monospace;font-size:6.5px;font-weight:500">N</text></symbol>
+
+<symbol id="vsr4" viewBox="0 0 48 48"><g fill="none" stroke="#232A22" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 24.9 L24 10 L42 24.9"/><path d="M9 23.5 V40.5 H39 V23.5"/></g><path d="M24 19.6 V22.4" stroke="#C9A227" stroke-width="1.8" stroke-linecap="round"/><circle cx="24" cy="32" r="5.9" fill="none" stroke="#DDDED3" stroke-width="2"/><circle cx="24" cy="32" r="5.9" fill="none" stroke="#7A9E7E" stroke-width="2" stroke-linecap="round" stroke-dasharray="30.4 37.1" transform="rotate(-90 24 32)"/><text x="24" y="34.3" text-anchor="middle" fill="#232A22" style="font-family:'DM Mono',monospace;font-size:6.5px;font-weight:500">82</text></symbol>
+
+<symbol id="vsr10" viewBox="0 0 48 48"><circle cx="24" cy="24" r="21" fill="none" stroke="#232A22" stroke-width="1.2"/><path d="M24 3v3.5 M45 24h-3.5 M24 45v-3.5 M3 24h3.5" stroke="#232A22" stroke-width="1.5"/><path d="M24 3v3.5" stroke="#C9A227" stroke-width="2.4"/><path d="M24 9 L39 24 L24 39 L9 24 Z" fill="none" stroke="#7A9E7E" stroke-width="1.4"/><rect x="15" y="15" width="18" height="18" fill="none" stroke="#232A22" stroke-width="1.2"/><path d="M21 15v18 M27 15v18 M15 21h18 M15 27h18" stroke="#C4D0BE" stroke-width="1"/><g fill="#7A9E7E"><circle cx="33.55" cy="14.45" r="2.6"/><circle cx="33.55" cy="33.55" r="2.6"/><circle cx="14.45" cy="33.55" r="2.6"/><circle cx="14.45" cy="14.45" r="2.6"/></g><circle cx="24" cy="24" r="4.4" fill="#C9A227"/></symbol>
+
+</defs></svg>
+
+<div data-screen-label="Shortlist" style="padding:52px 56px 90px">
+<div style="max-width:1180px;margin:0 auto">
+
+<div style="display:flex;align-items:flex-end;justify-content:space-between;gap:24px;border-bottom:1px solid #D3D6C9;padding-bottom:20px">
+<div>
+<div style="font-family:'Marcellus',serif;font-size:36px;line-height:1">VastuFirst — shortlist with direction tags</div>
+<div style="font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#6B7064;margin-top:9px">Compass house, lettered &nbsp;·&nbsp; plus three recreations</div>
+</div>
+<div style="font-family:'DM Mono',monospace;font-size:11px;line-height:1.75;color:#6B7064;text-align:right">Ink #232A22 · Sage #7A9E7E<br/>Gold #C9A227 · Bronze #6F5410</div>
+</div>
+
+<p style="font-size:15px;line-height:1.6;color:#4B5347;max-width:680px;margin:22px 0 0">Every mark now carries N / E / S / W. The letters replace the four cardinal ticks rather than sitting alongside them, and north is set in bronze so it reads first. Each tile shows the mark large and again at 30px — at that size the letters become texture rather than type, which is normal for a lettered bezel; the app icon would use the large form.</p>
+
+<div style="display:flex;align-items:baseline;gap:16px;margin:48px 0 22px">
+<span style="font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#C9A227">Lettered</span>
+<span style="font-family:'Marcellus',serif;font-size:24px">The compass house, corrected</span>
+<span style="flex:1;height:1px;background:#D3D6C9"></span>
+</div>
+
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:18px">
+
+<div style="background:#F8F6F0;border:1px solid #DDDED3;border-radius:16px;padding:18px 18px 20px">
+<div style="display:flex;align-items:center;justify-content:space-between"><span style="font-family:'DM Mono',monospace;font-size:11px;color:#C9A227">A1</span><svg data-small="1" viewBox="0 0 48 48" style="width:30px;height:30px"><use href="#vsq1" width="48" height="48"></use></svg></div>
+<div data-mark="1" style="display:flex;align-items:center;justify-content:center;height:130px"><svg viewBox="0 0 48 48" style="width:112px;height:112px"><use href="#vsq1" width="48" height="48"></use></svg></div>
+<div style="font-family:'Marcellus',serif;font-size:17px">Vastu Compass</div>
+<div data-concept="1" style="font-size:12.5px;line-height:1.5;color:#6B7064;margin-top:5px">Two-arm needle centred on the plot; letters replace the cardinal ticks.</div>
+</div>
+
+<div style="background:#F8F6F0;border:1px solid #DDDED3;border-radius:16px;padding:18px 18px 20px">
+<div style="display:flex;align-items:center;justify-content:space-between"><span style="font-family:'DM Mono',monospace;font-size:11px;color:#C9A227">C1</span><svg data-small="1" viewBox="0 0 48 48" style="width:30px;height:30px"><use href="#vsq2" width="48" height="48"></use></svg></div>
+<div data-mark="1" style="display:flex;align-items:center;justify-content:center;height:130px"><svg viewBox="0 0 48 48" style="width:112px;height:112px"><use href="#vsq2" width="48" height="48"></use></svg></div>
+<div style="font-family:'Marcellus',serif;font-size:17px">Compass House · circular</div>
+<div data-concept="1" style="font-size:12.5px;line-height:1.5;color:#6B7064;margin-top:5px">Full bezel: eight half-ticks, four diagonals, four letters. Solid sage house.</div>
+</div>
+
+<div style="background:#F8F6F0;border:1px solid #DDDED3;border-radius:16px;padding:18px 18px 20px">
+<div style="display:flex;align-items:center;justify-content:space-between"><span style="font-family:'DM Mono',monospace;font-size:11px;color:#C9A227">C2</span><svg data-small="1" viewBox="0 0 48 48" style="width:30px;height:30px"><use href="#vsq3" width="48" height="48"></use></svg></div>
+<div data-mark="1" style="display:flex;align-items:center;justify-content:center;height:130px"><svg viewBox="0 0 48 48" style="width:112px;height:112px"><use href="#vsq3" width="48" height="48"></use></svg></div>
+<div style="font-family:'Marcellus',serif;font-size:17px">Twin Dial · circular</div>
+<div data-concept="1" style="font-size:12.5px;line-height:1.5;color:#6B7064;margin-top:5px">Two hairlines, four diagonal ticks, outlined house with a sage roof.</div>
+</div>
+
+<div style="background:#F8F6F0;border:1px solid #DDDED3;border-radius:16px;padding:18px 18px 20px">
+<div style="display:flex;align-items:center;justify-content:space-between"><span style="font-family:'DM Mono',monospace;font-size:11px;color:#C9A227">C3</span><svg data-small="1" viewBox="0 0 48 48" style="width:30px;height:30px"><use href="#vsq4" width="48" height="48"></use></svg></div>
+<div data-mark="1" style="display:flex;align-items:center;justify-content:center;height:130px"><svg viewBox="0 0 48 48" style="width:112px;height:112px"><use href="#vsq4" width="48" height="48"></use></svg></div>
+<div style="font-family:'Marcellus',serif;font-size:17px">Sage Disc · circular</div>
+<div data-concept="1" style="font-size:12.5px;line-height:1.5;color:#6B7064;margin-top:5px">House knocked out of a sage disc; the letters ring the disc from outside.</div>
+</div>
+
+<div style="background:#F8F6F0;border:1px solid #DDDED3;border-radius:16px;padding:18px 18px 20px">
+<div style="display:flex;align-items:center;justify-content:space-between"><span style="font-family:'DM Mono',monospace;font-size:11px;color:#C9A227">C4</span><svg data-small="1" viewBox="0 0 48 48" style="width:30px;height:30px"><use href="#vsq5" width="48" height="48"></use></svg></div>
+<div data-mark="1" style="display:flex;align-items:center;justify-content:center;height:130px"><svg viewBox="0 0 48 48" style="width:112px;height:112px"><use href="#vsq5" width="48" height="48"></use></svg></div>
+<div style="font-family:'Marcellus',serif;font-size:17px">Corona · circular</div>
+<div data-concept="1" style="font-size:12.5px;line-height:1.5;color:#6B7064;margin-top:5px">No bezel line — ticks and letters alone imply the circle. Gold door.</div>
+</div>
+
+<div style="background:#F8F6F0;border:1px solid #DDDED3;border-radius:16px;padding:18px 18px 20px">
+<div style="display:flex;align-items:center;justify-content:space-between"><span style="font-family:'DM Mono',monospace;font-size:11px;color:#C9A227">C5</span><svg data-small="1" viewBox="0 0 48 48" style="width:30px;height:30px"><use href="#vsq6" width="48" height="48"></use></svg></div>
+<div data-mark="1" style="display:flex;align-items:center;justify-content:center;height:130px"><svg viewBox="0 0 48 48" style="width:112px;height:112px"><use href="#vsq6" width="48" height="48"></use></svg></div>
+<div style="font-family:'Marcellus',serif;font-size:17px">Compass House · square</div>
+<div data-concept="1" style="font-size:12.5px;line-height:1.5;color:#6B7064;margin-top:5px">Same instrument logic on a plot square; ticks run the four walls.</div>
+</div>
+
+<div style="background:#F8F6F0;border:1px solid #DDDED3;border-radius:16px;padding:18px 18px 20px">
+<div style="display:flex;align-items:center;justify-content:space-between"><span style="font-family:'DM Mono',monospace;font-size:11px;color:#C9A227">C6</span><svg data-small="1" viewBox="0 0 48 48" style="width:30px;height:30px"><use href="#vsq7" width="48" height="48"></use></svg></div>
+<div data-mark="1" style="display:flex;align-items:center;justify-content:center;height:130px"><svg viewBox="0 0 48 48" style="width:112px;height:112px"><use href="#vsq7" width="48" height="48"></use></svg></div>
+<div style="font-family:'Marcellus',serif;font-size:17px">Ink Plate · square</div>
+<div data-concept="1" style="font-size:12.5px;line-height:1.5;color:#6B7064;margin-top:5px">The app-icon case: full-bleed ink tile, sage house, gold north letter.</div>
+</div>
+
+<div style="background:#F8F6F0;border:1px solid #DDDED3;border-radius:16px;padding:18px 18px 20px">
+<div style="display:flex;align-items:center;justify-content:space-between"><span style="font-family:'DM Mono',monospace;font-size:11px;color:#C9A227">C7</span><svg data-small="1" viewBox="0 0 48 48" style="width:30px;height:30px"><use href="#vsq8" width="48" height="48"></use></svg></div>
+<div data-mark="1" style="display:flex;align-items:center;justify-content:center;height:130px"><svg viewBox="0 0 48 48" style="width:112px;height:112px"><use href="#vsq8" width="48" height="48"></use></svg></div>
+<div style="font-family:'Marcellus',serif;font-size:17px">Eight Marks · square</div>
+<div data-concept="1" style="font-size:12.5px;line-height:1.5;color:#6B7064;margin-top:5px">Four letters, four corner ticks — the eight directions, nothing else.</div>
+</div>
+
+<div style="background:#F8F6F0;border:1px solid #DDDED3;border-radius:16px;padding:18px 18px 20px">
+<div style="display:flex;align-items:center;justify-content:space-between"><span style="font-family:'DM Mono',monospace;font-size:11px;color:#C9A227">C8</span><svg data-small="1" viewBox="0 0 48 48" style="width:30px;height:30px"><use href="#vsq9" width="48" height="48"></use></svg></div>
+<div data-mark="1" style="display:flex;align-items:center;justify-content:center;height:130px"><svg viewBox="0 0 48 48" style="width:112px;height:112px"><use href="#vsq9" width="48" height="48"></use></svg></div>
+<div style="font-family:'Marcellus',serif;font-size:17px">Quiet Dial · square</div>
+<div data-concept="1" style="font-size:12.5px;line-height:1.5;color:#6B7064;margin-top:5px">Eight ticks, outlined house, sage eave, gold door. The most legible square.</div>
+</div>
+
+</div>
+
+<div style="display:flex;align-items:baseline;gap:16px;margin:56px 0 22px">
+<span style="font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#C9A227">Recreations</span>
+<span style="font-family:'Marcellus',serif;font-size:24px">1, 4 and 10 from your reference sheet</span>
+<span style="flex:1;height:1px;background:#D3D6C9"></span>
+</div>
+
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:18px">
+
+<div style="background:#F8F6F0;border:1px solid #DDDED3;border-radius:16px;padding:18px 18px 20px">
+<div style="display:flex;align-items:center;justify-content:space-between"><span style="font-family:'DM Mono',monospace;font-size:11px;color:#C9A227">R1</span><svg data-small="1" viewBox="0 0 48 48" style="width:30px;height:30px"><use href="#vsr1" width="48" height="48"></use></svg></div>
+<div data-mark="1" style="display:flex;align-items:center;justify-content:center;height:130px"><svg viewBox="0 0 48 48" style="width:112px;height:112px"><use href="#vsr1" width="48" height="48"></use></svg></div>
+<div style="font-family:'Marcellus',serif;font-size:17px">Vastu Compass</div>
+<div data-concept="1" style="font-size:12.5px;line-height:1.5;color:#6B7064;margin-top:5px">Smaller rose set low in the house body; the letter ring clears the roof line.</div>
+</div>
+
+<div style="background:#F8F6F0;border:1px solid #DDDED3;border-radius:16px;padding:18px 18px 20px">
+<div style="display:flex;align-items:center;justify-content:space-between"><span style="font-family:'DM Mono',monospace;font-size:11px;color:#C9A227">R4</span><svg data-small="1" viewBox="0 0 48 48" style="width:30px;height:30px"><use href="#vsr4" width="48" height="48"></use></svg></div>
+<div data-mark="1" style="display:flex;align-items:center;justify-content:center;height:130px"><svg viewBox="0 0 48 48" style="width:112px;height:112px"><use href="#vsr4" width="48" height="48"></use></svg></div>
+<div style="font-family:'Marcellus',serif;font-size:17px">Vastu Score</div>
+<div data-concept="1" style="font-size:12.5px;line-height:1.5;color:#6B7064;margin-top:5px">Score ring sized to sit inside the house body; numeral and gold north tick on the axis.</div>
+</div>
+
+<div style="background:#F8F6F0;border:1px solid #DDDED3;border-radius:16px;padding:18px 18px 20px">
+<div style="display:flex;align-items:center;justify-content:space-between"><span style="font-family:'DM Mono',monospace;font-size:11px;color:#C9A227">R10</span><svg data-small="1" viewBox="0 0 48 48" style="width:30px;height:30px"><use href="#vsr10" width="48" height="48"></use></svg></div>
+<div data-mark="1" style="display:flex;align-items:center;justify-content:center;height:130px"><svg viewBox="0 0 48 48" style="width:112px;height:112px"><use href="#vsr10" width="48" height="48"></use></svg></div>
+<div style="font-family:'Marcellus',serif;font-size:17px">Vastu Mandala</div>
+<div data-concept="1" style="font-size:12.5px;line-height:1.5;color:#6B7064;margin-top:5px">Ring, rotated square, nine-cell grid, four quarter petals, gold Brahmasthan.</div>
+</div>
+
+</div>
+
+<div style="margin-top:56px;border-top:1px solid #D3D6C9;padding-top:26px">
+<div style="font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#6B7064">All twelve at 34px</div>
+<div style="display:flex;flex-wrap:wrap;gap:16px;background:#F8F6F0;border:1px solid #DDDED3;border-radius:14px;padding:18px 20px;margin-top:18px;width:max-content;max-width:100%">
+<svg viewBox="0 0 48 48" style="width:34px;height:34px"><use href="#vsq1" width="48" height="48"></use></svg>
+<svg viewBox="0 0 48 48" style="width:34px;height:34px"><use href="#vsq2" width="48" height="48"></use></svg>
+<svg viewBox="0 0 48 48" style="width:34px;height:34px"><use href="#vsq3" width="48" height="48"></use></svg>
+<svg viewBox="0 0 48 48" style="width:34px;height:34px"><use href="#vsq4" width="48" height="48"></use></svg>
+<svg viewBox="0 0 48 48" style="width:34px;height:34px"><use href="#vsq5" width="48" height="48"></use></svg>
+<svg viewBox="0 0 48 48" style="width:34px;height:34px"><use href="#vsq6" width="48" height="48"></use></svg>
+<svg viewBox="0 0 48 48" style="width:34px;height:34px"><use href="#vsq7" width="48" height="48"></use></svg>
+<svg viewBox="0 0 48 48" style="width:34px;height:34px"><use href="#vsq8" width="48" height="48"></use></svg>
+<svg viewBox="0 0 48 48" style="width:34px;height:34px"><use href="#vsq9" width="48" height="48"></use></svg>
+<svg viewBox="0 0 48 48" style="width:34px;height:34px"><use href="#vsr1" width="48" height="48"></use></svg>
+<svg viewBox="0 0 48 48" style="width:34px;height:34px"><use href="#vsr4" width="48" height="48"></use></svg>
+<svg viewBox="0 0 48 48" style="width:34px;height:34px"><use href="#vsr10" width="48" height="48"></use></svg>
+</div>
+</div>
+
+</div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;markSize&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:112,&quot;min&quot;:64,&quot;max&quot;:150,&quot;step&quot;:4,&quot;unit&quot;:&quot;px&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Sheet&quot;},&quot;showSmallPreview&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Sheet&quot;},&quot;showConcepts&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Sheet&quot;}}">
+class Component extends DCLogic {
+  componentDidMount() { this.apply(); }
+  componentDidUpdate() { this.apply(); }
+  apply() {
+    const size = this.props.markSize ?? 112;
+    document.querySelectorAll('[data-mark] svg').forEach((s) => { s.style.width = size + 'px'; s.style.height = size + 'px'; });
+    const small = (this.props.showSmallPreview ?? true) ? '' : 'none';
+    document.querySelectorAll('[data-small]').forEach((s) => { s.style.display = small; });
+    const notes = (this.props.showConcepts ?? true) ? '' : 'none';
+    document.querySelectorAll('[data-concept]').forEach((s) => { s.style.display = notes; });
+  }
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

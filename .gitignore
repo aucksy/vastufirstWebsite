@@ -1,0 +1,22 @@
+# build output
+dist/
+.astro/
+
+# dependencies
+node_modules/
+
+# generated
+.wrangler/
+.dev.vars
+
+# environment
+.env
+.env.production
+
+# macOS / editors
+.DS_Store
+Thumbs.db
+*.log
+
+# the original handoff archive — the unpacked copy in handoff/ is what we read
+*.zip

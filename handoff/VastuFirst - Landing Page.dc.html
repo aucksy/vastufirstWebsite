@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=DM+Mono:wght@400;500&family=Noto+Serif+Devanagari&family=Noto+Serif+Tamil&family=Noto+Serif+Telugu&family=Noto+Serif+Kannada&family=Noto+Serif+Bengali&display=swap" rel="stylesheet"/>
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:auto}
+body{margin:0;background:#F8F6F0;color:#232A22;font-family:'DM Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:#4C7355;text-decoration:none}a:hover{color:#3B5E45}
+::selection{background:#EAD9A6}
+@keyframes vfMarquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes vfFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+@keyframes vfPulse{0%,100%{opacity:.45}50%{opacity:1}}
+@keyframes vfDash{to{stroke-dashoffset:0}}
+input::placeholder{color:#98A08C}
+/* Responsive layout is applied from the logic class (applyLayout) — inline styles
+   would beat any media query here. Breakpoints: width <= 900px (phone layout),
+   height <= 800px (release the pinned sections). */
+</style>
+</helmet>
+
+<div data-screen-label="Landing" style="overflow-x:clip">
+
+<div style="position:fixed;top:0;left:0;right:0;height:2px;z-index:60;background:transparent"><div id="vfProgress" style="height:100%;width:0%;background:#C9A227"></div></div>
+
+<nav id="vfNav" style="position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:clamp(12px,2vw,18px) clamp(18px,4vw,48px);background:rgba(248,246,240,.82);backdrop-filter:blur(14px);border-bottom:1px solid rgba(211,214,201,.6)">
+<div style="display:flex;align-items:center;gap:12px">
+<svg viewBox="0 0 40 40" style="width:34px;height:34px" aria-hidden="true"><rect x="2" y="2" width="36" height="36" rx="4" fill="none" stroke="#7A9E7E" stroke-width="1.4"/><line x1="14" y1="2" x2="14" y2="38" stroke="#7A9E7E" stroke-width=".8" opacity=".55"/><line x1="26" y1="2" x2="26" y2="38" stroke="#7A9E7E" stroke-width=".8" opacity=".55"/><line x1="2" y1="14" x2="38" y2="14" stroke="#7A9E7E" stroke-width=".8" opacity=".55"/><line x1="2" y1="26" x2="38" y2="26" stroke="#7A9E7E" stroke-width=".8" opacity=".55"/><path d="M20 5 L23.4 15.6 L20 13.4 L16.6 15.6 Z" fill="#7A9E7E"/><circle cx="20" cy="20" r="2.6" fill="#C9A227"/></svg>
+<span style="font-family:'Marcellus',serif;font-size:22px;letter-spacing:.01em">Vastu<span style="color:#7A9E7E">First</span></span>
+</div>
+<div id="vfNavLinks" style="display:flex;align-items:center;gap:30px;font-size:14px;font-weight:500">
+<a href="#" data-nav-text="1" onClick="{{ goHow }}" style="color:#4B5347" style-hover="color:#232A22">How it works</a>
+<a href="#" data-nav-text="1" onClick="{{ goZones }}" style="color:#4B5347" style-hover="color:#232A22">The eight zones</a>
+<a href="#" id="vfNavCta" onClick="{{ goNotify }}" style="display:inline-flex;align-items:center;gap:8px;background:#232A22;color:#F8F6F0;padding:10px 22px;border-radius:100px" style-hover="background:#3B4433;color:#F8F6F0"><span style="width:6px;height:6px;border-radius:50%;background:#C9A227;animation:vfPulse 2.4s ease-in-out infinite"></span><span id="vfNavCtaFull">Coming soon — get notified</span><span id="vfNavCtaShort" style="display:none">Get notified</span></a>
+</div>
+</nav>
+
+<section id="vfHero" style="position:relative;min-height:100vh;display:flex;align-items:center;padding:clamp(100px,12vw,140px) clamp(20px,4vw,48px) clamp(56px,8vw,80px);background:#F8F6F0">
+<div id="vfHeroGrid" style="position:absolute;inset:-8%;pointer-events:none;opacity:.5">
+<svg viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" style="width:100%;height:100%"><g stroke="#D3D6C9" stroke-width="1"><line x1="0" y1="200" x2="1200" y2="200"/><line x1="0" y1="400" x2="1200" y2="400"/><line x1="0" y1="600" x2="1200" y2="600"/><line x1="300" y1="0" x2="300" y2="800"/><line x1="600" y1="0" x2="600" y2="800"/><line x1="900" y1="0" x2="900" y2="800"/></g></svg>
+</div>
+<div id="vfHeroDial" style="position:absolute;right:-260px;top:50%;width:920px;height:920px;margin-top:-460px;pointer-events:none;opacity:.6">
+<svg viewBox="-110 -110 220 220" style="width:100%;height:100%">
+<circle r="104" fill="none" stroke="#D3D6C9" stroke-width=".7"/>
+<circle r="86" fill="none" stroke="#C4D0BE" stroke-width=".5"/>
+<circle r="58" fill="none" stroke="#D3D6C9" stroke-width=".4" stroke-dasharray="2 3"/>
+<sc-for list="{{ ticks }}" as="t" hint-placeholder-count="8"><line x1="{{ t.x1 }}" y1="{{ t.y1 }}" x2="{{ t.x2 }}" y2="{{ t.y2 }}" stroke="{{ t.c }}" stroke-width="{{ t.w }}"></line></sc-for>
+<sc-for list="{{ dialLabels }}" as="l" hint-placeholder-count="4"><text x="{{ l.x }}" y="{{ l.y }}" fill="#98A08C" text-anchor="middle" style="font-family:'DM Mono',monospace;font-size:7px;letter-spacing:.14em">{{ l.t }}</text></sc-for>
+</svg>
+</div>
+
+<div id="vfHeroCols" style="position:relative;max-width:1280px;margin:0 auto;width:100%;display:grid;grid-template-columns:1.15fr .85fr;gap:60px;align-items:center">
+<div>
+<div data-reveal="0" style="display:inline-flex;align-items:center;gap:10px;border:1px solid #C4D0BE;border-radius:100px;padding:8px 18px;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#4C7355;background:rgba(228,235,225,.5)">
+<svg viewBox="0 0 24 24" style="width:13px;height:13px"><path d="M12 2 L15 12 L12 10 L9 12 Z" fill="#7A9E7E"/><circle cx="12" cy="15" r="2" fill="#C9A227"/></svg>
+Vastu before you build
+</div>
+<h1 data-reveal="1" style="font-family:'Marcellus',serif;font-weight:400;font-size:clamp(52px,6.4vw,92px);line-height:1.02;margin:26px 0 0;letter-spacing:-.01em;text-wrap:balance">India&rsquo;s No.&thinsp;1<br/><span style="color:#7A9E7E">Vastu</span> App</h1>
+<p data-reveal="2" style="font-size:19px;line-height:1.6;color:#4B5347;max-width:520px;margin:26px 0 0;text-wrap:pretty">Sketch your plot, mark north, and get a room-by-room vastu verdict — before a single brick is laid. Built with practising vastu consultants, in six Indian languages.</p>
+<div data-reveal="3" style="display:flex;align-items:center;gap:14px;margin-top:38px;flex-wrap:wrap">
+<div style="display:inline-flex;align-items:center;gap:12px;background:#232A22;color:#F8F6F0;border-radius:14px;padding:12px 22px">
+<svg viewBox="0 0 24 24" style="width:24px;height:24px;fill:#F8F6F0"><path d="M17.05 12.04c-.03-2.4 1.96-3.55 2.05-3.61-1.12-1.63-2.86-1.86-3.47-1.88-1.47-.15-2.88.87-3.63.87-.75 0-1.9-.85-3.13-.83-1.61.02-3.1.94-3.92 2.38-1.68 2.9-.43 7.2 1.2 9.56.8 1.15 1.75 2.45 3 2.4 1.2-.05 1.66-.78 3.12-.78 1.45 0 1.86.78 3.13.75 1.3-.02 2.12-1.17 2.91-2.33.92-1.34 1.3-2.64 1.32-2.7-.03-.02-2.54-.98-2.58-3.83zM14.66 4.9c.66-.8 1.1-1.92.98-3.03-.95.04-2.1.63-2.78 1.43-.61.7-1.15 1.84-1 2.92 1.05.08 2.13-.53 2.8-1.32z"/></svg>
+<div><div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:#C9A227">Coming soon on</div><div style="font-size:17px;font-weight:500;margin-top:1px">App Store</div></div>
+</div>
+<div style="display:inline-flex;align-items:center;gap:12px;background:#232A22;color:#F8F6F0;border-radius:14px;padding:12px 22px">
+<svg viewBox="0 0 24 24" style="width:22px;height:22px"><path d="M4 3.5 L15.5 12 L4 20.5 Z" fill="none" stroke="#F8F6F0" stroke-width="1.6" stroke-linejoin="round"/><path d="M15.5 12 L19.5 9.4 L21 12 L19.5 14.6 Z" fill="#C9A227"/></svg>
+<div><div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:#C9A227">Coming soon on</div><div style="font-size:17px;font-weight:500;margin-top:1px">Google Play</div></div>
+</div>
+<a href="#" onClick="{{ goNotify }}" style="font-size:15px;font-weight:500;color:#4C7355;border-bottom:1px solid #C4D0BE;padding-bottom:2px">Get launch access →</a>
+</div>
+<div data-reveal="4" style="display:flex;align-items:center;gap:26px;margin-top:44px;font-family:'DM Mono',monospace;font-size:11.5px;letter-spacing:.06em;color:#6B7064">
+<span>16-zone analysis</span><span style="width:4px;height:4px;border-radius:50%;background:#C9A227"></span><span>Consultant-reviewed rules</span><span style="width:4px;height:4px;border-radius:50%;background:#C9A227"></span><span>6 languages</span>
+</div>
+</div>
+
+<div data-reveal="2" style="display:flex;justify-content:center">
+<div id="vfFloatWrap" style="animation:vfFloat 7s ease-in-out infinite">
+<div style="width:min(330px,88vw);background:#0c0c0c;border-radius:44px;padding:10px;box-shadow:0 50px 90px -36px rgba(35,42,34,.55)">
+<div style="background:#F8F6F0;border-radius:36px;overflow:hidden;height:640px;position:relative">
+<div style="height:42px;display:flex;align-items:center;justify-content:space-between;padding:0 26px;font-family:'DM Mono',monospace;font-size:11px;color:#98A08C"><span>9:41</span><span>VastuFirst</span></div>
+<div style="padding:14px 22px 0">
+<div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#6B7064">Step 2 of 3 · Mark north</div>
+<div style="font-family:'Marcellus',serif;font-size:24px;margin-top:6px">Face the road,<br/>hold steady</div>
+<div style="display:flex;align-items:baseline;gap:6px;margin-top:14px"><span id="vfDeg" style="font-family:'DM Mono',monospace;font-size:44px;color:#232A22">0°</span><span style="font-family:'DM Mono',monospace;font-size:12px;color:#4C7355" id="vfDir">N</span></div>
+</div>
+<div style="position:absolute;left:10px;right:10px;top:212px;bottom:74px;display:flex;align-items:center;justify-content:center">
+<svg viewBox="-110 -110 220 220" style="width:100%;height:100%;overflow:visible">
+<g id="vfPhoneDial">
+<circle r="100" fill="#EFF2EA"/>
+<circle r="100" fill="none" stroke="#C4D0BE" stroke-width="1"/>
+<circle r="72" fill="none" stroke="#D3D6C9" stroke-width=".6"/>
+<sc-for list="{{ ticks }}" as="t" hint-placeholder-count="8"><line x1="{{ t.x1 }}" y1="{{ t.y1 }}" x2="{{ t.x2 }}" y2="{{ t.y2 }}" stroke="{{ t.c }}" stroke-width="{{ t.w }}"></line></sc-for>
+<sc-for list="{{ dialLabels }}" as="l" hint-placeholder-count="4"><text x="{{ l.x }}" y="{{ l.y }}" fill="#4B5347" text-anchor="middle" style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.1em">{{ l.t }}</text></sc-for>
+</g>
+<path d="M0 -66 L10 -32 L0 -39 L-10 -32 Z" fill="#7A9E7E"/>
+<path d="M0 66 L10 32 L0 39 L-10 32 Z" fill="#EFF2EA" stroke="#C4D0BE" stroke-width="1"/>
+<circle r="7" fill="#C9A227"/>
+<circle r="7" fill="none" stroke="#F8F6F0" stroke-width="2"/>
+</svg>
+</div>
+<div style="position:absolute;left:22px;right:22px;bottom:18px;background:#7A9E7E;color:#232A22;border-radius:12px;text-align:center;padding:13px;font-size:15px;font-weight:600">Lock north</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div style="position:absolute;left:50%;bottom:26px;margin-left:-11px;color:#98A08C"><svg viewBox="0 0 22 30" style="width:22px;height:30px"><rect x="1" y="1" width="20" height="28" rx="10" fill="none" stroke="#98A08C" stroke-width="1.2"/><circle id="vfScrollDot" cx="11" cy="9" r="2.4" fill="#C9A227"/></svg></div>
+</section>
+
+<div style="background:#232A22;padding:18px 0;overflow:hidden;position:relative">
+<div id="vfMarquee" style="display:flex;gap:64px;width:max-content;animation:vfMarquee 36s linear infinite;font-size:16px;color:#98A08C;white-space:nowrap;align-items:center">
+<span style="font-family:'Marcellus',serif;color:#F8F6F0">Vastu before you build</span><span style="color:#C9A227">◆</span>
+<span style="font-family:'Noto Serif Devanagari',serif;color:#F8F6F0">निर्माण से पहले वास्तु</span><span style="color:#C9A227">◆</span>
+<span style="font-family:'Noto Serif Tamil',serif;color:#F8F6F0">கட்டும் முன் வாஸ்து</span><span style="color:#C9A227">◆</span>
+<span style="font-family:'Noto Serif Telugu',serif;color:#F8F6F0">నిర్మాణానికి ముందు వాస్తు</span><span style="color:#C9A227">◆</span>
+<span style="font-family:'Noto Serif Kannada',serif;color:#F8F6F0">ಕಟ್ಟುವ ಮೊದಲು ವಾಸ್ತು</span><span style="color:#C9A227">◆</span>
+<span style="font-family:'Noto Serif Bengali',serif;color:#F8F6F0">নির্মাণের আগে বাস্তু</span><span style="color:#C9A227">◆</span>
+<span style="font-family:'Marcellus',serif;color:#F8F6F0">Vastu before you build</span><span style="color:#C9A227">◆</span>
+<span style="font-family:'Noto Serif Devanagari',serif;color:#F8F6F0">निर्माण से पहले वास्तु</span><span style="color:#C9A227">◆</span>
+<span style="font-family:'Noto Serif Tamil',serif;color:#F8F6F0">கட்டும் முன் வாஸ்து</span><span style="color:#C9A227">◆</span>
+<span style="font-family:'Noto Serif Telugu',serif;color:#F8F6F0">నిర్మాణానికి ముందు వాస్తు</span><span style="color:#C9A227">◆</span>
+<span style="font-family:'Noto Serif Kannada',serif;color:#F8F6F0">ಕಟ್ಟುವ ಮೊದಲು ವಾಸ್ತು</span><span style="color:#C9A227">◆</span>
+<span style="font-family:'Noto Serif Bengali',serif;color:#F8F6F0">নির্মাণের আগে বাস্তু</span><span style="color:#C9A227">◆</span>
+</div>
+</div>
+
+<section id="vfHow" data-screen-label="How it works" style="position:relative">
+<div id="vfHowWrap" style="height:340vh">
+<div id="vfHowPane" style="position:sticky;top:0;height:100vh;display:flex;align-items:center;padding:90px clamp(20px,4vw,48px) 40px;background:#F2EEE4;overflow:hidden">
+<div id="vfHowCols" style="max-width:1280px;margin:0 auto;width:100%;display:grid;grid-template-columns:.9fr 1.1fr;gap:80px;align-items:center">
+
+<div id="vfHowPhoneCell" style="display:flex;justify-content:center;position:relative">
+<div id="vfHowRing" style="position:absolute;width:560px;height:560px;top:50%;left:50%;transform:translate(-50%,-50%);border:1px solid #DDDED3;border-radius:50%;pointer-events:none"></div>
+<div id="vfHowPhone" style="width:330px;background:#0c0c0c;border-radius:44px;padding:10px;box-shadow:0 50px 90px -36px rgba(35,42,34,.5);transform-origin:center center">
+<div style="background:#F8F6F0;border-radius:36px;overflow:hidden;height:640px;position:relative">
+<div style="height:42px;display:flex;align-items:center;justify-content:space-between;padding:0 26px;font-family:'DM Mono',monospace;font-size:11px;color:#98A08C"><span>9:41</span><span>VastuFirst</span></div>
+
+<div id="vfScr0" style="position:absolute;inset:42px 0 0;padding:16px 22px;transition:opacity .45s,transform .45s">
+<div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#6B7064">Step 1 of 3 · Sketch</div>
+<div style="font-family:'Marcellus',serif;font-size:24px;margin:6px 0 16px">Draw your plot</div>
+<svg viewBox="0 0 100 110" style="width:100%;display:block">
+<rect x="6" y="6" width="88" height="98" rx="2" fill="#FDFCF8" stroke="#98A08C" stroke-width="1"/>
+<rect x="6" y="6" width="52" height="40" fill="#E4EBE1" stroke="#7A9E7E" stroke-width=".8"/><text x="32" y="28" text-anchor="middle" style="font-family:'DM Mono',monospace;font-size:5px" fill="#4B5347">BEDROOM</text>
+<rect x="58" y="6" width="36" height="40" fill="#F5EFDA" stroke="#C9A227" stroke-width=".8"/><text x="76" y="28" text-anchor="middle" style="font-family:'DM Mono',monospace;font-size:5px" fill="#6F5410">KITCHEN</text>
+<rect x="6" y="46" width="34" height="58" fill="#EFF2EA" stroke="#98A08C" stroke-width=".6"/><text x="23" y="76" text-anchor="middle" style="font-family:'DM Mono',monospace;font-size:5px" fill="#4B5347">HALL</text>
+<rect x="40" y="46" width="54" height="30" fill="#EFF2EA" stroke="#98A08C" stroke-width=".6"/><text x="67" y="62" text-anchor="middle" style="font-family:'DM Mono',monospace;font-size:5px" fill="#4B5347">POOJA</text>
+<rect x="40" y="76" width="54" height="28" fill="#FDFCF8" stroke="#98A08C" stroke-width=".6" stroke-dasharray="2 2"/><text x="67" y="91" text-anchor="middle" style="font-family:'DM Mono',monospace;font-size:5px" fill="#98A08C">+ ADD ROOM</text>
+</svg>
+<div style="display:flex;gap:8px;margin-top:14px"><span style="font-family:'DM Mono',monospace;font-size:10px;background:#E4EBE1;color:#4C7355;padding:5px 10px;border-radius:100px">4 rooms placed</span><span style="font-family:'DM Mono',monospace;font-size:10px;background:#EFF2EA;color:#6B7064;padding:5px 10px;border-radius:100px">30 × 40 ft</span></div>
+</div>
+
+<div id="vfScr1" style="position:absolute;inset:42px 0 0;padding:16px 22px;transition:opacity .45s,transform .45s">
+<div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#6B7064">Step 2 of 3 · Orient</div>
+<div style="font-family:'Marcellus',serif;font-size:24px;margin:6px 0 16px">Mark north</div>
+<svg viewBox="0 0 100 110" style="width:100%;display:block">
+<rect x="6" y="10" width="88" height="94" rx="2" fill="#FDFCF8" stroke="#98A08C" stroke-width="1"/>
+<circle cx="50" cy="57" r="40" fill="none" stroke="#C4D0BE" stroke-width=".7" stroke-dasharray="2 2"/>
+<line x1="50" y1="57" x2="76" y2="21" stroke="#7A9E7E" stroke-width="1.2"/>
+<path d="M76 21 L79 30 L76 27.5 L73 30 Z" fill="#7A9E7E"/>
+<circle cx="76" cy="16" r="6.5" fill="#F8F6F0" stroke="#7A9E7E" stroke-width="1"/><text x="76" y="18.4" text-anchor="middle" style="font-family:'DM Mono',monospace;font-size:6px;font-weight:500" fill="#4C7355">N</text>
+<circle cx="50" cy="57" r="3" fill="#C9A227"/>
+<text x="50" y="98" text-anchor="middle" style="font-family:'DM Mono',monospace;font-size:5.5px" fill="#6B7064">PLOT FACES 34° NE</text>
+</svg>
+<div style="margin-top:14px;background:#E7EEE6;border-radius:10px;padding:10px 12px;font-size:12px;line-height:1.45;color:#4B5347">Compass locked. We adjust every rule to your true orientation — not an assumed north.</div>
+</div>
+
+<div id="vfScr2" style="position:absolute;inset:42px 0 0;padding:16px 22px;transition:opacity .45s,transform .45s">
+<div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#6B7064">Step 3 of 3 · Verdict</div>
+<div style="font-family:'Marcellus',serif;font-size:24px;margin:6px 0 14px">Your result</div>
+<div style="display:flex;align-items:center;gap:16px;background:#EFF2EA;border-radius:14px;padding:14px 16px">
+<svg viewBox="0 0 60 60" style="width:64px;height:64px;flex:0 0 64px"><circle cx="30" cy="30" r="26" fill="none" stroke="#DDDED3" stroke-width="5"/><circle id="vfScoreArc" cx="30" cy="30" r="26" fill="none" stroke="#7A9E7E" stroke-width="5" stroke-linecap="round" stroke-dasharray="163.4" stroke-dashoffset="163.4" transform="rotate(-90 30 30)"/><text id="vfScoreNum" x="30" y="35" text-anchor="middle" style="font-family:'DM Mono',monospace;font-size:15px;font-weight:500" fill="#232A22">0</text></svg>
+<div><div style="font-family:'Marcellus',serif;font-size:18px">Good, with 2 fixes</div><div style="font-size:12px;color:#6B7064;margin-top:2px">Both still free to make — nothing is built yet.</div></div>
+</div>
+<div style="margin-top:10px;background:#F5EFDA;border-left:3px solid #C9A227;border-radius:10px;padding:10px 12px"><div style="font-size:12.5px;font-weight:600">Kitchen — move to SE</div><div style="font-size:11.5px;color:#6B7064;margin-top:2px">Agni corner. One wall on the plan, zero cost on site.</div></div>
+<div style="margin-top:8px;background:#E7EEE6;border-left:3px solid #7A9E7E;border-radius:10px;padding:10px 12px"><div style="font-size:12.5px;font-weight:600">Pooja — keep in NE</div><div style="font-size:11.5px;color:#6B7064;margin-top:2px">Ishanya zone. Already perfectly placed.</div></div>
+</div>
+</div>
+</div>
+</div>
+
+<div>
+<div style="font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#4C7355">How it works</div>
+<h2 style="font-family:'Marcellus',serif;font-weight:400;font-size:clamp(36px,3.6vw,54px);line-height:1.08;margin:14px 0 0;text-wrap:balance">Three steps.<br/>Before one brick.</h2>
+<div style="display:flex;flex-direction:column;gap:10px;margin-top:36px">
+<div id="vfStep0" style="display:flex;gap:18px;padding:20px 22px;border-radius:16px;transition:background .4s,border-color .4s;border:1px solid transparent">
+<span style="font-family:'DM Mono',monospace;font-size:13px;color:#C9A227;padding-top:3px">01</span>
+<div><div style="font-family:'Marcellus',serif;font-size:22px">Sketch your plot</div><p style="font-size:15px;line-height:1.55;color:#4B5347;margin:6px 0 0;max-width:420px">Drag rooms onto a simple grid — no CAD, no architect needed. A farmhouse or a 2BHK, it takes two minutes.</p></div>
+</div>
+<div id="vfStep1" style="display:flex;gap:18px;padding:20px 22px;border-radius:16px;transition:background .4s,border-color .4s;border:1px solid transparent">
+<span style="font-family:'DM Mono',monospace;font-size:13px;color:#C9A227;padding-top:3px">02</span>
+<div><div style="font-family:'Marcellus',serif;font-size:22px">Mark north</div><p style="font-size:15px;line-height:1.55;color:#4B5347;margin:6px 0 0;max-width:420px">Point your phone at the road or type the bearing. Every rule is computed against your plot&rsquo;s true orientation.</p></div>
+</div>
+<div id="vfStep2" style="display:flex;gap:18px;padding:20px 22px;border-radius:16px;transition:background .4s,border-color .4s;border:1px solid transparent">
+<span style="font-family:'DM Mono',monospace;font-size:13px;color:#C9A227;padding-top:3px">03</span>
+<div><div style="font-family:'Marcellus',serif;font-size:22px">Get the verdict</div><p style="font-size:15px;line-height:1.55;color:#4B5347;margin:6px 0 0;max-width:420px">A room-by-room score with ranked fixes — each one traced to the classical text it comes from.</p></div>
+</div>
+</div>
+<div style="display:flex;gap:8px;margin-top:28px;margin-left:22px">
+<span id="vfDotA" style="height:4px;width:36px;border-radius:100px;background:#D3D6C9;transition:background .3s"></span>
+<span id="vfDotB" style="height:4px;width:36px;border-radius:100px;background:#D3D6C9;transition:background .3s"></span>
+<span id="vfDotC" style="height:4px;width:36px;border-radius:100px;background:#D3D6C9;transition:background .3s"></span>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+</section>
+
+<section id="vfZones" data-screen-label="Eight zones" style="position:relative">
+<div id="vfZoneWrap" style="height:320vh">
+<div id="vfZonePane" style="position:sticky;top:0;height:100vh;display:flex;align-items:center;padding:90px clamp(20px,4vw,48px) 40px;background:#232A22;color:#F8F6F0;overflow:hidden">
+<div id="vfZoneCols" style="max-width:1280px;margin:0 auto;width:100%;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center">
+<div>
+<div style="font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#C9A227">The eight zones</div>
+<h2 style="font-family:'Marcellus',serif;font-weight:400;font-size:clamp(36px,3.6vw,54px);line-height:1.08;margin:14px 0 0;color:#F8F6F0">Every direction<br/>has a duty.</h2>
+<div id="vfZoneMin" style="margin-top:36px;min-height:180px">
+<div style="display:flex;align-items:baseline;gap:14px"><span id="vfZName" style="font-family:'Marcellus',serif;font-size:44px;color:#F8F6F0">North</span><span id="vfZDeva" style="font-family:'Noto Serif Devanagari',serif;font-size:22px;color:#98A08C">उत्तर</span></div>
+<div style="display:flex;gap:10px;margin-top:12px"><span id="vfZElem" style="font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;background:rgba(122,158,126,.18);color:#A9C3AC;padding:6px 13px;border-radius:100px">Water · Jal</span><span id="vfZDeg" style="font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.1em;background:rgba(201,162,39,.14);color:#EAD9A6;padding:6px 13px;border-radius:100px">337.5° – 22.5°</span></div>
+<p id="vfZDesc" style="font-size:16.5px;line-height:1.6;color:#B8BFAF;margin:16px 0 0;max-width:430px">The zone of career and opportunity. Keep it open and light — an entrance or living space here supports flow.</p>
+</div>
+<div style="font-family:'DM Mono',monospace;font-size:11px;color:#6B7064;margin-top:18px"><span id="vfZIdx">01</span> / 08 — keep scrolling to turn the dial</div>
+</div>
+<div style="display:flex;justify-content:center">
+<div id="vfZoneBox" style="position:relative;width:min(480px,38vw);aspect-ratio:1">
+<svg viewBox="-120 -120 240 240" style="width:100%;height:100%;overflow:visible">
+<g id="vfWheel">
+<circle r="112" fill="none" stroke="#3B4433" stroke-width="1"/>
+<sc-for list="{{ zones }}" as="z" hint-placeholder-count="8">
+<g><path d="{{ z.path }}" fill="{{ z.fill }}" stroke="#232A22" stroke-width="1.2" id="{{ z.wid }}" style="transition:fill .4s"></path>
+<text x="{{ z.lx }}" y="{{ z.ly }}" text-anchor="middle" fill="#B8BFAF" transform="{{ z.rot }}" style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.18em">{{ z.ab }}</text></g>
+</sc-for>
+<circle r="34" fill="#232A22" stroke="#3B4433" stroke-width="1"/>
+<text y="-2" text-anchor="middle" fill="#98A08C" style="font-family:'DM Mono',monospace;font-size:7px;letter-spacing:.2em">BRAHMA</text>
+<text y="8" text-anchor="middle" fill="#6B7064" style="font-family:'DM Mono',monospace;font-size:6px;letter-spacing:.2em">STHAN</text>
+</g>
+<path d="M0 -118 L7 -100 L0 -105 L-7 -100 Z" fill="#C9A227"/>
+</svg>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<section data-reveal="0" style="padding:clamp(72px,10vw,120px) clamp(20px,4vw,48px);background:#F8F6F0">
+<div style="max-width:1080px;margin:0 auto">
+<div style="font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#4C7355;text-align:center">Why VastuFirst</div>
+<h2 style="font-family:'Marcellus',serif;font-weight:400;font-size:clamp(32px,3.2vw,46px);line-height:1.15;margin:14px auto 0;text-align:center;max-width:640px;text-wrap:balance">Advice you can trace, in the language you think in</h2>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(258px,1fr));gap:20px;margin-top:clamp(36px,5vw,56px)">
+<div data-reveal="1" style="background:#F2EEE4;border:1px solid #DDDED3;border-radius:18px;padding:30px 28px">
+<svg viewBox="0 0 24 24" style="width:26px;height:26px"><g fill="none" stroke="#4C7355" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4 h16 v16 h-16 Z"/><path d="M4 9 h16 M9 4 v16"/></g></svg>
+<div style="font-family:'Marcellus',serif;font-size:21px;margin-top:16px">16-zone precision</div>
+<p style="font-size:14.5px;line-height:1.6;color:#4B5347;margin:8px 0 0">Not just N-E-S-W. Every rule runs against the full 16-direction mandala, adjusted to your plot&rsquo;s exact bearing.</p>
+</div>
+<div data-reveal="2" style="background:#F2EEE4;border:1px solid #DDDED3;border-radius:18px;padding:30px 28px">
+<svg viewBox="0 0 24 24" style="width:26px;height:26px"><g fill="none" stroke="#6F5410" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3 h11 l3 3 v15 h-14 Z"/><path d="M8 9 h8 M8 13 h8 M8 17 h5"/></g></svg>
+<div style="font-family:'Marcellus',serif;font-size:21px;margin-top:16px">Sourced, not vague</div>
+<p style="font-size:14.5px;line-height:1.6;color:#4B5347;margin:8px 0 0">Each recommendation carries its provenance — classical text, regional school, or consultant consensus — so you know why.</p>
+</div>
+<div data-reveal="3" style="background:#F2EEE4;border:1px solid #DDDED3;border-radius:18px;padding:30px 28px">
+<svg viewBox="0 0 24 24" style="width:26px;height:26px"><g fill="none" stroke="#4C7355" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3.5 12 h17 M12 3.5 c3 2.5 3 14.5 0 17 M12 3.5 c-3 2.5 -3 14.5 0 17"/></g></svg>
+<div style="font-family:'Marcellus',serif;font-size:21px;margin-top:16px">Six languages</div>
+<p style="font-size:14.5px;line-height:1.6;color:#4B5347;margin:8px 0 0">English, हिन्दी, தமிழ், తెలుగు, ಕನ್ನಡ and বাংলা — the full verdict, not a translated shell.</p>
+</div>
+</div>
+</div>
+</section>
+
+<section id="vfNotify" data-screen-label="Notify CTA" style="padding:clamp(80px,10vw,120px) clamp(20px,4vw,48px) clamp(72px,9vw,100px);background:#F2EEE4;position:relative;overflow:hidden">
+<div id="vfCtaDial" style="position:absolute;left:-200px;bottom:-260px;width:640px;height:640px;opacity:.4;pointer-events:none">
+<svg viewBox="-110 -110 220 220" style="width:100%;height:100%"><circle r="104" fill="none" stroke="#D3D6C9" stroke-width=".8"/><circle r="80" fill="none" stroke="#C4D0BE" stroke-width=".6"/><sc-for list="{{ ticks }}" as="t" hint-placeholder-count="8"><line x1="{{ t.x1 }}" y1="{{ t.y1 }}" x2="{{ t.x2 }}" y2="{{ t.y2 }}" stroke="{{ t.c }}" stroke-width="{{ t.w }}"></line></sc-for></svg>
+</div>
+<div style="max-width:680px;margin:0 auto;text-align:center;position:relative">
+<div data-reveal="0" style="display:inline-flex;align-items:center;gap:8px;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#6F5410;background:#F5EFDA;border:1px solid #EAD9A6;padding:8px 18px;border-radius:100px"><span style="width:6px;height:6px;border-radius:50%;background:#C9A227;animation:vfPulse 2.4s ease-in-out infinite"></span>Launching soon · Android &amp; iOS</div>
+<h2 data-reveal="1" style="font-family:'Marcellus',serif;font-weight:400;font-size:clamp(36px,4vw,56px);line-height:1.1;margin:22px 0 0;text-wrap:balance">Be the first to build it right</h2>
+<p data-reveal="2" style="font-size:17px;line-height:1.6;color:#4B5347;margin:18px auto 0;max-width:460px">Leave your email and we&rsquo;ll send one message when VastuFirst goes live — nothing else.</p>
+<sc-if value="{{ notified }}" hint-placeholder-val="{{ false }}">
+<div style="margin-top:34px;display:inline-flex;align-items:center;gap:10px;background:#E7EEE6;border:1px solid #7A9E7E;color:#2E5539;border-radius:100px;padding:14px 28px;font-size:15px;font-weight:500"><svg viewBox="0 0 24 24" style="width:18px;height:18px"><path d="M4 12.5 L9.5 18 L20 6.5" fill="none" stroke="#2E5539" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>You&rsquo;re on the list. See you at launch.</div>
+</sc-if>
+<sc-if value="{{ notNotified }}" hint-placeholder-val="{{ true }}">
+<div data-reveal="3" style="margin-top:34px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+<input id="vfEmail" type="email" placeholder="you@example.com" style="width:320px;max-width:100%;font-family:'DM Sans',sans-serif;font-size:15px;padding:15px 22px;border-radius:100px;border:1px solid #C4D0BE;background:#F8F6F0;color:#232A22;outline:none" style-focus="border-color:#4C7355"/>
+<button onClick="{{ notify }}" style="font-family:'DM Sans',sans-serif;font-size:15px;font-weight:600;padding:15px 30px;border-radius:100px;border:none;background:#7A9E7E;color:#232A22;cursor:pointer" style-hover="background:#8FB093">Notify me</button>
+</div>
+</sc-if>
+<div data-reveal="4" style="display:flex;gap:14px;justify-content:center;margin-top:30px;opacity:.85">
+<span style="display:inline-flex;align-items:center;gap:8px;font-family:'DM Mono',monospace;font-size:11px;color:#6B7064;border:1px solid #DDDED3;border-radius:100px;padding:7px 16px"><svg viewBox="0 0 24 24" style="width:13px;height:13px;fill:#4B5347"><path d="M17.05 12.04c-.03-2.4 1.96-3.55 2.05-3.61-1.12-1.63-2.86-1.86-3.47-1.88-1.47-.15-2.88.87-3.63.87-.75 0-1.9-.85-3.13-.83-1.61.02-3.1.94-3.92 2.38-1.68 2.9-.43 7.2 1.2 9.56.8 1.15 1.75 2.45 3 2.4 1.2-.05 1.66-.78 3.12-.78 1.45 0 1.86.78 3.13.75 1.3-.02 2.12-1.17 2.91-2.33.92-1.34 1.3-2.64 1.32-2.7-.03-.02-2.54-.98-2.58-3.83z"/></svg>iOS — coming soon</span>
+<span style="display:inline-flex;align-items:center;gap:8px;font-family:'DM Mono',monospace;font-size:11px;color:#6B7064;border:1px solid #DDDED3;border-radius:100px;padding:7px 16px"><svg viewBox="0 0 24 24" style="width:12px;height:12px"><path d="M5 4 L16 12 L5 20 Z" fill="none" stroke="#4B5347" stroke-width="1.8" stroke-linejoin="round"/></svg>Android — coming soon</span>
+</div>
+</div>
+</section>
+
+<footer style="background:#232A22;color:#98A08C;padding:clamp(32px,5vw,44px) clamp(20px,4vw,48px)">
+<div style="max-width:1280px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap">
+<div style="display:flex;align-items:center;gap:10px">
+<svg viewBox="0 0 40 40" style="width:26px;height:26px"><rect x="2" y="2" width="36" height="36" rx="4" fill="none" stroke="#525A48" stroke-width="1.4"/><path d="M20 5 L23.4 15.6 L20 13.4 L16.6 15.6 Z" fill="#7A9E7E"/><circle cx="20" cy="20" r="2.6" fill="#C9A227"/></svg>
+<span style="font-family:'Marcellus',serif;font-size:17px;color:#F8F6F0">Vastu<span style="color:#7A9E7E">First</span></span>
+</div>
+<div style="font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.08em">Vastu before you build · © {{ year }} VastuFirst</div>
+</div>
+</footer>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;marqueeSpeed&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:36,&quot;min&quot;:12,&quot;max&quot;:80,&quot;step&quot;:2,&quot;unit&quot;:&quot;s&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Motion&quot;},&quot;floatPhone&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Motion&quot;}}">
+class Component extends DCLogic {
+  state = { notified: false };
+
+  renderVals() {
+    const ticks = [];
+    for (let i = 0; i < 48; i++) {
+      const a = (i * 7.5 - 90) * Math.PI / 180, major = i % 12 === 0, mid = i % 6 === 0;
+      const r1 = 100, r2 = major ? 88 : (mid ? 92 : 96);
+      ticks.push({
+        x1: +(Math.cos(a) * r1).toFixed(2), y1: +(Math.sin(a) * r1).toFixed(2),
+        x2: +(Math.cos(a) * r2).toFixed(2), y2: +(Math.sin(a) * r2).toFixed(2),
+        c: major ? '#7A9E7E' : '#C4D0BE', w: major ? 1.6 : 0.7
+      });
+    }
+    const dialLabels = ['N', 'E', 'S', 'W'].map((t, i) => {
+      const a = (i * 90 - 90) * Math.PI / 180;
+      return { t, x: +(Math.cos(a) * 76).toFixed(1), y: +(Math.sin(a) * 76 + 3).toFixed(1) };
+    });
+    const zones = this.zoneData().map((z, i) => {
+      const a0 = (i * 45 - 112.5) * Math.PI / 180, a1 = (i * 45 - 67.5) * Math.PI / 180, am = (i * 45 - 90) * Math.PI / 180;
+      const R = 112, r = 38;
+      const p = `M${(Math.cos(a0) * r).toFixed(1)} ${(Math.sin(a0) * r).toFixed(1)} L${(Math.cos(a0) * R).toFixed(1)} ${(Math.sin(a0) * R).toFixed(1)} A${R} ${R} 0 0 1 ${(Math.cos(a1) * R).toFixed(1)} ${(Math.sin(a1) * R).toFixed(1)} L${(Math.cos(a1) * r).toFixed(1)} ${(Math.sin(a1) * r).toFixed(1)} A${r} ${r} 0 0 0 ${(Math.cos(a0) * r).toFixed(1)} ${(Math.sin(a0) * r).toFixed(1)} Z`;
+      const lx = +(Math.cos(am) * 78).toFixed(1), ly = +(Math.sin(am) * 78 + 3).toFixed(1);
+      return { path: p, fill: '#2C352B', lx, ly, rot: `rotate(${i * 45} ${lx} ${ly - 3})`, ab: z.ab, wid: 'vfW' + i };
+    });
+    return {
+      ticks, dialLabels, zones,
+      year: new Date().getFullYear(),
+      notified: this.state.notified, notNotified: !this.state.notified,
+      notify: () => {
+        const el = document.getElementById('vfEmail');
+        if (el && el.value && el.value.includes('@')) this.setState({ notified: true });
+        else if (el) { el.style.borderColor = '#B3452E'; setTimeout(() => el.style.borderColor = '#C4D0BE', 1200); }
+      },
+      goHow: (e) => { e.preventDefault(); this.jump('vfHow'); },
+      goZones: (e) => { e.preventDefault(); this.jump('vfZones'); },
+      goNotify: (e) => { e.preventDefault(); this.jump('vfNotify'); }
+    };
+  }
+
+  zoneData() {
+    return [
+      { ab: 'N', name: 'North', deva: 'उत्तर', elem: 'Water · Jal', deg: '337.5° – 22.5°', desc: 'The zone of career and opportunity. Keep it open and light — an entrance or living space here supports flow.' },
+      { ab: 'NE', name: 'North-East', deva: 'ईशान्य', elem: 'Water · Ishanya', deg: '22.5° – 67.5°', desc: 'The most sacred corner — clarity, prayer, water. The ideal home for the pooja room, never for heavy storage.' },
+      { ab: 'E', name: 'East', deva: 'पूर्व', elem: 'Air · Vayu', deg: '67.5° – 112.5°', desc: 'The direction of the rising sun — health and new beginnings. Windows and morning rooms belong here.' },
+      { ab: 'SE', name: 'South-East', deva: 'आग्नेय', elem: 'Fire · Agni', deg: '112.5° – 157.5°', desc: 'The fire corner. The kitchen&rsquo;s natural home — flame and energy are welcome, water is not.' },
+      { ab: 'S', name: 'South', deva: 'दक्षिण', elem: 'Fire · Yama', deg: '157.5° – 202.5°', desc: 'Strength and reputation. Ideal for the master bedroom&rsquo;s wall — solid, heavy, protective.' },
+      { ab: 'SW', name: 'South-West', deva: 'नैऋत्य', elem: 'Earth · Prithvi', deg: '202.5° – 247.5°', desc: 'The anchor of the house. Master bedroom and heavy structure here bring stability to the whole plot.' },
+      { ab: 'W', name: 'West', deva: 'पश्चिम', elem: 'Space · Varuna', deg: '247.5° – 292.5°', desc: 'Gains and rest. A fine place for the dining room or children&rsquo;s study — settled, not stagnant.' },
+      { ab: 'NW', name: 'North-West', deva: 'वायव्य', elem: 'Air · Vayu', deg: '292.5° – 337.5°', desc: 'The zone of movement — guests, vehicles, and things meant to leave. Guest rooms and garages thrive here.' }
+    ];
+  }
+
+  componentDidUpdate() {
+    if (this._fitPhone) this._fitPhone();
+  }
+
+  applyLayout() {
+    const narrow = window.innerWidth <= 900;
+    const unpin = narrow || window.innerHeight <= 800;
+    this._expectPos = unpin ? 'relative' : 'sticky';
+    const gut = narrow ? '20px' : 'clamp(20px,4vw,48px)';
+    const set = (id, s) => { const el = document.getElementById(id); if (el) Object.assign(el.style, s); };
+
+    set('vfNavLinks', { gap: narrow ? '12px' : '30px' });
+    document.querySelectorAll('#vfNavLinks a[data-nav-text]').forEach((a) => { a.style.display = narrow ? 'none' : 'inline'; });
+    set('vfNavCtaFull', { display: narrow ? 'none' : 'inline' });
+    set('vfNavCtaShort', { display: narrow ? 'inline' : 'none' });
+    set('vfNavCta', { padding: narrow ? '12px 18px' : '10px 22px' });
+
+    set('vfHeroCols', { gridTemplateColumns: narrow ? '1fr' : '1.15fr .85fr', gap: narrow ? '40px' : '60px' });
+    set('vfHeroDial', narrow
+      ? { width: '560px', height: '560px', marginTop: '-280px', right: '-230px', opacity: '.4' }
+      : { width: '920px', height: '920px', marginTop: '-460px', right: '-260px', opacity: '.6' });
+    set('vfMarquee', { fontSize: narrow ? '14px' : '16px', gap: narrow ? '44px' : '64px' });
+
+    set('vfHowWrap', { height: unpin ? 'auto' : '340vh' });
+    set('vfHowPane', unpin
+      ? { position: 'relative', height: 'auto', display: 'block', overflow: 'visible', padding: '64px ' + gut + ' 76px' }
+      : { position: 'sticky', height: '100vh', display: 'flex', overflow: 'hidden', padding: '90px ' + gut + ' 40px' });
+    set('vfHowPhoneCell', { position: unpin ? 'sticky' : 'relative', top: unpin ? '72px' : 'auto', zIndex: '2' });
+    set('vfHowRing', { display: unpin ? 'none' : 'block' });
+    const howCopy = document.querySelector('#vfHowCols > div:last-child');
+    if (howCopy) howCopy.style.marginTop = narrow ? '26px' : '0px';
+    // Stacked: block flow, so the sticky phone's range is the whole section rather than one grid row.
+    set('vfHowCols', narrow
+      ? { display: 'block', gridTemplateColumns: '1fr', gap: '26px' }
+      : { display: 'grid', gridTemplateColumns: '.9fr 1.1fr', gap: '80px' });
+    // Taller step rows give the released pin enough scroll travel for three screens.
+    ['vfStep0', 'vfStep1', 'vfStep2'].forEach((id) => set(id, {
+      padding: unpin ? '16px 18px' : '20px 22px',
+      minHeight: unpin ? '38vh' : '0px',
+      alignItems: unpin ? 'center' : 'flex-start'
+    }));
+
+    set('vfZonePane', unpin
+      ? { height: 'auto', minHeight: '100vh', alignItems: 'flex-start', overflow: 'visible', padding: '78px ' + gut + ' 36px' }
+      : { height: '100vh', minHeight: '0px', alignItems: 'center', overflow: 'hidden', padding: '90px ' + gut + ' 40px' });
+    set('vfZoneCols', { gridTemplateColumns: narrow ? '1fr' : '1fr 1fr', gap: narrow ? '20px' : '80px' });
+    set('vfZoneBox', { width: narrow ? 'min(288px,36vh)' : 'min(480px,38vw,46vh)' });
+    set('vfZoneMin', { marginTop: narrow ? '22px' : '36px', minHeight: narrow ? '0px' : '180px' });
+    set('vfZName', { fontSize: narrow ? 'clamp(30px,5vh,40px)' : '44px' });
+    set('vfZDesc', { fontSize: narrow ? 'clamp(13.5px,2vh,15.5px)' : '16.5px', marginTop: narrow ? '12px' : '16px' });
+    const zh = document.querySelector('#vfZoneCols h2');
+    if (zh) zh.style.fontSize = narrow ? 'clamp(27px,4.6vh,34px)' : 'clamp(36px,3.6vw,54px)';
+    set('vfCtaDial', narrow
+      ? { width: '420px', height: '420px', left: '-150px', bottom: '-190px' }
+      : { width: '640px', height: '640px', left: '-200px', bottom: '-260px' });
+  }
+
+  jump(id) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 60, behavior: 'smooth' });
+  }
+
+  componentDidMount() {
+    this.reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const mq = document.getElementById('vfMarquee');
+    if (mq) mq.style.animationDuration = (this.props.marqueeSpeed ?? 36) + 's';
+    const fw = document.getElementById('vfFloatWrap');
+    if (fw && (this.props.floatPhone ?? true) === false) fw.style.animation = 'none';
+    const fitPhone = () => {
+      this.applyLayout();
+      const ph = document.getElementById('vfHowPhone');
+      if (!ph) return;
+      const narrow = window.innerWidth <= 900;
+      const unpinned = narrow || window.innerHeight <= 800;
+      // Stacked phones cap lower so a step card still shows beneath the pinned device.
+      const cap = narrow ? 0.66 : 0.86;
+      const s = unpinned
+        ? Math.max(0.52, Math.min(cap, (window.innerHeight - 170) / 680))
+        : Math.min(1, (window.innerHeight - 150) / 680);
+      ph.style.transformOrigin = 'top center';
+      ph.style.transform = 'scale(' + s.toFixed(3) + ')';
+      ph.style.marginBottom = (-(1 - s) * 660).toFixed(0) + 'px';
+    };
+    fitPhone();
+    this._fitPhone = fitPhone;
+    window.addEventListener('resize', fitPhone, { passive: true });
+    const io = new IntersectionObserver((es) => {
+      es.forEach((e) => {
+        if (e.isIntersecting) {
+          const d = +(e.target.getAttribute('data-reveal') || 0);
+          setTimeout(() => { e.target.style.opacity = '1'; e.target.style.transform = 'none'; }, d * 110);
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('[data-reveal]').forEach((el) => {
+      el.style.opacity = '0'; el.style.transform = 'translateY(26px)';
+      el.style.transition = 'opacity .7s cubic-bezier(.22,.8,.36,1), transform .7s cubic-bezier(.22,.8,.36,1)';
+      io.observe(el);
+    });
+    this._io = io;
+    const dirs = ['N', 'NNE', 'NE', 'ENE', 'E', 'ESE', 'SE', 'SSE', 'S', 'SSW', 'SW', 'WSW', 'W', 'WNW', 'NW', 'NNW'];
+    let ticking = false, zIdx = -1, stepIdx = -1, scoreDone = false;
+    const $ = (id) => document.getElementById(id);
+    const clamp = (v) => Math.max(0, Math.min(1, v));
+    const prog = (el) => { const r = el.getBoundingClientRect(); return clamp(-r.top / (r.height - window.innerHeight)); };
+    const zd = this.zoneData();
+    const update = () => {
+      ticking = false;
+      const hp = $('vfHowPane');
+      if (hp && hp.style.position !== this._expectPos) this.applyLayout();
+      const y = window.scrollY;
+      const doc = document.documentElement;
+      const pb = $('vfProgress'); if (pb) pb.style.width = (clamp(y / (doc.scrollHeight - window.innerHeight)) * 100).toFixed(2) + '%';
+      if (!this.reduce) {
+        const hd = $('vfHeroDial'); if (hd) hd.style.transform = 'rotate(' + (y * 0.06) + 'deg)';
+        const hg = $('vfHeroGrid'); if (hg) hg.style.transform = 'translateY(' + (y * 0.12) + 'px)';
+        const pd = $('vfPhoneDial'); if (pd) pd.style.transform = 'rotate(' + (-y * 0.12) + 'deg)';
+        const cd = $('vfCtaDial'); if (cd) cd.style.transform = 'rotate(' + (y * 0.03) + 'deg)';
+        const deg = ((y * 0.12) % 360 + 360) % 360;
+        const dg = $('vfDeg'); if (dg) dg.textContent = Math.round(deg) + '°';
+        const dr = $('vfDir'); if (dr) dr.textContent = dirs[Math.round(deg / 22.5) % 16];
+      }
+      const how = $('vfHowWrap');
+      if (how) {
+        const p = prog(how);
+        const i = Math.min(2, Math.floor(p * 3));
+        for (let k = 0; k < 3; k++) {
+          const scr = $('vfScr' + k);
+          if (scr) {
+            const on = k === i;
+            scr.style.opacity = on ? '1' : '0';
+            scr.style.transform = on ? 'translateY(0)' : (k < i ? 'translateY(-18px)' : 'translateY(18px)');
+            scr.style.pointerEvents = on ? 'auto' : 'none';
+          }
+          const st = $('vfStep' + k);
+          if (st) { st.style.background = k === i ? '#F8F6F0' : 'transparent'; st.style.borderColor = k === i ? '#DDDED3' : 'transparent'; }
+        }
+        ['vfDotA', 'vfDotB', 'vfDotC'].forEach((d, k) => { const el = $(d); if (el) el.style.background = k === i ? '#C9A227' : '#D3D6C9'; });
+        if (i !== stepIdx) stepIdx = i;
+        if (i === 2 && !scoreDone) {
+          scoreDone = true;
+          const arc = $('vfScoreArc'), num = $('vfScoreNum');
+          const t0 = performance.now(), dur = 1100, target = 78;
+          const anim = (t) => {
+            const q = clamp((t - t0) / dur), e = 1 - Math.pow(1 - q, 3);
+            if (num) num.textContent = Math.round(target * e);
+            if (arc) arc.style.strokeDashoffset = (163.4 * (1 - 0.78 * e)).toFixed(1);
+            if (q < 1) requestAnimationFrame(anim);
+          };
+          requestAnimationFrame(anim);
+        }
+      }
+      const zw = $('vfZoneWrap');
+      if (zw) {
+        const p = prog(zw);
+        const wheel = $('vfWheel');
+        if (wheel && !this.reduce) wheel.style.transform = 'rotate(' + (-p * 315) + 'deg)';
+        const i = Math.min(7, Math.floor(p * 8));
+        if (i !== zIdx) {
+          zIdx = i;
+          const z = zd[i];
+          const set = (id, v, html) => { const el = $(id); if (el) { if (html) el.innerHTML = v; else el.textContent = v; } };
+          set('vfZName', z.name); set('vfZDeva', z.deva); set('vfZElem', z.elem); set('vfZDeg', z.deg);
+          set('vfZDesc', z.desc, true); set('vfZIdx', String(i + 1).padStart(2, '0'));
+          for (let k = 0; k < 8; k++) { const w = $('vfW' + k); if (w) w.setAttribute('fill', k === i ? '#7A9E7E' : '#2C352B'); }
+        }
+      }
+    };
+    this._onScroll = () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } };
+    window.addEventListener('scroll', this._onScroll, { passive: true });
+    window.addEventListener('resize', this._onScroll, { passive: true });
+    update();
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this._onScroll);
+    window.removeEventListener('resize', this._onScroll);
+    if (this._fitPhone) window.removeEventListener('resize', this._fitPhone);
+    if (this._io) this._io.disconnect();
+  }
+}
+</script>
+</body>
+</html>

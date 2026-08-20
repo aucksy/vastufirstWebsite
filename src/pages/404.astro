@@ -1,0 +1,22 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+---
+<Base title="Page not found — VastuFirst" description="That page does not exist." path="/404">
+  <div class="page">
+    <Nav />
+    <main id="main" class="prose-page">
+      <article class="prose">
+        <p class="prose__updated">404</p>
+        <h1>That page has moved out.</h1>
+        <p>
+          There is nothing at this address. The website has one page and a privacy notice — try one
+          of those.
+        </p>
+        <a class="prose__back" href="/">← Back to VastuFirst</a>
+      </article>
+    </main>
+    <Footer />
+  </div>
+</Base>

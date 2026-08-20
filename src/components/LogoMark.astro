@@ -1,0 +1,36 @@
+---
+/**
+ * The interim grid-compass mark: a square mandala grid with a sage compass
+ * needle and a gold centre dot. Swap this one file once the logo shortlist is
+ * signed off — nav, footer, favicon and og image all read from here.
+ */
+interface Props {
+  size?: number;
+  /** 'ink' drops the grid lines and dims the frame, for use on the dark band. */
+  tone?: 'light' | 'ink';
+  class?: string;
+}
+const { size = 34, tone = 'light', class: cls } = Astro.props;
+const frame = tone === 'ink' ? '#525A48' : '#7A9E7E';
+---
+<svg
+  viewBox="0 0 40 40"
+  width={size}
+  height={size}
+  class={cls}
+  aria-hidden="true"
+  focusable="false"
+  style={`width:${size}px;height:${size}px;flex:0 0 ${size}px`}
+>
+  <rect x="2" y="2" width="36" height="36" rx="4" fill="none" stroke={frame} stroke-width="1.4" />
+  {tone === 'light' && (
+    <g stroke="#7A9E7E" stroke-width=".8" opacity=".55">
+      <line x1="14" y1="2" x2="14" y2="38" />
+      <line x1="26" y1="2" x2="26" y2="38" />
+      <line x1="2" y1="14" x2="38" y2="14" />
+      <line x1="2" y1="26" x2="38" y2="26" />
+    </g>
+  )}
+  <path d="M20 5 L23.4 15.6 L20 13.4 L16.6 15.6 Z" fill="#7A9E7E" />
+  <circle cx="20" cy="20" r="2.6" fill="#C9A227" />
+</svg>

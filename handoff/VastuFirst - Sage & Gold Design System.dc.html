@@ -1,0 +1,1438 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=DM+Mono:wght@400;500&family=Noto+Serif+Devanagari:wght@400;500;600&family=Noto+Serif+Tamil:wght@400;500;600&family=Noto+Serif+Telugu:wght@400;500;600&family=Noto+Serif+Bengali:wght@400;500;600&family=Noto+Sans+Devanagari:wght@400;500;600&family=Noto+Sans+Tamil:wght@400;500;600&family=Noto+Sans+Telugu:wght@400;500;600&family=Noto+Sans+Bengali:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#EAEBE1;font-family:'DM Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased;color:#232A22}
+a{color:#4C7355;text-decoration:none}
+a:hover{color:#3B5E45}
+::selection{background:#EAD9A6}
+.dsmono{font-family:'DM Mono',monospace}
+.dsser{font-family:'Marcellus',serif}
+code,pre{font-family:'DM Mono',monospace}
+main::-webkit-scrollbar{width:0}
+</style>
+</helmet>
+
+<div style="display:flex;align-items:flex-start;gap:0;width:1440px;margin:0 auto;background:#F8F6F0;box-shadow:0 40px 120px -40px rgba(35,42,34,.4)">
+
+<nav style="position:sticky;top:0;align-self:flex-start;width:236px;flex:0 0 236px;height:100vh;overflow-y:auto;background:#232A22;color:#E9EBE0;padding:28px 20px 40px">
+<div style="display:flex;align-items:center;gap:11px;margin-bottom:22px">
+<svg viewBox="0 0 40 40" style="width:34px;height:34px" aria-hidden="true"><rect x="2" y="2" width="36" height="36" rx="4" fill="none" stroke="#525A48" stroke-width="1.4"/><line x1="14" y1="2" x2="14" y2="38" stroke="#525A48" stroke-width=".8"/><line x1="26" y1="2" x2="26" y2="38" stroke="#525A48" stroke-width=".8"/><line x1="2" y1="14" x2="38" y2="14" stroke="#525A48" stroke-width=".8"/><line x1="2" y1="26" x2="38" y2="26" stroke="#525A48" stroke-width=".8"/><rect x="14" y="14" width="12" height="12" fill="#3B4433"/><path d="M20 5 L23.4 15.6 L20 13.4 L16.6 15.6 Z" fill="#7A9E7E"/><circle cx="20" cy="20" r="2.6" fill="#C9A227"/></svg>
+<div><div class="dsser" style="font-size:19px;line-height:1;color:#F8F6F0">Vastu<span style="color:#7A9E7E">First</span></div><div class="dsmono" style="font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:#98A08C;margin-top:3px">Design System</div></div>
+</div>
+<div class="dsmono" style="font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:#7A9E7E;background:rgba(122,158,126,.12);border:1px solid rgba(122,158,126,.3);border-radius:100px;padding:5px 10px;display:inline-block;margin-bottom:22px">Sage &amp; Gold · Stage 2</div>
+<sc-for list="{{ nav }}" as="n" hint-placeholder-count="12">
+<a href="{{ n.href }}" style="display:flex;gap:9px;align-items:baseline;padding:7px 0;font-size:13px;color:#B9C0AF;border-bottom:1px solid #333A30">
+<span class="dsmono" style="font-size:10px;color:#69705F;flex:0 0 20px">{{ n.num }}</span><span>{{ n.label }}</span>
+</a>
+</sc-for>
+<div style="margin-top:20px;font-size:10.5px;line-height:1.6;color:#828A76">The enforceable contract for VastuFirst's chosen theme. Every value here is a named token; the Compose block is the source of truth.</div>
+</nav>
+
+<main style="flex:1;min-width:0;padding:0">
+
+<section id="overview" style="padding:64px 72px 56px;position:relative;background:radial-gradient(1200px 640px at 8% -12%,rgba(122,158,126,.14),transparent 56%),radial-gradient(1000px 560px at 108% 6%,rgba(201,162,39,.10),transparent 54%),#F8F6F0">
+<div class="dsmono" style="font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#6B7064;margin-bottom:16px">VastuFirst · Stage 2 · v1.2 · 23 Jul 2026</div>
+<h1 class="dsser" style="font-size:62px;line-height:1.04;margin:0 0 20px;font-weight:400;max-width:900px">Sage &amp; Gold —<br>the design system as a contract.</h1>
+<p style="font-size:19px;line-height:1.55;color:#4B5347;max-width:760px;margin:0 0 30px;text-wrap:pretty">Not a set of pictures with notes. A named-token system where the question <em>"does the build match the design?"</em> is answered by comparison, not opinion. Every colour, size, and state below is pinned to a token an AI implementer can hold to precisely — in Compose Multiplatform, on Android now and iOS next.</p>
+<div style="display:flex;gap:14px;flex-wrap:wrap">
+<sc-for list="{{ heroStats }}" as="s" hint-placeholder-count="4">
+<div style="background:#F2EEE4;border:1px solid #DDDED3;border-radius:14px;padding:16px 20px;min-width:150px">
+<div class="dsser" style="font-size:34px;line-height:1;color:#7A9E7E">{{ s.n }}</div>
+<div style="font-size:13px;color:#4B5347;margin-top:6px">{{ s.l }}</div>
+</div>
+</sc-for>
+</div>
+<div style="margin-top:36px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;max-width:960px">
+<sc-for list="{{ principles }}" as="p" hint-placeholder-count="3">
+<div style="border-top:2px solid #7A9E7E;padding-top:12px">
+<div style="font-size:15px;font-weight:600;margin-bottom:5px">{{ p.t }}</div>
+<div style="font-size:13px;line-height:1.5;color:#4B5347">{{ p.d }}</div>
+</div>
+</sc-for>
+</div>
+</section>
+
+<section id="colour" style="padding:56px 72px;border-top:1px solid #E6E8DC">
+<div class="dsmono" style="font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#7A9E7E;margin-bottom:10px">01 · Foundations</div>
+<h2 class="dsser" style="font-size:38px;margin:0 0 12px;font-weight:400">Colour</h2>
+<p style="font-size:16px;line-height:1.55;color:#4B5347;max-width:720px;margin:0 0 8px">Roughly 28 semantic colours coexist on one screen without becoming a fruit salad. No colour ever appears in app code as a raw hex — only as a token. Every text pair below carries its live WCAG ratio; anything failing its floor is flagged, not hidden.</p>
+<div style="display:flex;gap:8px;flex-wrap:wrap;margin:18px 0 30px">
+<div style="font-size:12px;color:#4B5347;background:#F2EEE4;border:1px solid #DDDED3;border-radius:100px;padding:6px 12px"><span style="color:#3E9256;font-weight:700">✓ AA</span> passes its floor</div>
+<div style="font-size:12px;color:#4B5347;background:#F2EEE4;border:1px solid #DDDED3;border-radius:100px;padding:6px 12px"><span style="color:#C43F35;font-weight:700">◑</span> large-text / UI only (≥3:1)</div>
+</div>
+
+<sc-for list="{{ colorGroups }}" as="g" hint-placeholder-count="6">
+<div style="margin-bottom:34px">
+<div style="display:flex;align-items:baseline;gap:12px;margin-bottom:14px;border-bottom:1px solid #E6E8DC;padding-bottom:8px">
+<h3 class="dsser" style="font-size:21px;margin:0;font-weight:400">{{ g.title }}</h3>
+<span style="font-size:13px;color:#6B7064">{{ g.note }}</span>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(184px,1fr));gap:12px">
+<sc-for list="{{ g.tokens }}" as="c" hint-placeholder-count="6">
+<div style="border:1px solid #DDDED3;border-radius:12px;overflow:hidden;background:#F8F6F0">
+<div style="height:66px;background:{{ c.hex }};display:flex;align-items:flex-end;justify-content:flex-end;padding:7px">
+<sc-if value="{{ c.showText }}" hint-placeholder-val="{{ true }}"><span style="font-size:12px;font-weight:600;color:{{ c.textOn }}">Aa</span></sc-if>
+</div>
+<div style="padding:10px 11px">
+<div class="dsmono" style="font-size:11px;font-weight:500;color:#232A22;word-break:break-all">{{ c.name }}</div>
+<div class="dsmono" style="font-size:10.5px;color:#6B7064;margin-top:2px">{{ c.hex }}</div>
+<div style="font-size:11px;color:#4B5347;line-height:1.4;margin-top:6px">{{ c.use }}</div>
+<sc-if value="{{ c.ratio }}" hint-placeholder-val="text">
+<div style="margin-top:7px;display:inline-flex;align-items:center;gap:5px;font-size:10.5px;background:{{ c.passBg }};color:{{ c.passColor }};border-radius:100px;padding:3px 8px"><span style="font-weight:700">{{ c.passMark }}</span>{{ c.ratio }}:1</div>
+</sc-if>
+</div>
+</div>
+</sc-for>
+</div>
+</div>
+</sc-for>
+</section>
+
+<section id="zones" style="padding:56px 72px;border-top:1px solid #E6E8DC;background:#F4F1E8">
+<div class="dsmono" style="font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#7A9E7E;margin-bottom:10px">02 · Foundations</div>
+<h2 class="dsser" style="font-size:38px;margin:0 0 12px;font-weight:400">Zone map &amp; colourblind test</h2>
+<p style="font-size:16px;line-height:1.55;color:#4B5347;max-width:720px;margin:0 0 26px">Nine hues, adjacent on a circular map, must each be identifiable at a glance while staying calm. They are a modulated family, not nine loud independents. <strong>Colour is never the only signal:</strong> every zone is also fixed by position (N always top) and a label rendered in ink — so it survives red-green colour blindness and greyscale alike.</p>
+
+<div style="display:grid;grid-template-columns:340px 1fr;gap:36px;align-items:start">
+<div>
+<div class="dsmono" style="font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#6B7064;margin-bottom:10px">The nine zones, on the plan</div>
+<div style="width:320px;height:320px;background:#F8F6F0;border:1px solid #DDDED3;border-radius:18px;padding:8px">
+<svg viewBox="-30 -30 160 160" style="width:100%;height:100%;display:block">
+<circle cx="50" cy="50" r="66" fill="none" stroke="#DDDED3" stroke-width=".6"/>
+<sc-for list="{{ zoneMapWedges }}" as="w" hint-placeholder-count="8"><path d="{{ w.path }}" fill="{{ w.color }}" opacity="0.13"></path><text x="{{ w.lx }}" y="{{ w.ly }}" fill="#232A22" style="font-family:'DM Mono',monospace;font-size:4px;font-weight:500;text-anchor:middle">{{ w.z }}</text></sc-for>
+<circle cx="50" cy="50" r="11" fill="{{ zoneC }}" opacity=".13"/>
+<circle cx="50" cy="50" r="11" fill="none" stroke="{{ zoneC }}" stroke-width=".5" stroke-dasharray="1.6 1.6"/>
+<text x="50" y="51.4" fill="#232A22" style="font-family:'DM Mono',monospace;font-size:3.6px;text-anchor:middle">C</text>
+<rect x="4" y="4" width="92" height="92" rx="2" fill="none" stroke="#98A08C" stroke-width=".6"/>
+<sc-for list="{{ zoneMapRooms }}" as="r" hint-placeholder-count="8"><rect x="{{ r.x }}" y="{{ r.y }}" width="{{ r.w }}" height="{{ r.h }}" rx="1.4" fill="{{ r.fill }}" stroke="{{ r.stroke }}" stroke-width=".7"></rect><text x="{{ r.cx }}" y="{{ r.ly }}" fill="#232A22" style="font-family:'DM Sans',sans-serif;font-size:4.2px;font-weight:500;text-anchor:middle">{{ r.label }}</text><text x="{{ r.cx }}" y="{{ r.zy }}" fill="{{ r.zoneColor }}" style="font-family:'DM Mono',monospace;font-size:3.3px;text-anchor:middle">{{ r.zoneText }}</text></sc-for>
+<line x1="50" y1="50" x2="{{ northX }}" y2="{{ northY }}" stroke="#7A9E7E" stroke-width=".7" stroke-dasharray="2 2"/>
+<g transform="translate({{ markX }} {{ markY }})"><circle r="7" fill="#F8F6F0" stroke="#7A9E7E" stroke-width="1"/><text y="1.9" style="font-family:'DM Mono',monospace;font-size:6px;font-weight:500;text-anchor:middle" fill="#7A9E7E">N</text></g>
+</svg>
+</div>
+<p style="font-size:12.5px;line-height:1.5;color:#6B7064;margin:10px 2px 0">Content description (screen reader): <em>"Floor plan with Vastu zones, North at {{ north }} degrees, score {{ score }} of 100. Kitchen in the North-East — defect."</em></p>
+</div>
+
+<div>
+<div class="dsmono" style="font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#6B7064;margin-bottom:10px">Zone tokens · domain · contrast on paper</div>
+<div style="display:flex;flex-direction:column;gap:2px">
+<sc-for list="{{ zoneRows }}" as="z" hint-placeholder-count="9">
+<div style="display:flex;align-items:center;gap:12px;padding:9px 12px;background:{{ z.fill }};border:1px solid #E6E8DC;border-radius:10px">
+<span style="width:26px;height:26px;border-radius:7px;background:{{ z.hex }};flex:0 0 26px;display:grid;place-items:center;color:#F8F6F0;font-family:'DM Mono',monospace;font-size:10px;font-weight:600">{{ z.z }}</span>
+<div style="flex:1;min-width:0">
+<span class="dsmono" style="font-size:12px;color:#232A22">zone-{{ z.z }}</span>
+<span style="font-size:12px;color:#4B5347;margin-left:8px">{{ z.domain }}</span>
+</div>
+<span class="dsmono" style="font-size:11px;color:#6B7064">{{ z.hex }}</span>
+</div>
+</sc-for>
+</div>
+</div>
+</div>
+
+<div style="margin-top:38px;border-top:1px solid #E6E8DC;padding-top:26px">
+<div class="dsmono" style="font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#6B7064;margin-bottom:6px">Colourblind simulation · §8.1</div>
+<p style="font-size:15px;line-height:1.5;color:#4B5347;max-width:720px;margin:0 0 18px">About 1 in 12 men has some colour-vision deficiency. Under deuteranopia and protanopia the hues compress — but because every zone also carries its <strong>ink letter and fixed position</strong>, the map stays readable. This is why the palette is allowed to be calm rather than maximally separated.</p>
+<div style="display:flex;gap:22px;flex-wrap:wrap;margin-bottom:22px">
+<div>
+<div style="font-size:12px;font-weight:600;color:#232A22;margin-bottom:8px;text-align:center">Deuteranopia</div>
+<div style="width:220px;height:220px;background:#F8F6F0;border:1px solid #DDDED3;border-radius:14px;padding:6px">
+<svg viewBox="-30 -30 160 160" style="width:100%;height:100%;display:block">
+<sc-for list="{{ zoneMapWedgesD }}" as="w" hint-placeholder-count="8"><path d="{{ w.path }}" fill="{{ w.color }}" opacity="0.16"></path><text x="{{ w.lx }}" y="{{ w.ly }}" fill="#232A22" style="font-family:'DM Mono',monospace;font-size:4.4px;font-weight:600;text-anchor:middle">{{ w.z }}</text></sc-for>
+<circle cx="50" cy="50" r="11" fill="none" stroke="#232A22" stroke-width=".5" stroke-dasharray="1.6 1.6"/>
+<rect x="4" y="4" width="92" height="92" rx="2" fill="none" stroke="#98A08C" stroke-width=".6"/>
+</svg>
+</div>
+</div>
+<div>
+<div style="font-size:12px;font-weight:600;color:#232A22;margin-bottom:8px;text-align:center">Protanopia</div>
+<div style="width:220px;height:220px;background:#F8F6F0;border:1px solid #DDDED3;border-radius:14px;padding:6px">
+<svg viewBox="-30 -30 160 160" style="width:100%;height:100%;display:block">
+<sc-for list="{{ zoneMapWedgesP }}" as="w" hint-placeholder-count="8"><path d="{{ w.path }}" fill="{{ w.color }}" opacity="0.16"></path><text x="{{ w.lx }}" y="{{ w.ly }}" fill="#232A22" style="font-family:'DM Mono',monospace;font-size:4.4px;font-weight:600;text-anchor:middle">{{ w.z }}</text></sc-for>
+<circle cx="50" cy="50" r="11" fill="none" stroke="#232A22" stroke-width=".5" stroke-dasharray="1.6 1.6"/>
+<rect x="4" y="4" width="92" height="92" rx="2" fill="none" stroke="#98A08C" stroke-width=".6"/>
+</svg>
+</div>
+</div>
+<div style="flex:1;min-width:220px">
+<div style="font-size:12px;font-weight:600;color:#232A22;margin-bottom:8px">Hue shift per zone — normal / deuter / protan</div>
+<div style="display:flex;flex-direction:column;gap:4px">
+<sc-for list="{{ zoneCvdStrip }}" as="s" hint-placeholder-count="9">
+<div style="display:flex;align-items:center;gap:8px">
+<span class="dsmono" style="font-size:11px;color:#6B7064;width:26px">{{ s.z }}</span>
+<span style="flex:1;height:20px;border-radius:5px;background:{{ s.normal }}"></span>
+<span style="flex:1;height:20px;border-radius:5px;background:{{ s.deuter }}"></span>
+<span style="flex:1;height:20px;border-radius:5px;background:{{ s.protan }}"></span>
+</div>
+</sc-for>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<section id="type" style="padding:56px 72px;border-top:1px solid #E6E8DC">
+<div class="dsmono" style="font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#7A9E7E;margin-bottom:10px">03 · Foundations</div>
+<h2 class="dsser" style="font-size:38px;margin:0 0 12px;font-weight:400">Typography</h2>
+<p style="font-size:16px;line-height:1.55;color:#4B5347;max-width:720px;margin:0 0 8px">Three voices — <strong class="dsser">Marcellus</strong> serif for display, <strong>DM Sans</strong> for body, <span class="dsmono">DM Mono</span> for numerals and labels. The prototype's 13.5px body was too small for a middle-aged, outdoor audience: the floor is now <strong>16sp body / 12sp minimum</strong>. Sizes bias larger and everything reflows to 200%.</p>
+
+<div style="margin:24px 0 8px;border:1px solid #DDDED3;border-radius:16px;overflow:hidden">
+<div style="display:grid;grid-template-columns:130px 1fr 210px;gap:0;background:#F2EEE4;border-bottom:1px solid #DDDED3;padding:10px 18px" class="dsmono">
+<span style="font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#6B7064">Token</span>
+<span style="font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#6B7064">Specimen</span>
+<span style="font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#6B7064">Family · size/lh · wt · track</span>
+</div>
+<sc-for list="{{ ramp }}" as="r" hint-placeholder-count="10">
+<div style="display:grid;grid-template-columns:130px 1fr 210px;gap:0;align-items:center;padding:12px 18px;border-bottom:1px solid #E6E8DC">
+<span class="dsmono" style="font-size:12px;color:#232A22">{{ r.name }}</span>
+<span style="font-family:'{{ r.fam }}',serif;font-size:{{ r.size }}px;line-height:{{ r.lh }};font-weight:{{ r.weight }};letter-spacing:{{ r.tr }};color:#232A22">{{ r.role }}</span>
+<span class="dsmono" style="font-size:11px;color:#6B7064">{{ r.fam }} · {{ r.spec }}</span>
+</div>
+</sc-for>
+</div>
+
+<div style="margin-top:34px">
+<div class="dsmono" style="font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#6B7064;margin-bottom:6px">Six scripts, one product · §6</div>
+<p style="font-size:15px;line-height:1.5;color:#4B5347;max-width:720px;margin:0 0 18px">Marcellus and DM cover no Indic script — so five of six languages are paired with matched <strong>Noto Serif</strong> and <strong>Noto Sans</strong> optical sizes. Indic scripts get <strong>1.5–1.6 line-height</strong> against Latin's 1.2, because of matras and conjuncts. No component that holds translatable text may be fixed-height.</p>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+<sc-for list="{{ scripts }}" as="s" hint-placeholder-count="6">
+<div style="background:#F4F1E8;border:1px solid #DDDED3;border-radius:14px;padding:18px 20px">
+<div class="dsmono" style="font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#7A9E7E;margin-bottom:8px">{{ s.lang }}</div>
+<div style="font-family:'{{ s.serif }}',serif;font-size:25px;line-height:1.45;color:#232A22;margin-bottom:8px">{{ s.h }}</div>
+<div style="font-family:'{{ s.sans }}',sans-serif;font-size:15px;line-height:1.6;color:#4B5347">{{ s.b }}</div>
+<div class="dsmono" style="font-size:10px;color:#98A08C;margin-top:12px">{{ s.serif }} + {{ s.sans }}</div>
+</div>
+</sc-for>
+</div>
+</div>
+
+<div style="margin-top:26px;display:flex;gap:16px;flex-wrap:wrap">
+<div style="flex:1;min-width:280px;background:#F2EEE4;border:1px solid #DDDED3;border-left:3px solid #C9A227;border-radius:12px;padding:16px 18px">
+<div style="font-size:14px;font-weight:600;margin-bottom:5px">Numerals — Latin by default</div>
+<div style="font-size:13.5px;line-height:1.55;color:#4B5347">The score, degrees and prices use <span class="dsmono">Western Arabic (0–9)</span> across all locales — near-universally read in urban India and consistent in DM Mono. Devanagari numerals ship as a per-locale <em>option</em> in Settings, not a default. The score is a number and appears everywhere; one numeral system keeps it stable.</div>
+</div>
+<div style="flex:1;min-width:280px;background:#F2EEE4;border:1px solid #DDDED3;border-left:3px solid #7A9E7E;border-radius:12px;padding:16px 18px">
+<div style="font-size:14px;font-weight:600;margin-bottom:5px">Reflow at 200%</div>
+<div style="font-size:13.5px;line-height:1.55;color:#4B5347">Text scales to 200% system setting. Dense screens (report, settings) reflow single-column; the score number caps at a max so it never clips its container; buttons grow in height, never truncate their label. Line-boxes are set from the tallest script, so Devanagari never re-lays-out a screen proofed in English.</div>
+</div>
+</div>
+</section>
+
+<section id="scale" style="padding:56px 72px;border-top:1px solid #E6E8DC;background:#F4F1E8">
+<div class="dsmono" style="font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#7A9E7E;margin-bottom:10px">04 · Foundations</div>
+<h2 class="dsser" style="font-size:38px;margin:0 0 12px;font-weight:400">Spacing, radius, elevation &amp; motion</h2>
+<p style="font-size:16px;line-height:1.55;color:#4B5347;max-width:720px;margin:0 0 26px">A fixed scale. All spacing in the app comes from these nine steps — no arbitrary values. Elevation is given <strong>both</strong> an Android shadow and an iOS border, so one surface token renders correctly on either platform.</p>
+
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:34px">
+<div>
+<div class="dsmono" style="font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#6B7064;margin-bottom:12px">Spacing · 4dp base</div>
+<div style="display:flex;flex-direction:column;gap:8px">
+<sc-for list="{{ space }}" as="s" hint-placeholder-count="9">
+<div style="display:flex;align-items:center;gap:14px">
+<span class="dsmono" style="font-size:12px;color:#232A22;width:74px">{{ s.name }}</span>
+<span style="height:16px;width:{{ s.px }}px;background:#7A9E7E;border-radius:3px"></span>
+<span class="dsmono" style="font-size:11px;color:#6B7064">{{ s.px }}dp</span>
+</div>
+</sc-for>
+</div>
+<div class="dsmono" style="font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#6B7064;margin:26px 0 12px">Radius</div>
+<div style="display:flex;gap:14px;flex-wrap:wrap">
+<sc-for list="{{ radii }}" as="r" hint-placeholder-count="4">
+<div style="text-align:center">
+<div style="width:70px;height:70px;background:#F8F6F0;border:1px solid #B6BBA8;border-top-left-radius:{{ r.r }};border-top-right-radius:{{ r.r }}"></div>
+<div class="dsmono" style="font-size:11px;color:#232A22;margin-top:7px">{{ r.name }}</div>
+<div class="dsmono" style="font-size:10px;color:#6B7064">{{ r.pxLabel }}</div>
+</div>
+</sc-for>
+</div>
+</div>
+
+<div>
+<div class="dsmono" style="font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#6B7064;margin-bottom:12px">Elevation · Android shadow / iOS border</div>
+<div style="display:flex;flex-direction:column;gap:12px">
+<sc-for list="{{ elevation }}" as="e" hint-placeholder-count="4">
+<div style="display:flex;align-items:center;gap:16px;background:#F4F1E8;border-radius:12px;padding:12px">
+<div style="width:64px;height:44px;background:{{ e.demo }};border:1px solid #E6E8DC;border-radius:9px;box-shadow:{{ e.css }};flex:0 0 64px"></div>
+<div style="flex:1">
+<div class="dsmono" style="font-size:12px;color:#232A22">{{ e.name }}</div>
+<div style="font-size:11.5px;color:#4B5347;margin-top:2px">Android {{ e.android }} · iOS {{ e.ios }}</div>
+</div>
+</div>
+</sc-for>
+</div>
+<div class="dsmono" style="font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#6B7064;margin:22px 0 12px">Border</div>
+<div style="display:flex;flex-direction:column;gap:6px">
+<sc-for list="{{ borders }}" as="b" hint-placeholder-count="4">
+<div style="display:flex;align-items:center;gap:12px;font-size:12.5px;color:#4B5347">
+<span class="dsmono" style="color:#232A22;width:120px">{{ b.name }}</span>
+<span style="width:60px;border-top:{{ b.w }} solid {{ b.hex }}"></span>
+<span class="dsmono" style="font-size:11px;color:#6B7064">{{ b.w }} · {{ b.tok }}</span>
+</div>
+</sc-for>
+</div>
+</div>
+</div>
+
+<div style="margin-top:34px;border-top:1px solid #E6E8DC;padding-top:24px">
+<div class="dsmono" style="font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#6B7064;margin-bottom:12px">Motion · calm, never frantic</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+<div>
+<sc-for list="{{ motionDur }}" as="m" hint-placeholder-count="4">
+<div style="display:flex;align-items:baseline;gap:12px;padding:7px 0;border-bottom:1px dashed #E6E8DC">
+<span class="dsmono" style="font-size:12px;color:#232A22;width:150px">{{ m.name }}</span>
+<span class="dsmono" style="font-size:12px;color:#7A9E7E;width:56px">{{ m.v }}</span>
+<span style="font-size:12px;color:#4B5347">{{ m.u }}</span>
+</div>
+</sc-for>
+</div>
+<div>
+<sc-for list="{{ motionEase }}" as="m" hint-placeholder-count="3">
+<div style="display:flex;flex-direction:column;padding:7px 0;border-bottom:1px dashed #E6E8DC">
+<div style="display:flex;justify-content:space-between"><span class="dsmono" style="font-size:12px;color:#232A22">{{ m.name }}</span><span style="font-size:11.5px;color:#4B5347">{{ m.u }}</span></div>
+<span class="dsmono" style="font-size:11px;color:#6B7064;margin-top:2px">{{ m.v }}</span>
+</div>
+</sc-for>
+<div style="font-size:12px;line-height:1.5;color:#4B5347;margin-top:10px;background:#F3EFE1;border-radius:9px;padding:10px 12px">The North dial: drag tracks 1:1 at <span class="dsmono">instant</span>; on release it settles with <span class="dsmono">easing-decelerate</span>; the score tweens over <span class="dsmono">duration-medium</span> so it reads as responsive, never a wild flicker.</div>
+</div>
+</div>
+</div>
+</section>
+
+<section id="compose" style="padding:56px 72px;border-top:1px solid #E6E8DC">
+<div class="dsmono" style="font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#7A9E7E;margin-bottom:10px">05 · The real deliverable</div>
+<h2 class="dsser" style="font-size:38px;margin:0 0 12px;font-weight:400">The Compose theme</h2>
+<p style="font-size:16px;line-height:1.55;color:#4B5347;max-width:760px;margin:0 0 8px">Drop this into <span class="dsmono">commonMain</span> and build against it with no translation step. Android and iOS share one theme; anything platform-specific goes through <span class="dsmono">expect/actual</span>, not a second theme. Where this and <span class="dsmono">tokens.json</span> disagree, <strong>this file wins.</strong></p>
+<div style="display:flex;gap:8px;flex-wrap:wrap;margin:16px 0 20px">
+<span style="font-size:12px;color:#2E6E40;background:#E4EEE0;border-radius:100px;padding:6px 12px">✓ Every Color(0xFF…) filled in</span>
+<span style="font-size:12px;color:#2E6E40;background:#E4EEE0;border-radius:100px;padding:6px 12px">✓ Compiles as-is</span>
+<span style="font-size:12px;color:#2E6E40;background:#E4EEE0;border-radius:100px;padding:6px 12px">✓ Owned theme, not a Material skin</span>
+</div>
+
+<div style="border-radius:16px;overflow:hidden;border:1px solid #333A30;background:#1D2119">
+<div style="display:flex;align-items:center;justify-content:space-between;padding:11px 18px;background:#232A22;border-bottom:1px solid #333A30">
+<span class="dsmono" style="font-size:12px;color:#E9EBE0">VastuTheme.kt</span>
+<span class="dsmono" style="font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#98A08C">commonMain · source of truth</span>
+</div>
+<pre style="margin:0;padding:20px 22px;overflow-x:auto;font-size:12.5px;line-height:1.62;color:#DCE0D0;white-space:pre">{{ compose }}</pre>
+</div>
+
+<div style="margin-top:22px;border-radius:16px;overflow:hidden;border:1px solid #DDDED3;background:#F8F6F0">
+<div style="display:flex;align-items:center;justify-content:space-between;padding:11px 18px;background:#F2EEE4;border-bottom:1px solid #DDDED3">
+<span class="dsmono" style="font-size:12px;color:#232A22">tokens.json</span>
+<span class="dsmono" style="font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#98A08C">mirror · for tooling</span>
+</div>
+<pre style="margin:0;padding:18px 22px;overflow-x:auto;font-size:12px;line-height:1.6;color:#3F4A38;white-space:pre;max-height:360px">{{ tokensJson }}</pre>
+</div>
+<p style="font-size:13px;line-height:1.55;color:#6B7064;margin:16px 0 0;max-width:760px">Two rules decay fastest and are <strong>greppable</strong>, so CI enforces them: <span class="dsmono">zero hardcoded hex</span> (nothing matching <span class="dsmono">Color(0xFF……)</span> outside this file) and <span class="dsmono">zero raw .dp</span> in padding / margin / gap positions. Both appear in the review gate below.</p>
+</section>
+
+<section id="components" style="padding:56px 72px;border-top:1px solid #E6E8DC;background:#F4F1E8">
+<div class="dsmono" style="font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#7A9E7E;margin-bottom:10px">06 · Library</div>
+<h2 class="dsser" style="font-size:38px;margin:0 0 12px;font-weight:400">Components</h2>
+<p style="font-size:16px;line-height:1.55;color:#4B5347;max-width:720px;margin:0 0 8px">Every applicable state is pinned to a token. A state that is not specified is a state the implementer will invent — so each one is named here. Buttons carry the full state table as the exemplar; the pattern repeats for every component below.</p>
+
+<!-- BUTTONS -->
+<div style="margin-top:30px">
+<h3 class="dsser" style="font-size:22px;font-weight:400;margin:0 0 4px">Buttons</h3>
+<p style="font-size:14px;color:#6B7064;margin:0 0 16px">All primary buttons are <strong>48dp</strong> tall, <span class="dsmono">radius-full</span>, <span class="dsmono">space-4</span> horizontal padding, full width unless inside a row.</p>
+<div style="display:flex;gap:14px;flex-wrap:wrap;margin-bottom:20px">
+<sc-for list="{{ btnVariants }}" as="b" hint-placeholder-count="4">
+<div style="flex:1;min-width:220px;background:#F8F6F0;border:1px solid #DDDED3;border-radius:14px;padding:18px">
+<div style="height:48px;border-radius:100px;background:{{ b.bg }};color:{{ b.tx }};border:{{ b.bd }};box-shadow:{{ b.sh }};display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:600">{{ b.name }}</div>
+<div class="dsmono" style="font-size:11px;color:#232A22;margin-top:12px">{{ b.name }}</div>
+<div style="font-size:12px;color:#4B5347;line-height:1.45;margin-top:3px">{{ b.desc }}</div>
+</div>
+</sc-for>
+</div>
+<div style="border:1px solid #DDDED3;border-radius:14px;overflow:hidden">
+<div style="display:grid;grid-template-columns:1fr 1.3fr 1.3fr 1fr 1fr 0.9fr 0.9fr 0.9fr;background:#F2EEE4;border-bottom:1px solid #DDDED3;padding:9px 14px" class="dsmono">
+<span style="font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:#6B7064">State</span>
+<span style="font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:#6B7064">Background</span>
+<span style="font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:#6B7064">Text</span>
+<span style="font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:#6B7064">Border</span>
+<span style="font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:#6B7064">Radius</span>
+<span style="font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:#6B7064">Height</span>
+<span style="font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:#6B7064">Pad</span>
+<span style="font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:#6B7064">Elev</span>
+</div>
+<sc-for list="{{ buttonRows }}" as="r" hint-placeholder-count="5">
+<div style="display:grid;grid-template-columns:1fr 1.3fr 1.3fr 1fr 1fr 0.9fr 0.9fr 0.9fr;padding:10px 14px;border-bottom:1px solid #E6E8DC;font-size:11.5px;color:#4B5347" class="dsmono">
+<span style="color:#232A22;font-weight:500">{{ r.s }}</span><span>{{ r.bg }}</span><span>{{ r.tx }}</span><span>{{ r.bd }}</span><span>{{ r.rad }}</span><span>{{ r.h }}</span><span>{{ r.pad }}</span><span>{{ r.el }}</span>
+</div>
+</sc-for>
+</div>
+</div>
+
+<!-- INPUTS -->
+<div style="margin-top:34px;display:grid;grid-template-columns:1fr 1fr;gap:20px">
+<div style="background:#F8F6F0;border:1px solid #DDDED3;border-radius:14px;padding:20px">
+<div class="dsmono" style="font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#6B7064;margin-bottom:12px">Text field · default / focus / error</div>
+<div style="display:flex;flex-direction:column;gap:12px">
+<div><label style="font-size:12px;color:#4B5347;display:block;margin-bottom:5px">Plot city</label><div style="height:48px;border-radius:12px;border:1px solid #DDDED3;background:#FFFFFF;display:flex;align-items:center;padding:0 14px;font-size:15px;color:#232A22">Gurugram</div></div>
+<div><label style="font-size:12px;color:#4B5347;display:block;margin-bottom:5px">Plot city</label><div style="height:48px;border-radius:12px;border:2px solid #4C7355;background:#FFFFFF;display:flex;align-items:center;padding:0 13px;font-size:15px;color:#232A22">Gurugram<span style="width:1.5px;height:20px;background:#4C7355;margin-left:1px"></span></div></div>
+<div><label style="font-size:12px;color:#C43F35;display:block;margin-bottom:5px">Plot city</label><div style="height:48px;border-radius:12px;border:1.5px solid #C43F35;background:#FFFFFF;display:flex;align-items:center;padding:0 13px;font-size:15px;color:#232A22"></div><div style="font-size:12px;color:#C43F35;margin-top:5px">Enter a city to correct declination.</div></div>
+</div>
+</div>
+<div style="background:#F8F6F0;border:1px solid #DDDED3;border-radius:14px;padding:20px">
+<div class="dsmono" style="font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#6B7064;margin-bottom:12px">Degree input · chips · segmented · toggle</div>
+<div style="display:flex;align-items:center;gap:10px;margin-bottom:16px">
+<div style="height:48px;flex:1;border-radius:12px;border:1px solid #DDDED3;background:#FFFFFF;display:flex;align-items:center;justify-content:space-between;padding:0 8px 0 14px"><span class="dsmono" style="font-size:18px;color:#232A22">45°</span><div style="display:flex;flex-direction:column;gap:2px"><span style="width:30px;height:19px;border-radius:7px;background:#E9EFE8;color:#7A9E7E;display:grid;place-items:center;font-size:12px">▲</span><span style="width:30px;height:19px;border-radius:7px;background:#E9EFE8;color:#7A9E7E;display:grid;place-items:center;font-size:12px">▼</span></div></div>
+</div>
+<div style="display:flex;gap:8px;margin-bottom:16px">
+<span style="font-size:13px;padding:9px 16px;border-radius:100px;background:#232A22;color:#F8F6F0;font-weight:500">N</span>
+<span style="font-size:13px;padding:9px 16px;border-radius:100px;border:1px solid #DDDED3;color:#4B5347">E</span>
+<span style="font-size:13px;padding:9px 16px;border-radius:100px;border:1px solid #DDDED3;color:#4B5347">S</span>
+<span style="font-size:13px;padding:9px 16px;border-radius:100px;border:1px solid #DDDED3;color:#4B5347">W</span>
+</div>
+<div style="display:flex;background:#EAEBE0;border-radius:100px;padding:3px;margin-bottom:16px">
+<span style="flex:1;text-align:center;font-size:13px;padding:9px 0;border-radius:100px;background:#F8F6F0;color:#232A22;font-weight:600;box-shadow:0 1px 3px -1px rgba(35,42,34,.2)">Traditional 8-zone</span>
+<span style="flex:1;text-align:center;font-size:13px;padding:9px 0;color:#4B5347">16-zone school</span>
+</div>
+<div style="display:flex;align-items:center;justify-content:space-between"><span style="font-size:14px;color:#232A22">Devanagari numerals</span><span style="width:46px;height:28px;border-radius:100px;background:#DDDED3;padding:3px;display:flex"><span style="width:22px;height:22px;border-radius:50%;background:#FFFFFF;box-shadow:0 1px 3px rgba(0,0,0,.2)"></span></span></div>
+</div>
+</div>
+
+<!-- PROVENANCE + VERDICT -->
+<div style="margin-top:34px;display:grid;grid-template-columns:1.15fr 1fr;gap:20px">
+<div style="background:#F8F6F0;border:1px solid #DDDED3;border-radius:14px;padding:20px">
+<h3 class="dsser" style="font-size:20px;font-weight:400;margin:0 0 3px">Provenance tags · the differentiator</h3>
+<p style="font-size:13px;color:#6B7064;margin:0 0 16px">Informative, never alarming. A <span class="dsmono">MOD</span> tag is honesty about age — not a warning it fails. Quiet enough to live on nearly every report item, noticeable enough to tap.</p>
+<div style="display:flex;flex-direction:column;gap:10px">
+<sc-for list="{{ provenance }}" as="p" hint-placeholder-count="4">
+<div style="display:flex;align-items:center;gap:12px">
+<span style="display:inline-flex;align-items:center;gap:6px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.06em;padding:5px 10px;border-radius:100px;background:{{ p.chipBg }};color:{{ p.chipText }};border:1px solid {{ p.chipBorder }};flex:0 0 auto"><span style="width:6px;height:6px;border-radius:50%;background:{{ p.base }}"></span>{{ p.label }}</span>
+<span style="font-size:12.5px;color:#4B5347;line-height:1.4">{{ p.mean }}</span>
+</div>
+</sc-for>
+</div>
+</div>
+<div style="background:#F8F6F0;border:1px solid #DDDED3;border-radius:14px;padding:20px">
+<h3 class="dsser" style="font-size:20px;font-weight:400;margin:0 0 3px">Verdict pills · 5 states</h3>
+<p style="font-size:13px;color:#6B7064;margin:0 0 16px">Each pairs a colour with a <strong>label and a shape-icon</strong>, so meaning survives without colour.</p>
+<div style="display:flex;flex-direction:column;gap:10px">
+<sc-for list="{{ verdicts }}" as="v" hint-placeholder-count="5">
+<div style="display:flex;align-items:center;gap:12px">
+<span style="display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:600;padding:6px 12px;border-radius:100px;background:{{ v.pillBg }};color:{{ v.pillText }};border:1px solid {{ v.pillBorder }};flex:0 0 auto"><span style="font-size:12px">{{ v.icon }}</span>{{ v.label }}</span>
+<span class="dsmono" style="font-size:11px;color:#6B7064">{{ v.name }}</span>
+</div>
+</sc-for>
+</div>
+</div>
+</div>
+
+<!-- CARDS -->
+<div style="margin-top:20px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px">
+<div style="background:#F8F6F0;border:1px solid #DDDED3;border-left:3px solid #C43F35;border-radius:14px;padding:16px">
+<span style="display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:600;padding:5px 10px;border-radius:100px;background:#F7E3DD;color:#B23A30"><span>✕</span>Defect</span>
+<div class="dsser" style="font-size:17px;margin:9px 0 4px">Kitchen — North-East</div>
+<div style="font-size:13px;line-height:1.5;color:#4B5347">Agni's fire in the water zone. The most-cited classical defect.</div>
+</div>
+<div style="background:#F8F6F0;border:1px solid #DDDED3;border-left:3px solid #D68C18;border-radius:14px;padding:16px">
+<span style="display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:600;padding:5px 10px;border-radius:100px;background:#F9EDD8;color:#9A6407"><span>△</span>Not ideal</span>
+<div class="dsser" style="font-size:17px;margin:9px 0 4px">Bedroom — East</div>
+<div style="font-size:13px;line-height:1.5;color:#4B5347">Works, but a better-suited zone exists elsewhere.</div>
+</div>
+<div style="background:#F8F6F0;border:1px solid #DDDED3;border-left:3px solid #3E9256;border-radius:14px;padding:16px">
+<span style="display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:600;padding:5px 10px;border-radius:100px;background:#E4EEE0;color:#2E6E40"><span>✓</span>Ideal</span>
+<div class="dsser" style="font-size:17px;margin:9px 0 4px">Master — South-West</div>
+<div style="font-size:13px;line-height:1.5;color:#4B5347">The earth zone. Placed exactly right — leave it alone.</div>
+</div>
+</div>
+
+<!-- SCORE + FEEDBACK + PAYWALL -->
+<div style="margin-top:20px;display:grid;grid-template-columns:0.8fr 1.1fr 1.1fr;gap:16px;align-items:start">
+<div style="background:#F8F6F0;border:1px solid #DDDED3;border-radius:14px;padding:20px">
+<div class="dsmono" style="font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#6B7064;margin-bottom:10px">Score display</div>
+<div style="display:flex;align-items:flex-end;gap:6px"><span class="dsser" style="font-size:56px;line-height:1;color:#C43F35">46</span><span class="dsmono" style="font-size:12px;color:#98A08C;padding-bottom:10px">/ 100</span></div>
+<div style="height:7px;border-radius:100px;background:#DDDED3;overflow:hidden;margin-top:10px"><span style="display:block;height:100%;width:46%;background:#C43F35"></span></div>
+<div style="font-size:12px;color:#4B5347;margin-top:8px">Band <span class="dsmono">score-attention</span> · 0–49</div>
+</div>
+<div style="background:#F8F6F0;border:1px solid #DDDED3;border-radius:14px;padding:20px">
+<div class="dsmono" style="font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#6B7064;margin-bottom:12px">Toast · dialog · skeleton</div>
+<div style="background:#232A22;color:#F8F6F0;border-radius:12px;padding:11px 14px;font-size:13px;display:flex;align-items:center;gap:9px;margin-bottom:12px"><span style="color:#8FBE95">✓</span>Plan saved to your device</div>
+<div style="display:flex;flex-direction:column;gap:7px">
+<span style="height:12px;width:80%;border-radius:5px;background:linear-gradient(90deg,#E7E9DD,#F1F2EA,#E7E9DD)"></span>
+<span style="height:12px;width:60%;border-radius:5px;background:linear-gradient(90deg,#E7E9DD,#F1F2EA,#E7E9DD)"></span>
+<span style="height:12px;width:70%;border-radius:5px;background:linear-gradient(90deg,#E7E9DD,#F1F2EA,#E7E9DD)"></span>
+</div>
+</div>
+<div style="background:#F6EFD9;border:1px solid #E4CE8F;border-radius:16px;padding:18px">
+<div class="dsmono" style="font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#6B7064;margin-bottom:10px">Paywall card · honest</div>
+<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:12px">
+<div><div style="font-size:14px;font-weight:600;color:#232A22">Full report &amp; remedies</div><div style="font-size:12px;color:#6B7064;margin-top:2px">5 more issues · every fix, ranked</div></div>
+<div style="text-align:right"><div class="dsser" style="font-size:22px;color:#232A22;line-height:1">₹699</div><div class="dsmono" style="font-size:8.5px;color:#98A08C">ONE-TIME</div></div>
+</div>
+<div style="height:46px;border-radius:100px;background:#7A9E7E;color:#232A22;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;box-shadow:0 2px 8px -2px rgba(122,158,126,.5)">Unlock · ₹699</div>
+<div style="font-size:11px;text-align:center;color:#98A08C;margin-top:8px">Price shown before you pay · no hidden wall</div>
+</div>
+</div>
+
+<!-- LIST ROW / EMPTY / ERROR -->
+<div style="margin-top:20px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px">
+<div style="background:#F8F6F0;border:1px solid #DDDED3;border-radius:14px;padding:8px 4px">
+<div class="dsmono" style="font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#6B7064;margin:8px 14px">List row</div>
+<div style="display:flex;align-items:center;gap:12px;padding:12px 14px;border-bottom:1px solid #E6E8DC"><span style="width:38px;height:38px;border-radius:9px;background:#E9EFE8;display:grid;place-items:center;color:#7A9E7E">✎</span><div style="flex:1"><div style="font-size:14px;font-weight:500;color:#232A22">Builder's draft — 2BHK</div><div style="font-size:12px;color:#6B7064">Gurugram · 46/100</div></div><span style="color:#98A08C">›</span></div>
+<div style="display:flex;align-items:center;gap:12px;padding:12px 14px"><span style="width:38px;height:38px;border-radius:9px;background:#EAF1E4;display:grid;place-items:center;color:#3E9256">✎</span><div style="flex:1"><div style="font-size:14px;font-weight:500;color:#232A22">Architect revision</div><div style="font-size:12px;color:#6B7064">Same plot · 71/100</div></div><span style="color:#98A08C">›</span></div>
+</div>
+<div style="background:#F8F6F0;border:1px solid #DDDED3;border-radius:14px;padding:24px 18px;text-align:center">
+<div class="dsmono" style="font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#6B7064;margin-bottom:14px">Empty state</div>
+<svg viewBox="0 0 24 24" style="width:40px;height:40px;margin:0 auto 10px;display:block"><g fill="none" stroke="#B4B8A6" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11 L12 4 L20 11"/><path d="M6 9.8 V19 H18 V9.8"/><path d="M10 19 V14 H14 V19"/></g></svg>
+<div style="font-size:14px;font-weight:500;color:#232A22">No plans yet</div>
+<div style="font-size:12.5px;color:#4B5347;line-height:1.5;margin-top:4px">Add your first floor plan to see its Vastu score.</div>
+</div>
+<div style="background:#F8F6F0;border:1px solid #DDDED3;border-radius:14px;padding:24px 18px;text-align:center">
+<div class="dsmono" style="font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#6B7064;margin-bottom:14px">Error state</div>
+<div style="width:40px;height:40px;border-radius:50%;background:#F7E3DD;display:grid;place-items:center;margin:0 auto 10px;color:#C43F35;font-size:20px">!</div>
+<div style="font-size:14px;font-weight:500;color:#232A22">Couldn't read that plan</div>
+<div style="font-size:12.5px;color:#4B5347;line-height:1.5;margin-top:4px">The image was too blurry. Try a clearer photo or draw it instead.</div>
+<div style="display:inline-flex;margin-top:12px;height:40px;padding:0 18px;border-radius:100px;border:1px solid #DDDED3;align-items:center;font-size:13px;color:#232A22">Try again</div>
+</div>
+</div>
+</section>
+
+<section id="icons" style="padding:56px 72px;border-top:1px solid #E6E8DC">
+<div class="dsmono" style="font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#7A9E7E;margin-bottom:10px">07 · Library</div>
+<h2 class="dsser" style="font-size:38px;margin:0 0 12px;font-weight:400">Iconography</h2>
+<p style="font-size:16px;line-height:1.55;color:#4B5347;max-width:720px;margin:0 0 8px">One coherent set — line-based, a single <strong>1.6dp stroke</strong>, round joins, on a 24dp grid. Includes the Vastu-specific glyphs that exist nowhere else: room types, compass and North marker, the zone mandala, defect, remedy, layout-change, provenance. <strong>No religious symbol is used decoratively</strong> — a yantra appears only when a rule references it, drawn accurately, in context.</p>
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(112px,1fr));gap:12px;margin-top:22px">
+<sc-for list="{{ icons }}" as="ic" hint-placeholder-count="24">
+<div style="background:#F4F1E8;border:1px solid #DDDED3;border-radius:12px;padding:16px 8px 11px;text-align:center">
+<svg viewBox="0 0 24 24" style="width:30px;height:30px;margin:0 auto 9px;display:block"><g fill="none" stroke="#232A22" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><sc-for list="{{ ic.paths }}" as="d" hint-placeholder-count="3"><path d="{{ d }}"></path></sc-for></g></svg>
+<div class="dsmono" style="font-size:10.5px;color:#4B5347">{{ ic.label }}</div>
+</div>
+</sc-for>
+</div>
+</section>
+
+<section id="screens" style="padding:56px 72px;border-top:1px solid #E6E8DC;background:#F4F1E8">
+<div class="dsmono" style="font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#7A9E7E;margin-bottom:10px">08 · Screens</div>
+<h2 class="dsser" style="font-size:38px;margin:0 0 12px;font-weight:400">Screens · 412 × 915 dp</h2>
+<p style="font-size:16px;line-height:1.55;color:#4B5347;max-width:760px;margin:0 0 8px">The reference device is a mid-range Android, deliberately — not a flagship. The five signature screens are shown in full below; the remaining eight follow as designed frames. The report appears in two intent states (§5.5), because <strong>building</strong> and <strong>already living there</strong> are genuinely different acts.</p>
+<div style="display:flex;flex-wrap:wrap;gap:30px 34px;margin-top:28px;align-items:flex-start">
+
+<!-- 1 · WELCOME -->
+<div style="flex:0 0 412px">
+<div style="width:412px;height:915px;background:#F8F6F0;border-radius:46px;border:1px solid #DDDED3;box-shadow:0 34px 80px -34px rgba(35,42,34,.42);overflow:hidden;position:relative">
+<div style="height:44px;display:flex;align-items:center;justify-content:space-between;padding:0 28px;font-family:'DM Mono',monospace;font-size:12px;color:#98A08C"><span>9:41</span><span>VastuFirst</span><span>▮▮▮</span></div>
+<div style="height:871px;overflow:hidden;padding:26px 24px 24px">
+<svg viewBox="0 0 40 40" style="width:54px;height:54px;margin-bottom:20px" aria-hidden="true"><rect x="2" y="2" width="36" height="36" rx="4" fill="none" stroke="#DDDED3" stroke-width="1.4"/><line x1="14" y1="2" x2="14" y2="38" stroke="#DDDED3" stroke-width=".8"/><line x1="26" y1="2" x2="26" y2="38" stroke="#DDDED3" stroke-width=".8"/><line x1="2" y1="14" x2="38" y2="14" stroke="#DDDED3" stroke-width=".8"/><line x1="2" y1="26" x2="38" y2="26" stroke="#DDDED3" stroke-width=".8"/><rect x="14" y="14" width="12" height="12" fill="#E0E8DF"/><path d="M20 5 L23.4 15.6 L20 13.4 L16.6 15.6 Z" fill="#7A9E7E"/><circle cx="20" cy="20" r="2.6" fill="#C9A227"/></svg>
+<div class="dsmono" style="font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#6B7064;margin-bottom:12px">No sign-up · No phone number</div>
+<div class="dsser" style="font-size:31px;line-height:1.16;color:#232A22">Fix your home's Vastu on paper — before you build.</div>
+<p style="font-size:16px;line-height:1.55;color:#4B5347;margin:14px 0 0">Upload the plan. Mark which way North is. See exactly what to change, while changing it is still free.</p>
+<div style="height:1px;background:#DDDED3;margin:20px 0"></div>
+<div class="dsmono" style="font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#6B7064;margin-bottom:11px">Language</div>
+<div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px">
+<span style="font-size:14px;padding:11px 15px;border-radius:100px;background:#232A22;color:#F8F6F0;font-weight:500">English</span>
+<span style="font-family:'Noto Sans Devanagari',sans-serif;font-size:14px;padding:11px 15px;border-radius:100px;border:1px solid #DDDED3;color:#4B5347">हिन्दी</span>
+<span style="font-family:'Noto Sans Tamil',sans-serif;font-size:14px;padding:11px 15px;border-radius:100px;border:1px solid #DDDED3;color:#4B5347">தமிழ்</span>
+<span style="font-family:'Noto Sans Telugu',sans-serif;font-size:14px;padding:11px 15px;border-radius:100px;border:1px solid #DDDED3;color:#4B5347">తెలుగు</span>
+<span style="font-family:'Noto Sans Devanagari',sans-serif;font-size:14px;padding:11px 15px;border-radius:100px;border:1px solid #DDDED3;color:#4B5347">मराठी</span>
+<span style="font-family:'Noto Sans Bengali',sans-serif;font-size:14px;padding:11px 15px;border-radius:100px;border:1px solid #DDDED3;color:#4B5347">বাংলা</span>
+</div>
+<div class="dsmono" style="font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#6B7064;margin-bottom:11px">What brings you here?</div>
+<div style="display:flex;flex-direction:column;gap:10px">
+<div style="text-align:left;background:#FFFFFF;border:1px solid #DDDED3;border-radius:14px;padding:15px 16px"><div style="font-size:16px;font-weight:500;color:#232A22">I am building a home</div><div style="font-size:13px;color:#6B7064;margin-top:2px">The plan is not final yet</div></div>
+<div style="text-align:left;background:#E7EEE6;border:1px solid #7A9E7E;border-radius:14px;padding:15px 16px;box-shadow:0 0 0 1px #7A9E7E;display:flex;justify-content:space-between;align-items:center"><div><div style="font-size:16px;font-weight:600;color:#232A22">I am buying a home</div><div style="font-size:13px;color:#6B7064;margin-top:2px">Deciding between options</div></div><span style="width:22px;height:22px;border-radius:50%;background:#7A9E7E;color:#232A22;display:grid;place-items:center;font-size:13px">✓</span></div>
+<div style="text-align:left;background:#FFFFFF;border:1px solid #DDDED3;border-radius:14px;padding:15px 16px"><div style="font-size:16px;font-weight:500;color:#232A22">I already live here</div><div style="font-size:13px;color:#6B7064;margin-top:2px">Looking for remedies</div></div>
+</div>
+<div style="height:52px;border-radius:100px;background:#7A9E7E;color:#232A22;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:600;margin-top:22px;box-shadow:0 3px 12px -3px rgba(122,158,126,.6)">Continue</div>
+</div>
+</div>
+<div class="dsmono" style="font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:#6B7064;text-align:center;margin-top:16px">1 · Welcome — language &amp; intent</div>
+</div>
+
+<!-- 5 · MARK NORTH -->
+<div style="flex:0 0 412px">
+<div style="width:412px;height:915px;background:#F8F6F0;border-radius:46px;border:1px solid #DDDED3;box-shadow:0 34px 80px -34px rgba(35,42,34,.42);overflow:hidden;position:relative">
+<div style="height:44px;display:flex;align-items:center;justify-content:space-between;padding:0 28px;font-family:'DM Mono',monospace;font-size:12px;color:#98A08C"><span>9:41</span><span>VastuFirst</span><span>▮▮▮</span></div>
+<div style="height:871px;overflow:hidden;padding:18px 24px 22px">
+<div class="dsmono" style="font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#6B7064">Step 2 of 3</div>
+<div class="dsser" style="font-size:27px;line-height:1.15;color:#232A22;margin:8px 0 8px">Which way is North?</div>
+<p style="font-size:15px;line-height:1.5;color:#4B5347;margin:0 0 8px">Drag the <b style="color:#7A9E7E">N</b> dial, or use the slider. Everything else follows from this.</p>
+<div style="position:relative;width:344px;height:344px;margin:2px auto 0">
+<svg viewBox="-30 -30 160 160" style="width:100%;height:100%;display:block">
+<circle cx="50" cy="50" r="66" fill="none" stroke="#DDDED3" stroke-width=".6"/>
+<sc-for list="{{ zoneMapWedges }}" as="w" hint-placeholder-count="8"><path d="{{ w.path }}" fill="{{ w.color }}" opacity="0.13"></path><text x="{{ w.lx }}" y="{{ w.ly }}" fill="#4B5347" style="font-family:'DM Mono',monospace;font-size:4px;font-weight:500;text-anchor:middle">{{ w.z }}</text></sc-for>
+<circle cx="50" cy="50" r="11" fill="{{ zoneC }}" opacity=".13"/>
+<circle cx="50" cy="50" r="11" fill="none" stroke="{{ zoneC }}" stroke-width=".5" stroke-dasharray="1.6 1.6"/>
+<rect x="4" y="4" width="92" height="92" rx="2" fill="none" stroke="#98A08C" stroke-width=".6"/>
+<sc-for list="{{ zoneMapRooms }}" as="r" hint-placeholder-count="8"><rect x="{{ r.x }}" y="{{ r.y }}" width="{{ r.w }}" height="{{ r.h }}" rx="1.4" fill="{{ r.fill }}" stroke="{{ r.stroke }}" stroke-width=".7"></rect><text x="{{ r.cx }}" y="{{ r.ly }}" fill="#232A22" style="font-family:'DM Sans',sans-serif;font-size:4.2px;font-weight:500;text-anchor:middle">{{ r.label }}</text><text x="{{ r.cx }}" y="{{ r.zy }}" fill="{{ r.zoneColor }}" style="font-family:'DM Mono',monospace;font-size:3.3px;text-anchor:middle">{{ r.zoneText }}</text></sc-for>
+<line x1="50" y1="50" x2="{{ northX }}" y2="{{ northY }}" stroke="#7A9E7E" stroke-width=".7" stroke-dasharray="2 2"/>
+</svg>
+<div style="position:absolute;left:{{ knobLeft }}%;top:{{ knobTop }}%;transform:translate(-50%,-50%);width:54px;height:54px;display:grid;place-items:center">
+<svg viewBox="0 0 54 54" style="position:absolute;inset:0;width:54px;height:54px" aria-hidden="true"><path d="M27 1 L32 10 L22 10 Z" fill="#7A9E7E"/></svg>
+<span style="width:40px;height:40px;border-radius:50%;background:#F8F6F0;border:2px solid #7A9E7E;display:grid;place-items:center;box-shadow:0 3px 12px -3px rgba(122,158,126,.55)"><span class="dsmono" style="font-size:15px;font-weight:500;color:#7A9E7E">N</span></span>
+</div>
+</div>
+<div style="display:flex;flex-wrap:wrap;gap:5px 14px;margin-top:8px">
+<span style="display:flex;align-items:center;gap:5px;font-size:12px;color:#4B5347"><i style="width:12px;height:12px;border-radius:3px;background:#E4EEE0;border:1.5px solid #3E9256"></i>Ideal</span>
+<span style="display:flex;align-items:center;gap:5px;font-size:12px;color:#4B5347"><i style="width:12px;height:12px;border-radius:3px;background:#EFF4E9;border:1.5px solid #8FBE95"></i>Fine</span>
+<span style="display:flex;align-items:center;gap:5px;font-size:12px;color:#4B5347"><i style="width:12px;height:12px;border-radius:3px;background:#F9EDD8;border:1.5px solid #D68C18"></i>Not ideal</span>
+<span style="display:flex;align-items:center;gap:5px;font-size:12px;color:#4B5347"><i style="width:12px;height:12px;border-radius:3px;background:#F7E3DD;border:1.5px solid #C43F35"></i>Defect</span>
+</div>
+<div style="position:relative;height:28px;margin:12px 0 4px">
+<div style="position:absolute;top:11px;left:0;right:0;height:6px;border-radius:100px;background:#DDDED3"></div>
+<div style="position:absolute;top:11px;left:0;width:{{ sliderPct }}%;height:6px;border-radius:100px;background:#7A9E7E"></div>
+<div style="position:absolute;top:1px;left:{{ sliderPct }}%;transform:translateX(-50%);width:26px;height:26px;border-radius:50%;background:#F8F6F0;border:2px solid #7A9E7E;box-shadow:0 2px 8px -2px rgba(122,158,126,.5)"></div>
+</div>
+<div style="background:#F2EEE4;border:1px solid #DDDED3;border-radius:14px;padding:13px 15px">
+<div style="display:flex;justify-content:space-between;align-items:baseline;font-size:14px"><span style="color:#6B7064">North is at</span><b class="dsmono" style="color:#232A22">{{ north }}°</b></div>
+<div style="display:flex;justify-content:space-between;align-items:baseline;font-size:14px;padding-top:9px;margin-top:9px;border-top:1px dashed #DDDED3"><span style="color:#6B7064">Live score</span><b class="dsmono" style="color:{{ band }}">{{ score }}/100</b></div>
+</div>
+<div style="display:flex;gap:8px;margin-top:9px">
+<span style="flex:1;text-align:center;font-size:14px;padding:11px 0;border-radius:100px;background:#232A22;color:#F8F6F0;font-weight:500">N</span>
+<span style="flex:1;text-align:center;font-size:14px;padding:11px 0;border-radius:100px;border:1px solid #DDDED3;color:#4B5347">E</span>
+<span style="flex:1;text-align:center;font-size:14px;padding:11px 0;border-radius:100px;border:1px solid #DDDED3;color:#4B5347">S</span>
+<span style="flex:1;text-align:center;font-size:14px;padding:11px 0;border-radius:100px;border:1px solid #DDDED3;color:#4B5347">W</span>
+</div>
+<div style="display:flex;align-items:center;gap:12px;background:#F2EEE4;border:1px solid #DDDED3;border-radius:14px;padding:12px 14px;margin-top:9px">
+<svg viewBox="0 0 24 24" style="width:22px;height:22px;flex:0 0 22px"><g fill="none" stroke="#4C7355" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.8 a9.2 9.2 0 1 0 0.01 0"/><path d="M15.6 8.4 L10.6 10.6 L8.4 15.6 L13.4 13.4 Z"/></g></svg>
+<div style="flex:1"><div style="font-size:14px;font-weight:500;color:#232A22">Use my phone's compass</div><div style="font-size:12px;color:#6B7064;margin-top:1px">At the plot · optional helper</div></div>
+<span style="font-family:'DM Mono',monospace;font-size:10px;color:#5B7089;background:#E7ECF1;padding:4px 9px;border-radius:100px">OPTIONAL</span>
+</div>
+<div style="display:flex;gap:10px;margin-top:14px">
+<span style="flex:1;text-align:center;font-size:15px;padding:14px 0;border-radius:100px;border:1px solid #DDDED3;color:#4B5347">Back</span>
+<span style="flex:1.4;text-align:center;font-size:15px;font-weight:600;padding:14px 0;border-radius:100px;background:#7A9E7E;color:#232A22;box-shadow:0 3px 12px -3px rgba(122,158,126,.6)">Read my home</span>
+</div>
+</div>
+</div>
+<div class="dsmono" style="font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:#6B7064;text-align:center;margin-top:16px">5 · Mark North — the signature dial</div>
+</div>
+
+<!-- 6 · SCORE (FREE) -->
+<div style="flex:0 0 412px">
+<div style="width:412px;height:915px;background:#F8F6F0;border-radius:46px;border:1px solid #DDDED3;box-shadow:0 34px 80px -34px rgba(35,42,34,.42);overflow:hidden;position:relative">
+<div style="height:44px;display:flex;align-items:center;justify-content:space-between;padding:0 28px;font-family:'DM Mono',monospace;font-size:12px;color:#98A08C"><span>9:41</span><span>VastuFirst</span><span>▮▮▮</span></div>
+<div style="height:871px;overflow:hidden;padding:18px 24px 22px">
+<div class="dsmono" style="font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#6B7064">Your result · free</div>
+<div style="display:flex;align-items:flex-end;gap:8px;margin-top:8px"><div class="dsser" style="font-size:60px;line-height:.9;color:{{ band }}">{{ score }}</div><div class="dsmono" style="font-size:14px;color:#98A08C;padding-bottom:11px">/ 100</div></div>
+<div style="height:8px;border-radius:100px;background:#DDDED3;overflow:hidden;margin-top:12px"><span style="display:block;height:100%;width:{{ score }}%;background:{{ band }}"></span></div>
+<p style="font-size:15px;line-height:1.5;color:#4B5347;margin:10px 0 0">{{ verdictLine }}</p>
+<div style="height:1px;background:#DDDED3;margin:16px 0 12px"></div>
+<div class="dsmono" style="font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#6B7064;margin-bottom:8px">Zone map</div>
+<div style="width:182px;height:182px;margin:0 auto">
+<svg viewBox="-30 -30 160 160" style="width:100%;height:100%;display:block">
+<circle cx="50" cy="50" r="66" fill="none" stroke="#DDDED3" stroke-width=".6"/>
+<sc-for list="{{ zoneMapWedges }}" as="w" hint-placeholder-count="8"><path d="{{ w.path }}" fill="{{ w.color }}" opacity="0.13"></path><text x="{{ w.lx }}" y="{{ w.ly }}" fill="#4B5347" style="font-family:'DM Mono',monospace;font-size:4px;font-weight:500;text-anchor:middle">{{ w.z }}</text></sc-for>
+<circle cx="50" cy="50" r="11" fill="{{ zoneC }}" opacity=".13"/>
+<circle cx="50" cy="50" r="11" fill="none" stroke="{{ zoneC }}" stroke-width=".5" stroke-dasharray="1.6 1.6"/>
+<rect x="4" y="4" width="92" height="92" rx="2" fill="none" stroke="#98A08C" stroke-width=".6"/>
+<sc-for list="{{ zoneMapRooms }}" as="r" hint-placeholder-count="8"><rect x="{{ r.x }}" y="{{ r.y }}" width="{{ r.w }}" height="{{ r.h }}" rx="1.4" fill="{{ r.fill }}" stroke="{{ r.stroke }}" stroke-width=".7"></rect><text x="{{ r.cx }}" y="{{ r.ly }}" fill="#232A22" style="font-family:'DM Sans',sans-serif;font-size:4.2px;font-weight:500;text-anchor:middle">{{ r.label }}</text><text x="{{ r.cx }}" y="{{ r.zy }}" fill="{{ r.zoneColor }}" style="font-family:'DM Mono',monospace;font-size:3.3px;text-anchor:middle">{{ r.zoneText }}</text></sc-for>
+<line x1="50" y1="50" x2="{{ northX }}" y2="{{ northY }}" stroke="#7A9E7E" stroke-width=".7" stroke-dasharray="2 2"/>
+<g transform="translate({{ markX }} {{ markY }})"><circle r="7" fill="#F8F6F0" stroke="#7A9E7E" stroke-width="1"/><text y="1.9" style="font-family:'DM Mono',monospace;font-size:6px;font-weight:500;text-anchor:middle" fill="#7A9E7E">N</text></g>
+</svg>
+</div>
+<div style="height:1px;background:#DDDED3;margin:12px 0"></div>
+<div class="dsmono" style="font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#6B7064;margin-bottom:9px">Biggest problems</div>
+<div style="display:flex;flex-direction:column;gap:9px">
+<sc-for list="{{ top2 }}" as="d" hint-placeholder-count="2">
+<div style="background:#F2EEE4;border:1px solid #DDDED3;border-left:3px solid {{ d.stripe }};border-radius:14px;padding:11px 13px">
+<div style="display:flex;justify-content:space-between;align-items:center"><span style="display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;padding:4px 9px;border-radius:100px;background:{{ d.pillBg }};color:{{ d.pillText }}"><span>{{ d.pillIcon }}</span>{{ d.verdictWord }}</span><span style="display:inline-flex;align-items:center;gap:5px;font-family:'DM Mono',monospace;font-size:9.5px;padding:3px 8px;border-radius:100px;background:{{ d.provChipBg }};color:{{ d.provChipText }}"><span style="width:5px;height:5px;border-radius:50%;background:{{ d.provDot }}"></span>{{ d.provLabel }}</span></div>
+<div class="dsser" style="font-size:16px;color:#232A22;margin:7px 0 3px">{{ d.label }} — {{ d.zoneShort }}</div>
+<p style="font-size:12.5px;line-height:1.45;color:#6B7064;margin:0">{{ d.why }}</p>
+</div>
+</sc-for>
+</div>
+<div style="border-radius:16px;background:#F6EFD9;border:1px solid #E4CE8F;padding:15px 16px;margin-top:12px">
+<div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:11px">
+<div><div style="font-size:15px;font-weight:600;color:#232A22">Unlock the full report &amp; remedies</div><div style="font-size:12.5px;color:#6B7064;margin-top:2px">{{ restCount }} more issues · every fix &amp; remedy, ranked</div></div>
+<div style="text-align:right;flex:0 0 auto"><div class="dsser" style="font-size:24px;color:#232A22;line-height:1">₹699</div><div class="dsmono" style="font-size:9px;color:#98A08C">ONE-TIME</div></div>
+</div>
+<div style="height:50px;border-radius:100px;background:#7A9E7E;color:#232A22;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:600;box-shadow:0 3px 12px -3px rgba(122,158,126,.6)">Unlock full report &amp; remedies · ₹699</div>
+</div>
+<p style="font-size:12px;text-align:center;color:#98A08C;margin:8px 0 0">One-time · price shown before you pay · no hidden wall</p>
+</div>
+</div>
+<div class="dsmono" style="font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:#6B7064;text-align:center;margin-top:16px">6 · Score — free tier &amp; paywall</div>
+</div>
+
+<!-- 7a · REPORT (BUILDING) -->
+<div style="flex:0 0 412px">
+<div style="width:412px;height:915px;background:#F8F6F0;border-radius:46px;border:1px solid #DDDED3;box-shadow:0 34px 80px -34px rgba(35,42,34,.42);overflow:hidden;position:relative">
+<div style="height:44px;display:flex;align-items:center;justify-content:space-between;padding:0 28px;font-family:'DM Mono',monospace;font-size:12px;color:#98A08C"><span>9:41</span><span>VastuFirst</span><span>▮▮▮</span></div>
+<div style="height:871px;overflow:hidden;padding:18px 24px 22px">
+<div style="display:flex;align-items:center;justify-content:space-between"><div class="dsmono" style="font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#6B7064">Full report</div><span style="display:inline-flex;align-items:center;gap:6px;font-family:'DM Mono',monospace;font-size:10px;padding:5px 10px;border-radius:100px;background:#E4EEE0;color:#2E6E40"><span style="width:6px;height:6px;border-radius:50%;background:#3E9256"></span>BUILDING</span></div>
+<div class="dsser" style="font-size:27px;line-height:1.1;color:#232A22;margin:8px 0 4px">What to change</div>
+<p style="font-size:14.5px;line-height:1.5;color:#4B5347;margin:0 0 12px">Ranked by how much each matters. Nothing is built yet — <b style="color:#232A22">every layout change below is still free to make.</b></p>
+<div style="display:flex;background:#EAEBE0;border-radius:100px;padding:3px;margin-bottom:14px">
+<span style="flex:1;text-align:center;font-size:13px;padding:9px 0;border-radius:100px;background:#F8F6F0;color:#232A22;font-weight:600;box-shadow:0 1px 3px -1px rgba(35,42,34,.2)">Traditional 8-zone</span>
+<span style="flex:1;text-align:center;font-size:13px;padding:9px 0;color:#4B5347">16-zone school</span>
+</div>
+<div style="display:flex;flex-direction:column;gap:11px">
+<sc-for list="{{ topDefects }}" as="d" hint-placeholder-count="2">
+<div style="background:#F2EEE4;border:1px solid #DDDED3;border-left:3px solid {{ d.stripe }};border-radius:14px;padding:13px 14px">
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:7px"><span style="display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;padding:4px 9px;border-radius:100px;background:{{ d.pillBg }};color:{{ d.pillText }}"><span>{{ d.pillIcon }}</span>{{ d.verdictWord }}</span><span class="dsmono" style="font-size:10px;color:#98A08C">#{{ d.n }}</span></div>
+<div class="dsser" style="font-size:17px;color:#232A22;margin-bottom:6px">{{ d.label }} — {{ d.zone }}</div>
+<span style="display:inline-flex;align-items:center;gap:5px;font-family:'DM Mono',monospace;font-size:9.5px;padding:3px 8px;border-radius:100px;background:{{ d.provChipBg }};color:{{ d.provChipText }};margin-bottom:9px"><span style="width:5px;height:5px;border-radius:50%;background:{{ d.provDot }}"></span>{{ d.provLabel }}</span>
+<div style="background:#E7EEE6;border-radius:10px;padding:10px 12px;margin-bottom:8px"><div class="dsmono" style="font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#4C7355;margin-bottom:4px">✦ Change the layout — free now</div><p style="font-size:13.5px;line-height:1.45;color:#232A22;margin:0">{{ d.move }}</p></div>
+<div style="background:#F5EFDA;border-radius:10px;padding:10px 12px"><div class="dsmono" style="font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#6F5410;margin-bottom:5px">If it cannot move — remedies</div><sc-for list="{{ d.rem }}" as="rr" hint-placeholder-count="2"><div style="font-size:12.5px;line-height:1.5;color:#4B5347;display:flex;gap:6px"><span style="color:#C9A227">·</span><span>{{ rr }}</span></div></sc-for></div>
+</div>
+</sc-for>
+</div>
+</div>
+</div>
+<div class="dsmono" style="font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:#6B7064;text-align:center;margin-top:16px">7 · Report — intent: <b style="color:#232A22">building</b> (layout leads)</div>
+</div>
+
+<!-- 7b · REPORT (ALREADY LIVING) -->
+<div style="flex:0 0 412px">
+<div style="width:412px;height:915px;background:#F8F6F0;border-radius:46px;border:1px solid #DDDED3;box-shadow:0 34px 80px -34px rgba(35,42,34,.42);overflow:hidden;position:relative">
+<div style="height:44px;display:flex;align-items:center;justify-content:space-between;padding:0 28px;font-family:'DM Mono',monospace;font-size:12px;color:#98A08C"><span>9:41</span><span>VastuFirst</span><span>▮▮▮</span></div>
+<div style="height:871px;overflow:hidden;padding:18px 24px 22px">
+<div style="display:flex;align-items:center;justify-content:space-between"><div class="dsmono" style="font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#6B7064">Full report</div><span style="display:inline-flex;align-items:center;gap:6px;font-family:'DM Mono',monospace;font-size:10px;padding:5px 10px;border-radius:100px;background:#F5EFDA;color:#6F5410"><span style="width:6px;height:6px;border-radius:50%;background:#C9A227"></span>ALREADY LIVING HERE</span></div>
+<div class="dsser" style="font-size:27px;line-height:1.1;color:#232A22;margin:8px 0 4px">What to do now</div>
+<p style="font-size:14.5px;line-height:1.5;color:#4B5347;margin:0 0 12px">Walls can't move — so <b style="color:#232A22">remedies lead here.</b> Layout changes are kept, but demoted to "if you ever renovate".</p>
+<div style="display:flex;flex-direction:column;gap:11px">
+<sc-for list="{{ topDefects }}" as="d" hint-placeholder-count="2">
+<div style="background:#F2EEE4;border:1px solid #DDDED3;border-left:3px solid #C9A227;border-radius:14px;padding:13px 14px">
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:7px"><span style="display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;padding:4px 9px;border-radius:100px;background:{{ d.pillBg }};color:{{ d.pillText }}"><span>{{ d.pillIcon }}</span>{{ d.verdictWord }}</span><span class="dsmono" style="font-size:10px;color:#98A08C">#{{ d.n }}</span></div>
+<div class="dsser" style="font-size:17px;color:#232A22;margin-bottom:6px">{{ d.label }} — {{ d.zone }}</div>
+<span style="display:inline-flex;align-items:center;gap:5px;font-family:'DM Mono',monospace;font-size:9.5px;padding:3px 8px;border-radius:100px;background:{{ d.provChipBg }};color:{{ d.provChipText }};margin-bottom:9px"><span style="width:5px;height:5px;border-radius:50%;background:{{ d.provDot }}"></span>{{ d.provLabel }}</span>
+<div style="background:#F5EFDA;border-radius:10px;padding:11px 12px;margin-bottom:8px"><div class="dsmono" style="font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#6F5410;margin-bottom:6px">✦ Remedies — do these now</div><sc-for list="{{ d.rem }}" as="rr" hint-placeholder-count="2"><div style="font-size:13.5px;line-height:1.5;color:#232A22;display:flex;gap:6px;margin-bottom:2px"><span style="color:#C9A227">·</span><span>{{ rr }}</span></div></sc-for></div>
+<div style="background:#F0EFE6;border-radius:10px;padding:9px 12px;opacity:.9"><div class="dsmono" style="font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;color:#98A08C;margin-bottom:3px">If you ever renovate</div><p style="font-size:12px;line-height:1.4;color:#6B7064;margin:0">{{ d.move }}</p></div>
+</div>
+</sc-for>
+</div>
+</div>
+</div>
+<div class="dsmono" style="font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:#6B7064;text-align:center;margin-top:16px">7 · Report — intent: <b style="color:#232A22">already living</b> (remedies lead)</div>
+</div>
+
+<!-- 2 · ADD HOME -->
+<div style="flex:0 0 412px">
+<div style="width:412px;height:915px;background:#F8F6F0;border-radius:46px;border:1px solid #DDDED3;box-shadow:0 34px 80px -34px rgba(35,42,34,.42);overflow:hidden;position:relative">
+<div style="height:44px;display:flex;align-items:center;justify-content:space-between;padding:0 28px;font-family:'DM Mono',monospace;font-size:12px;color:#98A08C"><span>9:41</span><span>VastuFirst</span><span>▮▮▮</span></div>
+<div style="height:871px;overflow:hidden;padding:20px 24px 22px">
+<div class="dsmono" style="font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#6B7064">Step 1 of 3</div>
+<div class="dsser" style="font-size:27px;color:#232A22;margin:8px 0 6px">Add your home</div>
+<p style="font-size:15px;line-height:1.5;color:#4B5347;margin:0 0 18px">Use the plan your builder or architect sent — a photo, a PDF, even a rough sketch.</p>
+<div style="display:flex;flex-direction:column;gap:12px">
+<div style="display:flex;gap:14px;align-items:center;background:#FFFFFF;border:1px solid #DDDED3;border-radius:16px;padding:16px"><span style="width:46px;height:46px;border-radius:12px;background:#E7EEE6;display:grid;place-items:center;flex:0 0 46px"><svg viewBox="0 0 24 24" style="width:24px;height:24px"><g fill="none" stroke="#7A9E7E" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4 V15"/><path d="M8 8 L12 4 L16 8"/><path d="M5 17 V20 H19 V17"/></g></svg></span><div><div style="font-size:16px;font-weight:600;color:#232A22">Upload a plan</div><div style="font-size:13px;color:#6B7064;margin-top:2px">Photo, PDF or sketch · AI reads the rooms</div></div></div>
+<div style="display:flex;gap:14px;align-items:center;background:#FFFFFF;border:1px solid #DDDED3;border-radius:16px;padding:16px"><span style="width:46px;height:46px;border-radius:12px;background:#F5EFDA;display:grid;place-items:center;flex:0 0 46px"><svg viewBox="0 0 24 24" style="width:24px;height:24px"><g fill="none" stroke="#4C7355" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4 H20 V20 H4 Z"/><path d="M9.33 4 V20"/><path d="M14.66 4 V20"/><path d="M4 9.33 H20"/><path d="M4 14.66 H20"/></g></svg></span><div><div style="font-size:16px;font-weight:600;color:#232A22">Draw it on a grid</div><div style="font-size:13px;color:#6B7064;margin-top:2px">Place room blocks by hand · one-handed</div></div></div>
+<div style="display:flex;gap:14px;align-items:center;background:#FFFFFF;border:1px solid #DDDED3;border-radius:16px;padding:16px"><span style="width:46px;height:46px;border-radius:12px;background:#EAEBE0;display:grid;place-items:center;flex:0 0 46px"><svg viewBox="0 0 24 24" style="width:24px;height:24px"><g fill="none" stroke="#4B5347" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6 A2 2 0 0 1 6 4 H18 A2 2 0 0 1 20 6 V18 A2 2 0 0 1 18 20 H6 A2 2 0 0 1 4 18 Z"/><path d="M8 9 H16"/><path d="M8 13 H14"/></g></svg></span><div><div style="font-size:16px;font-weight:600;color:#232A22">Try a sample plan</div><div style="font-size:13px;color:#6B7064;margin-top:2px">See the whole flow in ten seconds</div></div></div>
+</div>
+<div style="margin-top:20px;background:#F2EEE4;border:1px dashed #DDDED3;border-radius:12px;padding:13px 15px;font-size:13px;line-height:1.5;color:#6B7064">Reading an arbitrary plan is the hardest part of the build — the AI drafts the rooms and <b style="color:#232A22">you confirm each one</b> next.</div>
+</div>
+</div>
+<div class="dsmono" style="font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:#6B7064;text-align:center;margin-top:16px">2 · Add home — method choice</div>
+</div>
+
+<!-- 3 · GUIDED GRID EDITOR -->
+<div style="flex:0 0 412px">
+<div style="width:412px;height:915px;background:#F8F6F0;border-radius:46px;border:1px solid #DDDED3;box-shadow:0 34px 80px -34px rgba(35,42,34,.42);overflow:hidden;position:relative">
+<div style="height:44px;display:flex;align-items:center;justify-content:space-between;padding:0 28px;font-family:'DM Mono',monospace;font-size:12px;color:#98A08C"><span>9:41</span><span>VastuFirst</span><span>▮▮▮</span></div>
+<div style="height:871px;overflow:hidden;padding:18px 24px 0;display:flex;flex-direction:column">
+<div class="dsser" style="font-size:24px;color:#232A22">Place your rooms</div>
+<p style="font-size:14px;line-height:1.45;color:#4B5347;margin:6px 0 14px">Tap a room, then tap a cell. Drag to resize. Everything stays in thumb reach.</p>
+<div style="position:relative;width:100%;aspect-ratio:1;background:#F2EEE4;border:1px solid #DDDED3;border-radius:16px;background-image:linear-gradient(#E6E8DC 1px,transparent 1px),linear-gradient(90deg,#E6E8DC 1px,transparent 1px);background-size:12.5% 12.5%;overflow:hidden">
+<div style="position:absolute;left:6%;top:6%;width:36%;height:26%;background:#EAF1E4;border:1.5px solid #4E9A55;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;color:#232A22">Pooja</div>
+<div style="position:absolute;left:56%;top:6%;width:38%;height:30%;background:#F7E3DD;border:1.5px solid #C43F35;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;color:#232A22">Toilet</div>
+<div style="position:absolute;left:6%;top:40%;width:40%;height:32%;background:#FBEBDF;border:1.5px dashed #E0662F;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;color:#232A22">Kitchen</div>
+<div style="position:absolute;left:54%;top:52%;width:40%;height:40%;background:#FFFFFF;border:1.5px solid #DDDED3;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:13px;color:#98A08C">tap to add</div>
+<div style="position:absolute;left:6%;top:78%;width:40%;height:16%;background:#E6EFEA;border:1.5px solid #2E8B8B;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:#232A22">Master</div>
+</div>
+<div style="margin-top:auto;padding:14px 0 20px">
+<div class="dsmono" style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#6B7064;margin-bottom:9px">Rooms</div>
+<div style="display:flex;gap:8px;overflow:hidden">
+<span style="font-size:13px;padding:10px 14px;border-radius:100px;background:#232A22;color:#F8F6F0;font-weight:500;white-space:nowrap">＋ Living</span>
+<span style="font-size:13px;padding:10px 14px;border-radius:100px;border:1px solid #DDDED3;color:#4B5347;white-space:nowrap">Bedroom</span>
+<span style="font-size:13px;padding:10px 14px;border-radius:100px;border:1px solid #DDDED3;color:#4B5347;white-space:nowrap">Stairs</span>
+<span style="font-size:13px;padding:10px 14px;border-radius:100px;border:1px solid #DDDED3;color:#4B5347;white-space:nowrap">Study</span>
+</div>
+<div style="height:50px;border-radius:100px;background:#7A9E7E;color:#232A22;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:600;margin-top:14px;box-shadow:0 3px 12px -3px rgba(122,158,126,.6)">Next — mark North</div>
+</div>
+</div>
+</div>
+<div class="dsmono" style="font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:#6B7064;text-align:center;margin-top:16px">3 · Guided grid editor</div>
+</div>
+
+<!-- 4 · PLAN UPLOAD + AI CONFIRM -->
+<div style="flex:0 0 412px">
+<div style="width:412px;height:915px;background:#F8F6F0;border-radius:46px;border:1px solid #DDDED3;box-shadow:0 34px 80px -34px rgba(35,42,34,.42);overflow:hidden;position:relative">
+<div style="height:44px;display:flex;align-items:center;justify-content:space-between;padding:0 28px;font-family:'DM Mono',monospace;font-size:12px;color:#98A08C"><span>9:41</span><span>VastuFirst</span><span>▮▮▮</span></div>
+<div style="height:871px;overflow:hidden;padding:18px 24px 22px">
+<div class="dsser" style="font-size:24px;color:#232A22">Confirm each room</div>
+<p style="font-size:14px;line-height:1.45;color:#4B5347;margin:6px 0 14px">The AI read your plan. <b style="color:#232A22">Check each one</b> — you know the home, it doesn't.</p>
+<div style="position:relative;height:150px;border-radius:14px;background:#F2EEE4;border:1px solid #DDDED3;overflow:hidden;margin-bottom:14px">
+<svg viewBox="0 0 100 60" style="width:100%;height:100%"><rect x="4" y="4" width="92" height="52" fill="none" stroke="#B4B8A6" stroke-width=".8"/><rect x="8" y="8" width="34" height="20" fill="#EAF1E4" stroke="#4E9A55" stroke-width=".6"/><rect x="46" y="8" width="24" height="20" fill="#F7E3DD" stroke="#C43F35" stroke-width=".6"/><rect x="74" y="8" width="18" height="26" fill="#FBEBDF" stroke="#E0662F" stroke-width=".6"/><rect x="8" y="32" width="30" height="22" fill="#FFFFFF" stroke="#DDDED3" stroke-width=".6"/><text x="50" y="52" font-size="4" fill="#98A08C" text-anchor="middle" font-family="DM Mono">builder-plan.pdf</text></svg>
+</div>
+<div style="display:flex;flex-direction:column;gap:9px">
+<div style="display:flex;align-items:center;gap:12px;background:#FFFFFF;border:1px solid #DDDED3;border-radius:12px;padding:11px 13px"><span style="width:36px;height:36px;border-radius:9px;background:#EAF1E4;display:grid;place-items:center;color:#3E9256">✓</span><div style="flex:1"><div style="font-size:14.5px;font-weight:500;color:#232A22">Pooja room</div><div style="font-size:12px;color:#6B7064">Top-left · confirmed</div></div></div>
+<div style="display:flex;align-items:center;gap:12px;background:#FFFFFF;border:1px solid #DDDED3;border-radius:12px;padding:11px 13px"><span style="width:36px;height:36px;border-radius:9px;background:#EAF1E4;display:grid;place-items:center;color:#3E9256">✓</span><div style="flex:1"><div style="font-size:14.5px;font-weight:500;color:#232A22">Kitchen</div><div style="font-size:12px;color:#6B7064">Lower-left · confirmed</div></div></div>
+<div style="background:#F1F4EE;border:1.5px solid #7A9E7E;border-radius:12px;padding:12px 13px"><div style="display:flex;align-items:center;gap:12px"><span style="width:36px;height:36px;border-radius:9px;background:#E7EEE6;display:grid;place-items:center;color:#7A9E7E">?</span><div style="flex:1"><div style="font-size:14.5px;font-weight:600;color:#232A22">Unsure — room, top-right</div><div style="font-size:12px;color:#6B7064">Could be toilet or store</div></div></div><div style="display:flex;gap:8px;margin-top:11px"><span style="flex:1;text-align:center;font-size:13px;padding:9px 0;border-radius:100px;background:#7A9E7E;color:#232A22;font-weight:600">It's a toilet</span><span style="flex:1;text-align:center;font-size:13px;padding:9px 0;border-radius:100px;border:1px solid #DDDED3;color:#4B5347">Pick type</span></div></div>
+</div>
+<div style="height:50px;border-radius:100px;background:#7A9E7E;color:#232A22;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:600;margin-top:16px;box-shadow:0 3px 12px -3px rgba(122,158,126,.6)">All correct — continue</div>
+</div>
+</div>
+<div class="dsmono" style="font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:#6B7064;text-align:center;margin-top:16px">4 · Plan upload + AI confirmation</div>
+</div>
+
+<!-- 8 · UNLOCK / PAYMENT -->
+<div style="flex:0 0 412px">
+<div style="width:412px;height:915px;background:#F8F6F0;border-radius:46px;border:1px solid #DDDED3;box-shadow:0 34px 80px -34px rgba(35,42,34,.42);overflow:hidden;position:relative">
+<div style="height:44px;display:flex;align-items:center;justify-content:space-between;padding:0 28px;font-family:'DM Mono',monospace;font-size:12px;color:#98A08C"><span>9:41</span><span>VastuFirst</span><span>▮▮▮</span></div>
+<div style="height:871px;overflow:hidden;padding:20px 24px 22px">
+<div class="dsser" style="font-size:27px;color:#232A22">Unlock the full report</div>
+<div style="display:flex;align-items:baseline;gap:10px;margin:14px 0 4px"><span class="dsser" style="font-size:44px;color:#232A22;line-height:1">₹699</span><span style="font-size:15px;color:#6B7064">one-time · this home, forever</span></div>
+<div style="height:1px;background:#DDDED3;margin:16px 0"></div>
+<div class="dsmono" style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#6B7064;margin-bottom:11px">What you get</div>
+<div style="display:flex;flex-direction:column;gap:10px;margin-bottom:18px">
+<div style="display:flex;gap:10px;font-size:15px;color:#232A22"><span style="color:#3E9256">✓</span>Every issue ranked, not just the top three</div>
+<div style="display:flex;gap:10px;font-size:15px;color:#232A22"><span style="color:#3E9256">✓</span>Layout change <b>and</b> remedy for each</div>
+<div style="display:flex;gap:10px;font-size:15px;color:#232A22"><span style="color:#3E9256">✓</span>Source &amp; provenance on every rule</div>
+<div style="display:flex;gap:10px;font-size:15px;color:#232A22"><span style="color:#3E9256">✓</span>PDF export to send your architect</div>
+</div>
+<div class="dsmono" style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#6B7064;margin-bottom:10px">Pay with</div>
+<div style="display:flex;gap:10px;margin-bottom:16px"><span style="flex:1;text-align:center;font-size:14px;font-weight:600;padding:13px 0;border-radius:12px;border:1.5px solid #7A9E7E;background:#E7EEE6;color:#232A22">UPI</span><span style="flex:1;text-align:center;font-size:14px;padding:13px 0;border-radius:12px;border:1px solid #DDDED3;color:#4B5347">Card</span><span style="flex:1;text-align:center;font-size:14px;padding:13px 0;border-radius:12px;border:1px solid #DDDED3;color:#4B5347">Wallet</span></div>
+<div style="height:52px;border-radius:100px;background:#7A9E7E;color:#232A22;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:600;box-shadow:0 3px 12px -3px rgba(122,158,126,.6)">Pay ₹699 &amp; unlock</div>
+<p style="font-size:12.5px;text-align:center;line-height:1.5;color:#98A08C;margin:12px 0 0">No subscription. No auto-renew. The price above is the price you pay.</p>
+</div>
+</div>
+<div class="dsmono" style="font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:#6B7064;text-align:center;margin-top:16px">8 · Unlock / payment — no dark patterns</div>
+</div>
+
+<!-- 9 · AI ASSISTANT CHAT -->
+<div style="flex:0 0 412px">
+<div style="width:412px;height:915px;background:#F8F6F0;border-radius:46px;border:1px solid #DDDED3;box-shadow:0 34px 80px -34px rgba(35,42,34,.42);overflow:hidden;position:relative">
+<div style="height:44px;display:flex;align-items:center;justify-content:space-between;padding:0 28px;font-family:'DM Mono',monospace;font-size:12px;color:#98A08C"><span>9:41</span><span>VastuFirst</span><span>▮▮▮</span></div>
+<div style="height:871px;overflow:hidden;padding:18px 24px 0;display:flex;flex-direction:column">
+<div class="dsser" style="font-size:22px;color:#232A22;margin-bottom:2px">Vastu assistant</div>
+<p style="font-size:13px;color:#6B7064;margin:0 0 16px">Every answer cites where it comes from.</p>
+<div style="flex:1;overflow:hidden;display:flex;flex-direction:column;gap:12px">
+<div style="align-self:flex-end;max-width:80%;background:#232A22;color:#F8F6F0;border-radius:16px 16px 5px 16px;padding:11px 14px;font-size:14.5px;line-height:1.45">Why is a toilet in the North-East a problem?</div>
+<div style="align-self:flex-start;max-width:86%;background:#F2EEE4;border:1px solid #DDDED3;border-radius:16px 16px 16px 5px;padding:13px 14px">
+<p style="font-size:14.5px;line-height:1.5;color:#232A22;margin:0 0 9px">The North-East (Ishana) is the water and clarity zone. A drain here is read as draining that quality from the home — one of the most consistently cited defects across schools.</p>
+<span style="display:inline-flex;align-items:center;gap:6px;font-family:'DM Mono',monospace;font-size:10px;padding:4px 9px;border-radius:100px;background:#E4EFE8;color:#2F6B4F"><span style="width:6px;height:6px;border-radius:50%;background:#3F7D5E"></span>From classical text · Vastu Shastra</span>
+</div>
+<div style="align-self:flex-start;max-width:86%;background:#F2EEE4;border:1px solid #DDDED3;border-radius:16px 16px 16px 5px;padding:13px 14px">
+<p style="font-size:14.5px;line-height:1.5;color:#232A22;margin:0 0 9px">If it can't move, a bowl of rock salt and a closed door with a running exhaust are the commonly taught remedies.</p>
+<span style="display:inline-flex;align-items:center;gap:6px;font-family:'DM Mono',monospace;font-size:10px;padding:4px 9px;border-radius:100px;background:#EEEAF3;color:#6A4E96"><span style="width:6px;height:6px;border-radius:50%;background:#7A5AA6"></span>Modern practice · not classical</span>
+</div>
+</div>
+<div style="padding:14px 0 20px"><div style="height:48px;border-radius:100px;border:1px solid #DDDED3;background:#FFFFFF;display:flex;align-items:center;justify-content:space-between;padding:0 6px 0 16px"><span style="font-size:14px;color:#98A08C">Ask about your report…</span><span style="width:38px;height:38px;border-radius:50%;background:#7A9E7E;color:#232A22;display:grid;place-items:center">↑</span></div></div>
+</div>
+</div>
+<div class="dsmono" style="font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:#6B7064;text-align:center;margin-top:16px">9 · AI assistant — answers cite sources</div>
+</div>
+
+<!-- 10 · REMEDY STORE -->
+<div style="flex:0 0 412px">
+<div style="width:412px;height:915px;background:#F8F6F0;border-radius:46px;border:1px solid #DDDED3;box-shadow:0 34px 80px -34px rgba(35,42,34,.42);overflow:hidden;position:relative">
+<div style="height:44px;display:flex;align-items:center;justify-content:space-between;padding:0 28px;font-family:'DM Mono',monospace;font-size:12px;color:#98A08C"><span>9:41</span><span>VastuFirst</span><span>▮▮▮</span></div>
+<div style="height:871px;overflow:hidden;padding:20px 24px 22px">
+<div class="dsser" style="font-size:24px;color:#232A22">Remedies for your home</div>
+<p style="font-size:14px;line-height:1.45;color:#4B5347;margin:6px 0 16px">Matched to your actual defects — not a generic catalogue. Ad-light, always optional.</p>
+<div style="background:#F2EEE4;border:1px solid #DDDED3;border-radius:14px;padding:6px 6px 14px;margin-bottom:14px">
+<div style="height:120px;border-radius:10px;background:#EAEBE0;display:grid;place-items:center;margin-bottom:12px"><svg viewBox="0 0 24 24" style="width:40px;height:40px"><g fill="none" stroke="#8A6A45" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9 L18 9 L17 20 L7 20 Z"/><path d="M9 9 V6 A3 3 0 0 1 15 6 V9"/></g></svg></div>
+<div style="padding:0 8px"><div style="display:flex;justify-content:space-between;align-items:center"><div style="font-size:16px;font-weight:600;color:#232A22">Himalayan rock salt bowl</div><div class="dsser" style="font-size:18px;color:#232A22">₹249</div></div><div style="font-size:13px;color:#6B7064;margin-top:3px">For your North-East toilet · replace weekly</div><span style="display:inline-flex;align-items:center;gap:6px;font-family:'DM Mono',monospace;font-size:9.5px;padding:3px 8px;border-radius:100px;background:#EEEAF3;color:#6A4E96;margin-top:9px"><span style="width:5px;height:5px;border-radius:50%;background:#7A5AA6"></span>Modern practice</span></div>
+</div>
+<div style="display:flex;gap:12px">
+<div style="flex:1;background:#F2EEE4;border:1px solid #DDDED3;border-radius:14px;padding:6px 6px 12px"><div style="height:78px;border-radius:9px;background:#EAF1E4;display:grid;place-items:center;margin-bottom:9px"><svg viewBox="0 0 24 24" style="width:28px;height:28px"><g fill="none" stroke="#4E9A55" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20 V11"/><path d="M12 13 C9 13 6.5 11 6.5 7.5 C10 7.5 12 9.5 12 12"/></g></svg></div><div style="padding:0 6px;font-size:13.5px;font-weight:600;color:#232A22">Money plant</div><div style="padding:0 6px;font-size:12px;color:#6B7064">₹149</div></div>
+<div style="flex:1;background:#F2EEE4;border:1px solid #DDDED3;border-radius:14px;padding:6px 6px 12px"><div style="height:78px;border-radius:9px;background:#E6EFEA;display:grid;place-items:center;margin-bottom:9px"><svg viewBox="0 0 24 24" style="width:28px;height:28px"><g fill="none" stroke="#2E8B8B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 L21 12 L12 21 L3 12 Z"/><path d="M12 8 L16 12 L12 16 L8 12 Z"/></g></svg></div><div style="padding:0 6px;font-size:13.5px;font-weight:600;color:#232A22">Copper pyramid</div><div style="padding:0 6px;font-size:12px;color:#6B7064">₹399</div></div>
+</div>
+</div>
+</div>
+<div class="dsmono" style="font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:#6B7064;text-align:center;margin-top:16px">10 · Remedy store — matched to defects</div>
+</div>
+
+<!-- 11 · SAVED PLANS -->
+<div style="flex:0 0 412px">
+<div style="width:412px;height:915px;background:#F8F6F0;border-radius:46px;border:1px solid #DDDED3;box-shadow:0 34px 80px -34px rgba(35,42,34,.42);overflow:hidden;position:relative">
+<div style="height:44px;display:flex;align-items:center;justify-content:space-between;padding:0 28px;font-family:'DM Mono',monospace;font-size:12px;color:#98A08C"><span>9:41</span><span>VastuFirst</span><span>▮▮▮</span></div>
+<div style="height:871px;overflow:hidden;padding:20px 24px 22px">
+<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px"><div class="dsser" style="font-size:26px;color:#232A22">Your plans</div><span style="width:40px;height:40px;border-radius:50%;background:#7A9E7E;color:#232A22;display:grid;place-items:center;font-size:22px">＋</span></div>
+<div style="display:flex;flex-direction:column;gap:12px">
+<div style="background:#FFFFFF;border:1px solid #DDDED3;border-radius:14px;padding:14px;display:flex;gap:14px;align-items:center"><div style="width:60px;height:60px;border-radius:10px;background:#F2EEE4;flex:0 0 60px"><svg viewBox="0 0 100 100" style="width:100%;height:100%"><rect x="8" y="8" width="84" height="84" fill="none" stroke="#DDDED3" stroke-width="2"/><rect x="14" y="14" width="34" height="30" fill="#F7E3DD"/><rect x="54" y="14" width="32" height="40" fill="#EAF1E4"/><rect x="14" y="52" width="40" height="34" fill="#FBEBDF"/></svg></div><div style="flex:1"><div style="font-size:16px;font-weight:600;color:#232A22">Builder's draft — 2BHK</div><div style="font-size:13px;color:#6B7064;margin-top:2px">Gurugram · updated Tuesday</div></div><div style="text-align:right"><div class="dsser" style="font-size:22px;color:#C43F35">46</div><div class="dsmono" style="font-size:9px;color:#98A08C">/100</div></div></div>
+<div style="background:#FFFFFF;border:1px solid #DDDED3;border-radius:14px;padding:14px;display:flex;gap:14px;align-items:center"><div style="width:60px;height:60px;border-radius:10px;background:#F2EEE4;flex:0 0 60px"><svg viewBox="0 0 100 100" style="width:100%;height:100%"><rect x="8" y="8" width="84" height="84" fill="none" stroke="#DDDED3" stroke-width="2"/><rect x="14" y="14" width="30" height="30" fill="#EAF1E4"/><rect x="50" y="14" width="36" height="26" fill="#E6EFEA"/><rect x="50" y="48" width="36" height="38" fill="#EFF4E9"/></svg></div><div style="flex:1"><div style="font-size:16px;font-weight:600;color:#232A22">Architect revision</div><div style="font-size:13px;color:#6B7064;margin-top:2px">Same plot · updated today</div></div><div style="text-align:right"><div class="dsser" style="font-size:22px;color:#3E9256">71</div><div class="dsmono" style="font-size:9px;color:#98A08C">/100</div></div></div>
+</div>
+<div style="margin-top:16px;border:1px dashed #DDDED3;border-radius:14px;padding:20px;text-align:center;background:#F2EEE4"><div style="font-size:14px;font-weight:500;color:#232A22">Comparing options?</div><div style="font-size:13px;color:#6B7064;line-height:1.5;margin-top:3px">Add each plan — the scores sit side by side so you can choose with your eyes open.</div></div>
+</div>
+</div>
+<div class="dsmono" style="font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:#6B7064;text-align:center;margin-top:16px">11 · Saved plans</div>
+</div>
+
+<!-- 12 · SETTINGS -->
+<div style="flex:0 0 412px">
+<div style="width:412px;height:915px;background:#F8F6F0;border-radius:46px;border:1px solid #DDDED3;box-shadow:0 34px 80px -34px rgba(35,42,34,.42);overflow:hidden;position:relative">
+<div style="height:44px;display:flex;align-items:center;justify-content:space-between;padding:0 28px;font-family:'DM Mono',monospace;font-size:12px;color:#98A08C"><span>9:41</span><span>VastuFirst</span><span>▮▮▮</span></div>
+<div style="height:871px;overflow:hidden;padding:20px 24px 22px">
+<div class="dsser" style="font-size:26px;color:#232A22;margin-bottom:16px">Settings</div>
+<div class="dsmono" style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#6B7064;margin-bottom:9px">Preferences</div>
+<div style="background:#FFFFFF;border:1px solid #DDDED3;border-radius:14px;overflow:hidden;margin-bottom:18px">
+<div style="display:flex;align-items:center;justify-content:space-between;padding:15px 15px;border-bottom:1px solid #E6E8DC"><span style="font-size:15px;color:#232A22">Language</span><span style="font-size:14px;color:#6B7064">English ›</span></div>
+<div style="display:flex;align-items:center;justify-content:space-between;padding:15px 15px;border-bottom:1px solid #E6E8DC"><span style="font-size:15px;color:#232A22">School profile</span><span style="font-size:14px;color:#6B7064">Traditional 8-zone ›</span></div>
+<div style="display:flex;align-items:center;justify-content:space-between;padding:15px 15px"><span style="font-size:15px;color:#232A22">Devanagari numerals</span><span style="width:46px;height:28px;border-radius:100px;background:#DDDED3;padding:3px;display:flex"><span style="width:22px;height:22px;border-radius:50%;background:#FFFFFF;box-shadow:0 1px 3px rgba(0,0,0,.2)"></span></span></div>
+</div>
+<div class="dsmono" style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#6B7064;margin-bottom:9px">Data &amp; privacy</div>
+<div style="background:#FFFFFF;border:1px solid #DDDED3;border-radius:14px;overflow:hidden">
+<div style="display:flex;align-items:center;justify-content:space-between;padding:15px 15px;border-bottom:1px solid #E6E8DC"><span style="font-size:15px;color:#232A22">Your plans stay on this device</span><span style="font-size:13px;color:#3E9256">On</span></div>
+<div style="display:flex;align-items:center;justify-content:space-between;padding:15px 15px;border-bottom:1px solid #E6E8DC"><span style="font-size:15px;color:#232A22">Export my data</span><span style="font-size:14px;color:#6B7064">›</span></div>
+<div style="display:flex;align-items:center;justify-content:space-between;padding:15px 15px"><span style="font-size:15px;color:#C43F35">Delete my data</span><span style="font-size:14px;color:#C43F35">›</span></div>
+</div>
+<p style="font-size:12.5px;line-height:1.5;color:#98A08C;margin:14px 2px 0">No account. No phone number. Nothing leaves your phone unless you export it.</p>
+</div>
+</div>
+<div class="dsmono" style="font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:#6B7064;text-align:center;margin-top:16px">12 · Settings</div>
+</div>
+
+<!-- 13 · LEGAL / DISCLAIMER -->
+<div style="flex:0 0 412px">
+<div style="width:412px;height:915px;background:#F8F6F0;border-radius:46px;border:1px solid #DDDED3;box-shadow:0 34px 80px -34px rgba(35,42,34,.42);overflow:hidden;position:relative">
+<div style="height:44px;display:flex;align-items:center;justify-content:space-between;padding:0 28px;font-family:'DM Mono',monospace;font-size:12px;color:#98A08C"><span>9:41</span><span>VastuFirst</span><span>▮▮▮</span></div>
+<div style="height:871px;overflow:hidden;padding:20px 24px 22px">
+<div class="dsser" style="font-size:26px;color:#232A22;margin-bottom:14px">Honesty &amp; sources</div>
+<div style="background:#F2EEE4;border:1px solid #DDDED3;border-left:3px solid #C9A227;border-radius:14px;padding:16px 17px;margin-bottom:18px"><p style="font-size:16px;line-height:1.55;color:#232A22;margin:0">Vastu is a traditional practice. This is guidance for your own decisions — <b>not a guaranteed outcome.</b></p></div>
+<div class="dsmono" style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#6B7064;margin-bottom:11px">How we tag every rule</div>
+<div style="display:flex;flex-direction:column;gap:10px;margin-bottom:18px">
+<div style="display:flex;gap:11px;align-items:flex-start"><span style="display:inline-flex;align-items:center;gap:6px;font-family:'DM Mono',monospace;font-size:9.5px;padding:4px 9px;border-radius:100px;background:#E4EFE8;color:#2F6B4F;flex:0 0 auto;margin-top:1px"><span style="width:5px;height:5px;border-radius:50%;background:#3F7D5E"></span>From classical text</span><span style="font-size:13px;color:#4B5347;line-height:1.4">Traceable to a named source, with citation.</span></div>
+<div style="display:flex;gap:11px;align-items:flex-start"><span style="display:inline-flex;align-items:center;gap:6px;font-family:'DM Mono',monospace;font-size:9.5px;padding:4px 9px;border-radius:100px;background:#F4EDE1;color:#7C551F;flex:0 0 auto;margin-top:1px"><span style="width:5px;height:5px;border-radius:50%;background:#9A6B33"></span>Traditional practice</span><span style="font-size:13px;color:#4B5347;line-height:1.4">Reasoned from the mandala; widely taught.</span></div>
+<div style="display:flex;gap:11px;align-items:flex-start"><span style="display:inline-flex;align-items:center;gap:6px;font-family:'DM Mono',monospace;font-size:9.5px;padding:4px 9px;border-radius:100px;background:#E7ECF1;color:#455A73;flex:0 0 auto;margin-top:1px"><span style="width:5px;height:5px;border-radius:50%;background:#5B7089"></span>Modern practice</span><span style="font-size:13px;color:#4B5347;line-height:1.4">20th-century. Honesty about age, not a warning.</span></div>
+<div style="display:flex;gap:11px;align-items:flex-start"><span style="display:inline-flex;align-items:center;gap:6px;font-family:'DM Mono',monospace;font-size:9.5px;padding:4px 9px;border-radius:100px;background:#EEEAF3;color:#6A4E96;flex:0 0 auto;margin-top:1px"><span style="width:5px;height:5px;border-radius:50%;background:#7A5AA6"></span>Schools disagree</span><span style="font-size:13px;color:#4B5347;line-height:1.4">Two readings shown, neither chosen for you.</span></div>
+</div>
+<p style="font-size:13px;line-height:1.55;color:#6B7064;margin:0">We never use fear, urgency or promises of wealth, health or fortune. Where the tradition contradicts itself, we show you both sides.</p>
+</div>
+</div>
+<div class="dsmono" style="font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:#6B7064;text-align:center;margin-top:16px">13 · Legal / disclaimer</div>
+</div>
+
+</div>
+</section>
+
+<section id="l10n" style="padding:56px 72px;border-top:1px solid #E6E8DC">
+<div class="dsmono" style="font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#7A9E7E;margin-bottom:10px">09 · Localisation</div>
+<h2 class="dsser" style="font-size:38px;margin:0 0 12px;font-weight:400">The same screen in three scripts</h2>
+<p style="font-size:16px;line-height:1.55;color:#4B5347;max-width:760px;margin:0 0 8px">A system only seen in English has not been tested. Here is the Score screen in <strong>English, हिन्दी and தமிழ்</strong> — same layout, same tokens, no clipping. Devanagari and Tamil take more vertical space, so every text container flexes in height; nothing is pinned. <span style="color:#98A08C">(Indic copy is indicative, for layout proofing.)</span></p>
+<div style="display:flex;gap:26px;flex-wrap:wrap;margin-top:26px">
+<sc-for list="{{ l10n }}" as="L" hint-placeholder-count="3">
+<div style="flex:0 0 360px">
+<div style="width:360px;height:852px;background:#F8F6F0;border-radius:42px;border:1px solid #DDDED3;box-shadow:0 30px 70px -30px rgba(35,42,34,.4);overflow:hidden;position:relative">
+<div style="height:40px;display:flex;align-items:center;justify-content:space-between;padding:0 24px;font-family:'DM Mono',monospace;font-size:11px;color:#98A08C"><span>9:41</span><span>{{ L.lang }}</span><span>▮▮</span></div>
+<div style="height:812px;overflow:hidden;padding:16px 20px">
+<div style="font-family:'{{ L.sans }}',sans-serif;font-size:12px;color:#6B7064;margin-bottom:11px">{{ L.eyebrow }}</div>
+<div style="display:flex;align-items:flex-end;gap:7px"><div style="font-family:'{{ L.ser }}',serif;font-size:52px;line-height:1;color:{{ band }}">{{ L.score }}</div><div class="dsmono" style="font-size:12px;color:#98A08C;padding-bottom:9px">/ 100</div></div>
+<div style="height:7px;border-radius:100px;background:#DDDED3;overflow:hidden;margin-top:10px"><span style="display:block;height:100%;width:46%;background:{{ band }}"></span></div>
+<p style="font-family:'{{ L.sans }}',sans-serif;font-size:13.5px;line-height:1.55;color:#4B5347;margin:9px 0 0">{{ L.verdict }}</p>
+<div style="height:1px;background:#DDDED3;margin:13px 0 10px"></div>
+<div style="font-family:'{{ L.sans }}',sans-serif;font-size:12px;color:#6B7064;margin-bottom:7px">{{ L.map }}</div>
+<div style="width:150px;height:150px;margin:0 auto">
+<svg viewBox="-30 -30 160 160" style="width:100%;height:100%;display:block">
+<circle cx="50" cy="50" r="66" fill="none" stroke="#DDDED3" stroke-width=".6"/>
+<sc-for list="{{ zoneMapWedges }}" as="w" hint-placeholder-count="8"><path d="{{ w.path }}" fill="{{ w.color }}" opacity="0.13"></path><text x="{{ w.lx }}" y="{{ w.ly }}" fill="#4B5347" style="font-family:'DM Mono',monospace;font-size:4px;font-weight:500;text-anchor:middle">{{ w.z }}</text></sc-for>
+<circle cx="50" cy="50" r="11" fill="{{ zoneC }}" opacity=".13"/>
+<rect x="4" y="4" width="92" height="92" rx="2" fill="none" stroke="#98A08C" stroke-width=".6"/>
+<sc-for list="{{ zoneMapRooms }}" as="r" hint-placeholder-count="8"><rect x="{{ r.x }}" y="{{ r.y }}" width="{{ r.w }}" height="{{ r.h }}" rx="1.4" fill="{{ r.fill }}" stroke="{{ r.stroke }}" stroke-width=".7"></rect><text x="{{ r.cx }}" y="{{ r.zy }}" fill="{{ r.zoneColor }}" style="font-family:'DM Mono',monospace;font-size:3.3px;text-anchor:middle">{{ r.zoneText }}</text></sc-for>
+<g transform="translate({{ markX }} {{ markY }})"><circle r="7" fill="#F8F6F0" stroke="#7A9E7E" stroke-width="1"/><text y="1.9" style="font-family:'DM Mono',monospace;font-size:6px;font-weight:500;text-anchor:middle" fill="#7A9E7E">N</text></g>
+</svg>
+</div>
+<div style="height:1px;background:#DDDED3;margin:10px 0"></div>
+<div style="font-family:'{{ L.sans }}',sans-serif;font-size:12px;color:#6B7064;margin-bottom:8px">{{ L.problems }}</div>
+<div style="background:#F2EEE4;border:1px solid #DDDED3;border-left:3px solid #C43F35;border-radius:12px;padding:10px 12px;margin-bottom:11px">
+<span style="display:inline-flex;align-items:center;gap:5px;font-size:10.5px;font-weight:600;padding:3px 8px;border-radius:100px;background:#F7E3DD;color:#B23A30"><span>✕</span>Defect</span>
+<div style="font-family:'{{ L.ser }}',serif;font-size:15px;color:#232A22;margin:6px 0 3px;line-height:1.35">{{ L.defectTitle }}</div>
+<p style="font-family:'{{ L.sans }}',sans-serif;font-size:12px;line-height:1.5;color:#6B7064;margin:0">{{ L.defectWhy }}</p>
+</div>
+<div style="border-radius:14px;background:#F6EFD9;border:1px solid #E4CE8F;padding:12px 13px">
+<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:9px"><div><div style="font-family:'{{ L.sans }}',sans-serif;font-size:13.5px;font-weight:600;color:#232A22;line-height:1.3">{{ L.unlockTitle }}</div><div style="font-family:'{{ L.sans }}',sans-serif;font-size:11.5px;color:#6B7064;margin-top:2px">{{ L.unlockSub }}</div></div><div style="text-align:right;flex:0 0 auto"><div class="dsser" style="font-size:20px;color:#232A22;line-height:1">{{ L.price }}</div><div class="dsmono" style="font-size:8px;color:#98A08C">{{ L.oneTime }}</div></div></div>
+<div style="min-height:46px;border-radius:100px;background:#7A9E7E;color:#232A22;display:flex;align-items:center;justify-content:center;text-align:center;font-family:'{{ L.sans }}',sans-serif;font-size:12.5px;font-weight:600;padding:8px 12px;line-height:1.3;box-shadow:0 3px 12px -3px rgba(122,158,126,.6)">{{ L.cta }}</div>
+</div>
+<p style="font-family:'{{ L.sans }}',sans-serif;font-size:10.5px;text-align:center;color:#98A08C;margin:7px 0 0;line-height:1.4">{{ L.foot }}</p>
+</div>
+</div>
+</div>
+</sc-for>
+</div>
+</section>
+
+<section id="a11y" style="padding:56px 72px;border-top:1px solid #E6E8DC;background:#F4F1E8">
+<div class="dsmono" style="font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#7A9E7E;margin-bottom:10px">10 · Constraints</div>
+<h2 class="dsser" style="font-size:38px;margin:0 0 12px;font-weight:400">Accessibility audit</h2>
+<p style="font-size:16px;line-height:1.55;color:#4B5347;max-width:760px;margin:0 0 22px">Numbers the implementer can test, not adjectives. The soft sage-and-ivory palette is exactly where low contrast hides — so every critical pair is measured, live, below. Rows marked <strong>Large/UI</strong> clear 3:1 and are restricted to ≥18sp text, icons or borders; they never carry body copy.</p>
+
+<div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:22px">
+<div style="flex:1;min-width:150px;background:#F8F6F0;border:1px solid #DDDED3;border-radius:12px;padding:14px 16px"><div class="dsser" style="font-size:26px;color:#232A22">48<span style="font-size:15px;color:#6B7064">dp</span></div><div style="font-size:12.5px;color:#4B5347;margin-top:3px">Min touch target — dial included</div></div>
+<div style="flex:1;min-width:150px;background:#F8F6F0;border:1px solid #DDDED3;border-radius:12px;padding:14px 16px"><div class="dsser" style="font-size:26px;color:#232A22">16<span style="font-size:15px;color:#6B7064">sp</span></div><div style="font-size:12.5px;color:#4B5347;margin-top:3px">Body floor · 12sp absolute min</div></div>
+<div style="flex:1;min-width:150px;background:#F8F6F0;border:1px solid #DDDED3;border-radius:12px;padding:14px 16px"><div class="dsser" style="font-size:26px;color:#232A22">200<span style="font-size:15px;color:#6B7064">%</span></div><div style="font-size:12.5px;color:#4B5347;margin-top:3px">Font scale — every screen reflows</div></div>
+<div style="flex:1;min-width:150px;background:#F8F6F0;border:1px solid #DDDED3;border-radius:12px;padding:14px 16px"><div class="dsser" style="font-size:26px;color:#232A22">2×<span style="font-size:15px;color:#6B7064">signal</span></div><div style="font-size:12.5px;color:#4B5347;margin-top:3px">Colour + label/icon/position, always</div></div>
+</div>
+
+<div style="border:1px solid #DDDED3;border-radius:14px;overflow:hidden;background:#F8F6F0">
+<div style="display:grid;grid-template-columns:1.1fr 1fr 0.7fr 0.6fr 0.9fr 1.4fr;background:#F2EEE4;border-bottom:1px solid #DDDED3;padding:10px 16px" class="dsmono">
+<span style="font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:#6B7064">Foreground</span>
+<span style="font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:#6B7064">On</span>
+<span style="font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:#6B7064">Ratio</span>
+<span style="font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:#6B7064">Floor</span>
+<span style="font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:#6B7064">Result</span>
+<span style="font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:#6B7064">Used for</span>
+</div>
+<sc-for list="{{ auditRows }}" as="a" hint-placeholder-count="10">
+<div style="display:grid;grid-template-columns:1.1fr 1fr 0.7fr 0.6fr 0.9fr 1.4fr;padding:10px 16px;border-bottom:1px solid #E6E8DC;align-items:center">
+<span class="dsmono" style="font-size:11.5px;color:#232A22">{{ a.fg }}</span>
+<span class="dsmono" style="font-size:11.5px;color:#6B7064">{{ a.bg }}</span>
+<span class="dsmono" style="font-size:12px;color:#232A22">{{ a.ratio }}</span>
+<span class="dsmono" style="font-size:11.5px;color:#6B7064">{{ a.floor }}</span>
+<span style="font-size:11px;font-weight:600;background:{{ a.markBg }};color:{{ a.markColor }};border-radius:100px;padding:3px 9px;justify-self:start">{{ a.mark }}</span>
+<span style="font-size:12px;color:#4B5347">{{ a.use }}</span>
+</div>
+</sc-for>
+</div>
+<p style="font-size:13px;line-height:1.55;color:#6B7064;margin:16px 0 0;max-width:760px">Zone hues and the gold accent are deliberate exceptions: <span class="dsmono">zone-e</span> and gold sit near or below 3:1 as fills, so they never carry meaning alone — the <strong>ink zone-letter and fixed position</strong> do. That trade is validated by the deuteranopia and protanopia maps in §02. Screen-reader equivalents are specified per surface (the zone map announces <em>"North at {{ north }}°, score {{ score }} of 100"</em>).</p>
+</section>
+
+<section id="gate" style="padding:56px 72px;border-top:1px solid #E6E8DC">
+<div class="dsmono" style="font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#7A9E7E;margin-bottom:10px">11 · The gate</div>
+<h2 class="dsser" style="font-size:38px;margin:0 0 12px;font-weight:400">Screen review gate</h2>
+<p style="font-size:16px;line-height:1.55;color:#4B5347;max-width:760px;margin:0 0 8px">Claude Code runs this against <strong>every screen before declaring it done.</strong> It is a gate, not advice: each line is yes/no, and any <strong>no</strong> means the screen is not finished. Two lines are <span class="dsmono">greppable</span> and enforced in CI.</p>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:22px">
+<sc-for list="{{ gate }}" as="g" hint-placeholder-count="6">
+<div style="background:#1D2119;border:1px solid #333A30;border-radius:16px;padding:18px 20px">
+<div style="display:flex;align-items:center;gap:9px;margin-bottom:12px"><span class="dsmono" style="font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#7A9E7E">{{ g.h }}</span><sc-if value="{{ g.grep }}" hint-placeholder-val="{{ true }}"><span class="dsmono" style="font-size:9px;color:#8FBE95;border:1px solid #3A5A3A;border-radius:100px;padding:2px 7px">greppable</span></sc-if></div>
+<div style="display:flex;flex-direction:column;gap:9px">
+<sc-for list="{{ g.items }}" as="it" hint-placeholder-count="4">
+<div style="display:flex;gap:9px;align-items:flex-start"><span style="width:15px;height:15px;border:1.5px solid #525A48;border-radius:4px;flex:0 0 15px;margin-top:2px"></span><span style="font-size:13px;line-height:1.45;color:#CDD1C0">{{ it }}</span></div>
+</sc-for>
+</div>
+</div>
+</sc-for>
+</div>
+</section>
+
+<section id="ios" style="padding:56px 72px 80px;border-top:1px solid #E6E8DC;background:#F4F1E8">
+<div class="dsmono" style="font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#7A9E7E;margin-bottom:10px">12 · Cross-platform</div>
+<h2 class="dsser" style="font-size:38px;margin:0 0 12px;font-weight:400">iOS adaptation</h2>
+<p style="font-size:16px;line-height:1.55;color:#4B5347;max-width:760px;margin:0 0 22px">One shared Compose Multiplatform codebase. Android ships first; the iOS pass should be a <strong>re-skin, not a redesign</strong>. Each divergence is stated as a rule now, so the later iOS build is mechanical.</p>
+<div style="border:1px solid #DDDED3;border-radius:14px;overflow:hidden;background:#F8F6F0">
+<div style="display:grid;grid-template-columns:0.7fr 1.2fr 1.2fr;background:#F2EEE4;border-bottom:1px solid #DDDED3;padding:11px 18px" class="dsmono">
+<span style="font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:#6B7064">Concern</span>
+<span style="font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:#6B7064">Android</span>
+<span style="font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:#6B7064">iOS</span>
+</div>
+<sc-for list="{{ iosNotes }}" as="n" hint-placeholder-count="7">
+<div style="display:grid;grid-template-columns:0.7fr 1.2fr 1.2fr;padding:13px 18px;border-bottom:1px solid #E6E8DC;align-items:start">
+<span style="font-size:13.5px;font-weight:600;color:#232A22">{{ n.concern }}</span>
+<span style="font-size:13px;line-height:1.5;color:#4B5347">{{ n.android }}</span>
+<span style="font-size:13px;line-height:1.5;color:#4B5347">{{ n.ios }}</span>
+</div>
+</sc-for>
+</div>
+<div style="margin-top:26px;display:flex;align-items:center;gap:14px;background:#F6EFD9;border:1px solid #E4CE8F;border-radius:14px;padding:18px 22px">
+<svg viewBox="0 0 40 40" style="width:36px;height:36px;flex:0 0 36px" aria-hidden="true"><rect x="2" y="2" width="36" height="36" rx="4" fill="none" stroke="#C4D0BE" stroke-width="1.4"/><rect x="14" y="14" width="12" height="12" fill="#E0E8DF"/><path d="M20 5 L23.4 15.6 L20 13.4 L16.6 15.6 Z" fill="#7A9E7E"/><circle cx="20" cy="20" r="2.6" fill="#C9A227"/></svg>
+<div style="font-size:14px;line-height:1.55;color:#3F4A38">This document <strong>is</strong> the contract. The Compose theme in §05 is the source of truth; the review gate in §11 is how "does the build match?" gets answered — by comparison, not opinion. Hand it to the engineer and the 13 screens across 6 languages build the same way twice.</div>
+</div>
+</section>
+
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:1100}}">
+class Component extends DCLogic {
+  // ---------- colour engine ----------
+  _rgb(h){h=h.replace('#','');if(h.length===3)h=h.split('').map(x=>x+x).join('');return[parseInt(h.slice(0,2),16),parseInt(h.slice(2,4),16),parseInt(h.slice(4,6),16)];}
+  _hex(r,g,b){const f=v=>Math.max(0,Math.min(255,Math.round(v))).toString(16).padStart(2,'0').toUpperCase();return '#'+f(r)+f(g)+f(b);}
+  _rgba(h,a){const[r,g,b]=this._rgb(h);return `rgba(${r},${g},${b},${a})`;}
+  _hsl(h){let[r,g,b]=this._rgb(h).map(v=>v/255);const mx=Math.max(r,g,b),mn=Math.min(r,g,b);let hh=0,s=0,l=(mx+mn)/2;const d=mx-mn;if(d){s=l>.5?d/(2-mx-mn):d/(mx+mn);hh=mx===r?(g-b)/d+(g<b?6:0):mx===g?(b-r)/d+2:(r-g)/d+4;hh*=60;}return[hh,s,l];}
+  _fromHsl(hh,s,l){hh=(hh%360+360)%360;const c=(1-Math.abs(2*l-1))*s,x=c*(1-Math.abs((hh/60)%2-1)),m=l-c/2;let r,g,b;if(hh<60)[r,g,b]=[c,x,0];else if(hh<120)[r,g,b]=[x,c,0];else if(hh<180)[r,g,b]=[0,c,x];else if(hh<240)[r,g,b]=[0,x,c];else if(hh<300)[r,g,b]=[x,0,c];else[r,g,b]=[c,0,x];return this._hex((r+m)*255,(g+m)*255,(b+m)*255);}
+  _rot(hex,dh,ss,dl){let[h,s,l]=this._hsl(hex);return this._fromHsl(h+dh,Math.max(0,Math.min(1,s*ss)),Math.max(0,Math.min(1,l+dl)));}
+  _flat(hex,a,bg){const[r,g,b]=this._rgb(hex),[br,bg2,bb]=this._rgb(bg);return this._hex(r*a+br*(1-a),g*a+bg2*(1-a),b*a+bb*(1-a));}
+  _lin(v){v/=255;return v<=0.03928?v/12.92:Math.pow((v+0.055)/1.055,2.4);}
+  _lum(h){const[r,g,b]=this._rgb(h);return 0.2126*this._lin(r)+0.7152*this._lin(g)+0.0722*this._lin(b);}
+  _ratio(a,b){const L1=this._lum(a),L2=this._lum(b);const hi=Math.max(L1,L2),lo=Math.min(L1,L2);return (hi+0.05)/(lo+0.05);}
+  _r2(a,b){return Math.round(this._ratio(a,b)*100)/100;}
+  _best(bg,ink){return this._ratio(bg,ink)>=this._ratio(bg,'#FFFFFF')?ink:'#FFFFFF';}
+  // colourblind sim (gamma-space approximation, fine for demonstration swatches)
+  _cvd(hex,t){let[r,g,b]=this._rgb(hex);const M=t==='deuter'?[[.625,.375,0],[.7,.3,0],[0,.3,.7]]:[[.567,.433,0],[.558,.442,0],[0,.242,.758]];return this._hex(M[0][0]*r+M[0][1]*g+M[0][2]*b,M[1][0]*r+M[1][1]*g+M[1][2]*b,M[2][0]*r+M[2][1]*g+M[2][2]*b);}
+
+  _tok(name,hex,use,onList){ // onList: [{bg,large}] -> pick worst ratio for the badge
+    let ratio=null,pass=null;
+    if(onList&&onList.length){
+      let worst=99,large=false;
+      onList.forEach(o=>{const rr=this._ratio(hex,o.bg);if(rr<worst){worst=rr;large=o.large;}});
+      ratio=worst.toFixed(2);const floor=large?3:4.5;pass=worst>=floor;
+      return {name,hex,use,ratio,showText:true,textOn:this._best(hex,'#232A22'),passMark:pass?'✓':'◑',passBg:pass?'#E4EEE0':'#F8E6DF',passColor:pass?'#2E6E40':'#B23A30'};
+    }
+    return {name,hex,use,ratio:null,showText:true,textOn:this._best(hex,'#232A22')};
+  }
+
+  // ---------- plan geometry (reuse approved engine) ----------
+  _geom(){
+    const RR={entrance:{label:'Entrance',wt:3,ideal:['N','NE','E'],ok:['W'],bad:['SW','S']},kitchen:{label:'Kitchen',wt:3,ideal:['SE'],ok:['NW'],bad:['NE','SW','C','N']},master:{label:'Master bedroom',wt:3,ideal:['SW'],ok:['S','W'],bad:['NE','SE','C']},bedroom:{label:'Bedroom',wt:1.5,ideal:['W','NW'],ok:['N','E','S'],bad:['SE','C']},pooja:{label:'Pooja room',wt:2,ideal:['NE'],ok:['E','N'],bad:['S','SW','C','NW']},toilet:{label:'Toilet',wt:2.5,ideal:['NW','W'],ok:['S'],bad:['NE','SW','C','E']},living:{label:'Living room',wt:1.5,ideal:['N','E','NE'],ok:['W','NW'],bad:['SW','C']},stair:{label:'Staircase',wt:2,ideal:['S','SW','W'],ok:['NW'],bad:['NE','C']}};
+    const WHY={toilet:'The North-East is the water and clarity zone — a drain here is the most-cited defect.',kitchen:'The South-East belongs to Agni, the fire element. Cooking is fire work.',master:'The South-West is the earth zone — the most grounding part of a home.',pooja:'The North-East (Ishana) is traditionally the most auspicious for prayer.',stair:'The centre is the Brahmasthan and is meant to stay open.',entrance:'The entrance is how energy enters; texts weight it above any element.',living:'Active space suits the light-facing zones, not the heavy South-West.',bedroom:'The West and North-West traditionally suit rest.'};
+    const PLAN=[{type:'pooja',label:'Pooja',x:6,y:6,w:28,h:20},{type:'bedroom',label:'Bed 2',x:38,y:6,w:26,h:24},{type:'toilet',label:'Toilet',x:68,y:6,w:26,h:20},{type:'kitchen',label:'Kitchen',x:6,y:34,w:28,h:26},{type:'stair',label:'Stairs',x:42,y:41,w:17,h:18},{type:'living',label:'Living',x:66,y:32,w:28,h:30},{type:'master',label:'Master',x:6,y:66,w:34,h:28},{type:'entrance',label:'Entry',x:66,y:70,w:28,h:24}];
+    const ZO=['N','NE','E','SE','S','SW','W','NW'];
+    const bearing=(px,py)=>(Math.atan2(px-50,-(py-50))*180/Math.PI+360)%360;
+    const zoneFor=(rm,n)=>{const px=rm.x+rm.w/2,py=rm.y+rm.h/2;if(Math.hypot(px-50,py-50)<11)return'C';const b=(bearing(px,py)-n+360)%360;return ZO[Math.round(b/45)%8];};
+    const verdict=(ty,z)=>{const r=RR[ty];if(r.ideal.includes(z))return{v:'ideal',pts:100};if(r.ok.includes(z))return{v:'ok',pts:70};if(r.bad.includes(z))return{v:'bad',pts:10};return{v:'plain',pts:50};};
+    const analyse=(n)=>{let num=0,den=0;const rows=PLAN.map(rm=>{const zone=zoneFor(rm,n),{v,pts}=verdict(rm.type,zone),wt=RR[rm.type].wt;num+=pts*wt;den+=wt;return{...rm,zone,v,pts,wt};});return{score:Math.round(num/den),rows,defects:rows.filter(r=>r.v==='bad').sort((a,b)=>b.wt-a.wt),weak:rows.filter(r=>r.v==='plain'),good:rows.filter(r=>r.v==='ideal')};};
+    let pick={n:0,d:1e9};for(let n=0;n<360;n++){const A=analyse(n);if(A.defects.length>=3){const d=Math.abs(A.score-46);if(d<pick.d)pick={n,d};}}
+    const north=pick.n,A=analyse(north),RING=66,LBL=73,r2=Math.PI/180;
+    const wedges=ZO.map((z,i)=>{const a0=(i*45-22.5+north)*r2,a1=(i*45+22.5+north)*r2,m=(i*45+north)*r2;return{z,path:`M50 50 L${(50+RING*Math.sin(a0)).toFixed(2)} ${(50-RING*Math.cos(a0)).toFixed(2)} A${RING} ${RING} 0 0 1 ${(50+RING*Math.sin(a1)).toFixed(2)} ${(50-RING*Math.cos(a1)).toFixed(2)} Z`,lx:+(50+LBL*Math.sin(m)).toFixed(2),ly:+(50-LBL*Math.cos(m)+1.4).toFixed(2)};});
+    const na=north*r2;
+    return {RR,WHY,PLAN,ZO,analyse,north,A,wedges,na,RING,LBL,
+      northX:+(50+56*Math.sin(na)).toFixed(2),northY:+(50-56*Math.cos(na)).toFixed(2),
+      markX:+(50+RING*Math.sin(na)).toFixed(2),markY:+(50-RING*Math.cos(na)).toFixed(2),
+      knobLeft:+(((50+RING*Math.sin(na))+30)/160*100).toFixed(2),knobTop:+(((50-RING*Math.cos(na))+30)/160*100).toFixed(2),
+      sliderPct:+(north/359*100).toFixed(1)};
+  }
+
+  renderVals(){
+    const P='#F8F6F0', INK='#232A22', SUR='#F2EEE4';
+    // ---- locked palette ----
+    const c={
+      paper:P, surface:SUR, surfaceRaised:'#FFFFFF',
+      ink:INK, textSecondary:'#4B5347', textTertiary:'#6B7064', inkFaint:'#98A08C',
+      line:'#DDDED3', lineStrong:'#B6BBA8', focus:'#4C7355',
+      primary:'#7A9E7E', primaryDark:'#5F8465', onPrimary:INK, secondary:'#C9A227', secondaryText:'#6F5410',
+      zoneN:'#2E8B8B',zoneNE:'#2F6FBF',zoneE:'#E0A21E',zoneSE:'#E0662F',zoneS:'#C83B32',zoneSW:'#8A6A45',zoneW:'#6A5FB0',zoneNW:'#4E9A55',zoneC:'#9A57B0',
+      ideal:'#3E9256',ok:'#8FBE95',plain:'#D68C18',bad:'#C43F35',notAssessed:'#948C84',
+      scoreStrong:'#3E9256',scoreWorkable:'#D68C18',scoreAttention:'#C43F35',
+      provText:'#3F7D5E',provDeriv:'#9A6B33',provMod:'#5B7089',provDisp:'#7A5AA6',
+      success:'#3E9256',warning:'#D68C18',error:'#C43F35',info:'#2F6FBF'
+    };
+    const zoneMeta={N:{d:'Kubera · Wealth, career'},NE:{d:'Ishana · Water · Clarity'},E:{d:'Indra · Vitality'},SE:{d:'Agni · Fire · Energy'},S:{d:'Yama · Rest, fame'},SW:{d:'Nirriti · Earth · Stability'},W:{d:'Varuna · Gains'},NW:{d:'Vayu · Air · Movement'},C:{d:'Brahma · Space · Stay open'}};
+
+    // ---- colour groups (with live audit badges) ----
+    const on=(bg,large)=>({bg,large});
+    const colorGroups=[
+      {title:'Brand & surface',note:'wordmark, buttons, grounds',tokens:[
+        this._tok('color-paper',c.paper,'App background',null),
+        this._tok('color-surface',c.surface,'Card / raised fill',null),
+        this._tok('color-surface-raised',c.surfaceRaised,'Sheets, dialogs',null),
+        this._tok('color-primary',c.primary,'Sage — CTAs, dial',[on(c.paper,true)]),
+        this._tok('color-primary-dark',c.primaryDark,'Pressed CTA',[on(c.paper,true)]),
+        this._tok('color-secondary',c.secondary,'Gold — support, remedies',[on(c.paper,true)]),
+        this._tok('color-secondary-text',c.secondaryText,'Gold as body text',[on(c.paper,false)]),
+      ]},
+      {title:'Ink & border',note:'three text weights, two borders',tokens:[
+        this._tok('text-primary',c.ink,'Headings, body',[on(c.paper,false),on(c.surface,false)]),
+        this._tok('text-secondary',c.textSecondary,'Supporting copy',[on(c.paper,false)]),
+        this._tok('text-tertiary',c.textTertiary,'Captions, eyebrows',[on(c.paper,false)]),
+        this._tok('on-primary',c.onPrimary,'Ink on sage button',[on(c.primary,false)]),
+        this._tok('border-default',c.line,'Hairline, card edge',null),
+        this._tok('border-strong',c.lineStrong,'Emphasised divider',null),
+      ]},
+      {title:'Zone colours',note:'9 · a modulated family, never nine loud hues',tokens:['N','NE','E','SE','S','SW','W','NW','C'].map(z=>{const hx=c['zone'+z];const t=this._tok('zone-'+z.toLowerCase(),hx,zoneMeta[z].d,[on(c.paper,true)]);return t;})},
+      {title:'Verdict states',note:'5 · always paired with a label + icon',tokens:[
+        this._tok('verdict-ideal',c.ideal,'Placed well',[on(c.paper,true)]),
+        this._tok('verdict-acceptable',c.ok,'Workable',[on(c.paper,true)]),
+        this._tok('verdict-suboptimal',c.plain,'Better elsewhere',[on(c.paper,true)]),
+        this._tok('verdict-defect',c.bad,'Classic defect',[on(c.paper,false)]),
+        this._tok('verdict-not-assessed',c.notAssessed,'No input given',[on(c.paper,true)]),
+      ]},
+      {title:'Score bands & provenance',note:'3 bands · 4 source tags — quiet, never alarming',tokens:[
+        this._tok('score-strong',c.scoreStrong,'75–100',[on(c.paper,true)]),
+        this._tok('score-workable',c.scoreWorkable,'50–74',[on(c.paper,true)]),
+        this._tok('score-attention',c.scoreAttention,'0–49',[on(c.paper,false)]),
+        this._tok('provenance-text',c.provText,'From classical text',[on(c.paper,true)]),
+        this._tok('provenance-deriv',c.provDeriv,'Traditional practice',[on(c.paper,false)]),
+        this._tok('provenance-mod',c.provMod,'Modern practice',[on(c.paper,false)]),
+        this._tok('provenance-disp',c.provDisp,'Schools disagree',[on(c.paper,true)]),
+      ]},
+      {title:'Feedback',note:'system status only — not Vastu verdicts',tokens:[
+        this._tok('feedback-success',c.success,'Saved, done',[on(c.paper,true)]),
+        this._tok('feedback-warning',c.warning,'Needs attention',[on(c.paper,true)]),
+        this._tok('feedback-error',c.error,'Something failed',[on(c.paper,false)]),
+        this._tok('feedback-info',c.info,'Neutral notice',[on(c.paper,true)]),
+      ]},
+    ];
+
+    const nav=[
+      {num:'01',label:'Colour',href:'#colour'},
+      {num:'02',label:'Zone map & CVD',href:'#zones'},
+      {num:'03',label:'Typography',href:'#type'},
+      {num:'04',label:'Scale & motion',href:'#scale'},
+      {num:'05',label:'Compose theme',href:'#compose'},
+      {num:'06',label:'Components',href:'#components'},
+      {num:'07',label:'Icons',href:'#icons'},
+      {num:'08',label:'Screens',href:'#screens'},
+      {num:'09',label:'Localisation',href:'#l10n'},
+      {num:'10',label:'Accessibility',href:'#a11y'},
+      {num:'11',label:'Review gate',href:'#gate'},
+      {num:'12',label:'iOS notes',href:'#ios'},
+    ];
+    const heroStats=[{n:'28',l:'semantic colours, one screen'},{n:'6',l:'scripts, matched rhythm'},{n:'13',l:'screens, 412×915 dp'},{n:'0',l:'raw hex in app code'}];
+    const principles=[
+      {t:'Calm, not fear',d:'A low score is an opportunity, never a verdict. No red doom, no countdowns, no loss-framing.'},
+      {t:'Bright & daylit',d:'Warm ivory ground, paper-and-ink. No dark mode, no occult styling, no glowing runes.'},
+      {t:'Name every value',d:'The implementer drifts from anything vague and holds to anything named. So nothing is vague.'},
+    ];
+
+    // stash geometry + palette for later sections
+    // ===== ZONES + CVD =====
+    const G=this._geom();
+    const zoneRows=['N','NE','E','SE','S','SW','W','NW','C'].map(z=>{const hx=c['zone'+z];return {z,hex:hx,fill:this._flat(hx,0.12,P),domain:zoneMeta[z].d,ratio:this._r2(hx,P).toFixed(2)};});
+    const mkWedges=(tf)=>G.wedges.map(w=>({...w,color:tf?this._cvd(c['zone'+w.z],tf):c['zone'+w.z]}));
+    const zoneMapWedges=mkWedges(null),zoneMapWedgesD=mkWedges('deuter'),zoneMapWedgesP=mkWedges('protan');
+    const vmap={bad:{f:this._flat(c.bad,.14,P),s:c.bad,z:c.bad},ideal:{f:this._flat(c.ideal,.15,P),s:c.ideal,z:this._rot(c.ideal,0,1,-.1)},ok:{f:this._flat(c.ok,.16,P),s:c.ok,z:c.textTertiary},plain:{f:this._flat(c.plain,.14,P),s:c.plain,z:c.textTertiary}};
+    const zoneMapRooms=G.A.rows.map(r=>({label:r.label,x:r.x,y:r.y,w:r.w,h:r.h,cx:+(r.x+r.w/2).toFixed(2),ly:+(r.y+r.h/2-0.6).toFixed(2),zy:+(r.y+r.h/2+4.4).toFixed(2),zoneText:r.zone+(r.v==='bad'?' ✕':r.v==='ideal'?' ✓':''),fill:vmap[r.v].f,stroke:vmap[r.v].s,zoneColor:vmap[r.v].z}));
+    const zoneCvdStrip=['N','NE','E','SE','S','SW','W','NW','C'].map(z=>({z,normal:c['zone'+z],deuter:this._cvd(c['zone'+z],'deuter'),protan:this._cvd(c['zone'+z],'protan')}));
+    const score=G.A.score, band=score>=75?c.scoreStrong:score>=50?c.scoreWorkable:c.scoreAttention;
+    const bandName=score>=75?'score-strong':score>=50?'score-workable':'score-attention';
+    const verdictLine=score>=75?'Strong — a few refinements left.':score>=50?'Workable, with real problems to fix while it is still on paper.':'Several core placements work against you — worth fixing now, on paper.';
+    const FIX={toilet:{move:'Shift the toilet to the North-West or West.',rem:['Rock salt bowl, replaced weekly.','Keep the door shut, exhaust running.'],prov:'TEXT'},kitchen:{move:'Shift the kitchen to the South-East; the North-West is the accepted second choice.',rem:['Position the hob so the cook faces East.','Keep sink and hob apart — fire and water.'],prov:'TEXT'},stair:{move:'Move the staircase to the South, South-West or West edge.',rem:['Keep the space beneath it empty.','Light the centre well.'],prov:'DERIV'},master:{move:'Shift the master bedroom to the South-West.',rem:['Sleep with the head to the South.','Heaviest wardrobe on the SW wall.'],prov:'DERIV'},pooja:{move:'Shift the pooja room to the North-East.',rem:['Face the idols East.','Raise the platform ~six inches.'],prov:'TEXT'},entrance:{move:'Shift the main door to the N, NE or E.',rem:['Keep the approach clear and lit.','Brass or copper threshold strip.'],prov:'TEXT'},living:{move:'Shift the living room to the North or East.',rem:['Seat guests facing East or North.'],prov:'MOD'},bedroom:{move:'Shift this bedroom to the West or North-West.',rem:['Head South or East while sleeping.'],prov:'DERIV'}};
+    const provColor={TEXT:c.provText,DERIV:c.provDeriv,MOD:c.provMod,DISP:c.provDisp};
+    const provLabelMap={TEXT:'From classical text',DERIV:'Traditional practice',MOD:'Modern practice',DISP:'Schools disagree'};
+    const mkItem=(d,i)=>{const f=FIX[d.type]||{move:'',rem:[],prov:'DERIV'};const base=provColor[f.prov];return{n:i+1,label:G.RR[d.type].label,zone:d.zone==='C'?'centre (Brahmasthan)':d.zone,zoneShort:d.zone==='C'?'centre':d.zone,defect:d.v==='bad',verdictWord:d.v==='bad'?'Defect':'Not ideal',stripe:d.v==='bad'?c.bad:c.plain,pillBg:d.v==='bad'?this._flat(c.bad,.15,P):this._flat(c.plain,.15,P),pillText:d.v==='bad'?this._rot(c.bad,0,1,-.12):'#9A6407',pillIcon:d.v==='bad'?'✕':'△',move:f.move,rem:f.rem,provTag:f.prov,provLabel:provLabelMap[f.prov],provChipBg:this._flat(base,.12,P),provChipText:this._rot(base,0,1,-.14),provDot:base,why:G.WHY[d.type]||''};};
+    const reportItems=[...G.A.defects,...G.A.weak].map(mkItem);
+    const topDefects=G.A.defects.slice(0,3).map((d,i)=>mkItem(d,i));
+    const top2=topDefects.slice(0,2);
+    const goodRooms=G.A.good.map(g=>({label:G.RR[g.type].label,zone:g.zone}));
+    const notAssessedRooms=[{label:'Overhead beams',why:'No ceiling data given'},{label:'Plot slope & road',why:'Not provided'}];
+    const restCount=(G.A.defects.length-Math.min(3,G.A.defects.length))+G.A.weak.length;
+
+    // ===== TYPOGRAPHY =====
+    const ramp=[
+      {name:'display',fam:'Marcellus',size:34,weight:400,lh:'1.2',tr:'0',role:'One-per-screen hero'},
+      {name:'h1',fam:'Marcellus',size:28,weight:400,lh:'1.25',tr:'0',role:'Screen title'},
+      {name:'h2',fam:'Marcellus',size:22,weight:400,lh:'1.3',tr:'0',role:'Section title'},
+      {name:'h3',fam:'Marcellus',size:18,weight:400,lh:'1.35',tr:'.005em',role:'Card title'},
+      {name:'body-lg',fam:'DM Sans',size:18,weight:400,lh:'1.5',tr:'0',role:'Lead paragraph'},
+      {name:'body',fam:'DM Sans',size:16,weight:400,lh:'1.55',tr:'0',role:'Default copy — 16sp floor'},
+      {name:'body-sm',fam:'DM Sans',size:14,weight:400,lh:'1.5',tr:'0',role:'Dense supporting text'},
+      {name:'label',fam:'DM Sans',size:14,weight:600,lh:'1.2',tr:'.01em',role:'Buttons, chips, tabs'},
+      {name:'caption',fam:'DM Mono',size:12,weight:400,lh:'1.4',tr:'.02em',role:'Eyebrow, meta — 12sp floor'},
+      {name:'mono',fam:'DM Mono',size:16,weight:500,lh:'1.2',tr:'.02em',role:'Score, degrees, numerals'},
+    ].map(r=>({...r,spec:r.size+'/'+r.lh+' · '+r.weight+' · '+r.tr}));
+    const scripts=[
+      {lang:'English',serif:'Marcellus',sans:'DM Sans',h:'Which way is North?',b:'Everything else follows from this one input.'},
+      {lang:'हिन्दी',serif:'Noto Serif Devanagari',sans:'Noto Sans Devanagari',h:'उत्तर किस दिशा में है?',b:'बाकी सब कुछ इसी एक इनपुट से तय होता है।'},
+      {lang:'தமிழ்',serif:'Noto Serif Tamil',sans:'Noto Sans Tamil',h:'வடக்கு எந்தத் திசையில்?',b:'மற்ற அனைத்தும் இந்த ஒரு உள்ளீட்டிலிருந்தே.'},
+      {lang:'తెలుగు',serif:'Noto Serif Telugu',sans:'Noto Sans Telugu',h:'ఉత్తరం ఏ దిక్కున ఉంది?',b:'మిగతా అంతా ఈ ఒక్క ఇన్‌పుట్ నుండే.'},
+      {lang:'मराठी',serif:'Noto Serif Devanagari',sans:'Noto Sans Devanagari',h:'उत्तर कोणत्या दिशेला आहे?',b:'बाकी सर्व काही याच एका इनपुटवर अवलंबून आहे.'},
+      {lang:'বাংলা',serif:'Noto Serif Bengali',sans:'Noto Sans Bengali',h:'উত্তর কোন দিকে?',b:'বাকি সব কিছু এই একটি ইনপুট থেকেই নির্ধারিত হয়।'},
+    ];
+
+    // ===== SCALE & MOTION =====
+    const space=[['space-1',4],['space-2',8],['space-3',12],['space-4',16],['space-6',24],['space-8',32],['space-10',40],['space-12',48],['space-16',64]].map(([n,v])=>({name:n,px:v}));
+    const radii=[['radius-sm',8],['radius-md',14],['radius-lg',22],['radius-full',999]].map(([n,v])=>({name:n,px:v,disp:v>100?28:v,r:v>100?'50%':v+'px',pxLabel:v>100?'full':v+'px'}));
+    const elevation=[
+      {name:'elevation-flat',android:'No shadow',ios:'border-hairline',css:'none',demo:'#F8F6F0'},
+      {name:'elevation-raised',android:'y2 · blur8 · 12%',ios:'border-default',css:'0 2px 8px -2px rgba(35,42,34,.14)',demo:'#FFFFFF'},
+      {name:'elevation-overlay',android:'y8 · blur24 · 18%',ios:'border + top separator',css:'0 8px 24px -6px rgba(35,42,34,.18)',demo:'#FFFFFF'},
+      {name:'elevation-modal',android:'y20 · blur48 · 28%',ios:'top separator, no shadow',css:'0 20px 48px -12px rgba(35,42,34,.28)',demo:'#FFFFFF'},
+    ];
+    const borders=[{name:'border-hairline',w:'1dp',tok:'border-default',hex:c.line},{name:'border-default',w:'1dp',tok:'border-default',hex:c.line},{name:'border-strong',w:'1.5dp',tok:'border-strong',hex:c.lineStrong},{name:'border-focus',w:'2dp',tok:'color-focus',hex:c.focus}];
+    const motionDur=[{name:'duration-instant',v:'0ms',u:'state that must not animate'},{name:'duration-short',v:'120ms',u:'press, chip, toggle'},{name:'duration-medium',v:'220ms',u:'sheet, dialog, score tween'},{name:'duration-long',v:'360ms',u:'screen transition'}];
+    const motionEase=[{name:'easing-standard',v:'cubic-bezier(.2,.8,.2,1)',u:'default, both directions'},{name:'easing-decelerate',v:'cubic-bezier(0,.7,.2,1)',u:'elements entering'},{name:'easing-accelerate',v:'cubic-bezier(.4,0,1,1)',u:'elements leaving'}];
+
+    // ===== COMPOSE THEME + tokens.json =====
+    const k=h=>'0xFF'+h.replace('#','');
+    const compose=`// VastuTheme.kt — commonMain · Sage & Gold · the single source of truth.
+// No colour, size, or radius appears anywhere downstream as a raw value.
+// Material3 ColorScheme cannot hold ~28 semantic colours, so this is an
+// OWNED theme exposed through CompositionLocals — not a MaterialTheme override.
+
+@Immutable
+data class VastuColors(
+    val paper: Color, val surface: Color, val surfaceRaised: Color,
+    val primary: Color, val primaryDark: Color, val onPrimary: Color,
+    val secondary: Color, val secondaryText: Color,
+    val textPrimary: Color, val textSecondary: Color, val textTertiary: Color,
+    val borderDefault: Color, val borderStrong: Color, val borderFocus: Color,
+    val zoneN: Color, val zoneNE: Color, val zoneE: Color, val zoneSE: Color,
+    val zoneS: Color, val zoneSW: Color, val zoneW: Color, val zoneNW: Color, val zoneCentre: Color,
+    val verdictIdeal: Color, val verdictAcceptable: Color, val verdictSuboptimal: Color,
+    val verdictDefect: Color, val verdictNotAssessed: Color,
+    val scoreStrong: Color, val scoreWorkable: Color, val scoreAttention: Color,
+    val provenanceText: Color, val provenanceDeriv: Color, val provenanceMod: Color, val provenanceDisp: Color,
+    val success: Color, val warning: Color, val error: Color, val info: Color,
+)
+
+val SageGold = VastuColors(
+    paper = Color(${k(c.paper)}), surface = Color(${k(c.surface)}), surfaceRaised = Color(${k(c.surfaceRaised)}),
+    primary = Color(${k(c.primary)}), primaryDark = Color(${k(c.primaryDark)}), onPrimary = Color(${k(c.onPrimary)}),
+    secondary = Color(${k(c.secondary)}), secondaryText = Color(${k(c.secondaryText)}),
+    textPrimary = Color(${k(c.ink)}), textSecondary = Color(${k(c.textSecondary)}), textTertiary = Color(${k(c.textTertiary)}),
+    borderDefault = Color(${k(c.line)}), borderStrong = Color(${k(c.lineStrong)}), borderFocus = Color(${k(c.focus)}),
+    zoneN = Color(${k(c.zoneN)}), zoneNE = Color(${k(c.zoneNE)}), zoneE = Color(${k(c.zoneE)}), zoneSE = Color(${k(c.zoneSE)}),
+    zoneS = Color(${k(c.zoneS)}), zoneSW = Color(${k(c.zoneSW)}), zoneW = Color(${k(c.zoneW)}), zoneNW = Color(${k(c.zoneNW)}), zoneCentre = Color(${k(c.zoneC)}),
+    verdictIdeal = Color(${k(c.ideal)}), verdictAcceptable = Color(${k(c.ok)}), verdictSuboptimal = Color(${k(c.plain)}),
+    verdictDefect = Color(${k(c.bad)}), verdictNotAssessed = Color(${k(c.notAssessed)}),
+    scoreStrong = Color(${k(c.scoreStrong)}), scoreWorkable = Color(${k(c.scoreWorkable)}), scoreAttention = Color(${k(c.scoreAttention)}),
+    provenanceText = Color(${k(c.provText)}), provenanceDeriv = Color(${k(c.provDeriv)}), provenanceMod = Color(${k(c.provMod)}), provenanceDisp = Color(${k(c.provDisp)}),
+    success = Color(${k(c.success)}), warning = Color(${k(c.warning)}), error = Color(${k(c.error)}), info = Color(${k(c.info)}),
+)
+
+@Immutable
+data class VastuSpacing(
+    val s1: Dp = 4.dp, val s2: Dp = 8.dp, val s3: Dp = 12.dp, val s4: Dp = 16.dp,
+    val s6: Dp = 24.dp, val s8: Dp = 32.dp, val s10: Dp = 40.dp, val s12: Dp = 48.dp, val s16: Dp = 64.dp,
+)
+
+@Immutable
+data class VastuShapes(
+    val sm: CornerBasedShape = RoundedCornerShape(8.dp),
+    val md: CornerBasedShape = RoundedCornerShape(14.dp),
+    val lg: CornerBasedShape = RoundedCornerShape(22.dp),
+    val full: CornerBasedShape = RoundedCornerShape(percent = 50),
+)
+
+@Immutable
+data class VastuElevation(
+    val flat: Dp = 0.dp, val raised: Dp = 2.dp, val overlay: Dp = 8.dp, val modal: Dp = 20.dp,
+)
+
+// display, sans and mono are bundled on BOTH platforms; per-script Noto faces
+// are selected by locale so Hindi and Tamil keep the same weight and rhythm.
+@Immutable
+data class VastuTypography(
+    val display: TextStyle, val h1: TextStyle, val h2: TextStyle, val h3: TextStyle,
+    val bodyLg: TextStyle, val body: TextStyle, val bodySm: TextStyle,
+    val label: TextStyle, val caption: TextStyle, val mono: TextStyle,
+)
+
+val LocalVastuColors     = staticCompositionLocalOf<VastuColors> { error("VastuTheme missing") }
+val LocalVastuSpacing    = staticCompositionLocalOf { VastuSpacing() }
+val LocalVastuShapes     = staticCompositionLocalOf { VastuShapes() }
+val LocalVastuElevation  = staticCompositionLocalOf { VastuElevation() }
+val LocalVastuTypography = staticCompositionLocalOf<VastuTypography> { error("VastuTheme missing") }
+
+@Composable
+fun VastuTheme(
+    typography: VastuTypography = vastuTypography(),   // locale-aware, see Typography section
+    content: @Composable () -> Unit,
+) = CompositionLocalProvider(
+    LocalVastuColors provides SageGold,
+    LocalVastuSpacing provides VastuSpacing(),
+    LocalVastuShapes provides VastuShapes(),
+    LocalVastuElevation provides VastuElevation(),
+    LocalVastuTypography provides typography,
+    content = content,
+)
+
+object VastuTheme {
+    val colors  @Composable get() = LocalVastuColors.current
+    val spacing @Composable get() = LocalVastuSpacing.current
+    val shapes  @Composable get() = LocalVastuShapes.current
+    val elevation @Composable get() = LocalVastuElevation.current
+    val type    @Composable get() = LocalVastuTypography.current
+}`;
+    const tokensObj={
+      color:{paper:c.paper,surface:c.surface,'surface-raised':c.surfaceRaised,primary:c.primary,'primary-dark':c.primaryDark,'on-primary':c.onPrimary,secondary:c.secondary,'secondary-text':c.secondaryText,'text-primary':c.ink,'text-secondary':c.textSecondary,'text-tertiary':c.textTertiary,'border-default':c.line,'border-strong':c.lineStrong,'border-focus':c.focus,'zone-n':c.zoneN,'zone-ne':c.zoneNE,'zone-e':c.zoneE,'zone-se':c.zoneSE,'zone-s':c.zoneS,'zone-sw':c.zoneSW,'zone-w':c.zoneW,'zone-nw':c.zoneNW,'zone-centre':c.zoneC,'verdict-ideal':c.ideal,'verdict-acceptable':c.ok,'verdict-suboptimal':c.plain,'verdict-defect':c.bad,'verdict-not-assessed':c.notAssessed,'score-strong':c.scoreStrong,'score-workable':c.scoreWorkable,'score-attention':c.scoreAttention,'provenance-text':c.provText,'provenance-deriv':c.provDeriv,'provenance-mod':c.provMod,'provenance-disp':c.provDisp,success:c.success,warning:c.warning,error:c.error,info:c.info},
+      space:{'space-1':4,'space-2':8,'space-3':12,'space-4':16,'space-6':24,'space-8':32,'space-10':40,'space-12':48,'space-16':64},
+      radius:{'radius-sm':8,'radius-md':14,'radius-lg':22,'radius-full':999},
+      elevation:{'elevation-flat':0,'elevation-raised':2,'elevation-overlay':8,'elevation-modal':20},
+      border:{'border-hairline':1,'border-default':1,'border-strong':1.5,'border-focus':2}
+    };
+    const tokensJson=JSON.stringify(tokensObj,null,2);
+
+    // ===== COMPONENTS =====
+    const buttonRows=[
+      {s:'Default',bg:'color-primary',tx:'on-primary · label',bd:'—',rad:'radius-full',h:'48dp',pad:'space-4',el:'raised'},
+      {s:'Pressed',bg:'color-primary-dark',tx:'on-primary · label',bd:'—',rad:'radius-full',h:'48dp',pad:'space-4',el:'flat'},
+      {s:'Disabled',bg:'primary @38%',tx:'on-primary @38%',bd:'—',rad:'radius-full',h:'48dp',pad:'space-4',el:'flat'},
+      {s:'Focused',bg:'color-primary',tx:'on-primary · label',bd:'border-focus',rad:'radius-full',h:'48dp',pad:'space-4',el:'raised'},
+      {s:'Loading',bg:'color-primary',tx:'spinner · on-primary',bd:'—',rad:'radius-full',h:'48dp',pad:'space-4',el:'raised'},
+    ];
+    const btnVariants=[
+      {name:'Primary',desc:'One per screen. Sage fill, ink label.',bg:c.primary,tx:c.onPrimary,bd:'none',sh:'0 2px 8px -2px '+this._rgba(c.primary,.5)},
+      {name:'Secondary',desc:'Paper fill, ink label, default border.',bg:c.surfaceRaised,tx:c.ink,bd:'1px solid '+c.line,sh:'none'},
+      {name:'Ghost',desc:'No fill. Tertiary actions.',bg:'transparent',tx:c.secondaryText,bd:'none',sh:'none'},
+      {name:'Destructive',desc:'Delete data only. Never for Vastu.',bg:'transparent',tx:c.error,bd:'1px solid '+this._flat(c.error,.4,P),sh:'none'},
+    ];
+    const provenance=[
+      {tag:'TEXT',label:'From classical text',mean:'Traceable to a named source, with citation.',base:c.provText},
+      {tag:'DERIV',label:'Traditional practice',mean:'Reasoned from the mandala; taught widely.',base:c.provDeriv},
+      {tag:'MOD',label:'Modern practice',mean:'20th-century. Honesty about its age — not a warning.',base:c.provMod},
+      {tag:'DISP',label:'Schools disagree',mean:'Two readings shown, neither chosen.',base:c.provDisp},
+    ].map(p=>({...p,chipBg:this._flat(p.base,.12,P),chipText:this._rot(p.base,0,1,-.14),chipBorder:this._flat(p.base,.34,P)}));
+    const verdicts=[
+      {name:'verdict-ideal',label:'Ideal',icon:'✓',base:c.ideal},
+      {name:'verdict-acceptable',label:'Acceptable',icon:'≈',base:c.ok},
+      {name:'verdict-suboptimal',label:'Suboptimal',icon:'△',base:c.plain},
+      {name:'verdict-defect',label:'Defect',icon:'✕',base:c.bad},
+      {name:'verdict-not-assessed',label:'Not assessed',icon:'–',base:c.notAssessed},
+    ].map(v=>({...v,pillBg:this._flat(v.base,.15,P),pillText:this._rot(v.base,0,1,-.12),pillBorder:this._flat(v.base,.4,P)}));
+
+    // ===== ICONS =====
+    const circ=(cx,cy,r)=>`M ${cx-r} ${cy} a ${r} ${r} 0 1 0 ${2*r} 0 a ${r} ${r} 0 1 0 ${-2*r} 0`;
+    const icons=[
+      {label:'compass',paths:[circ(12,12,9.2),'M15.6 8.4 L10.6 10.6 L8.4 15.6 L13.4 13.4 Z']},
+      {label:'north-marker',paths:[circ(12,12,9.2),'M12 6.4 L15 15 L12 13 L9 15 Z']},
+      {label:'zone-glyph',paths:['M4 4 H20 V20 H4 Z','M9.33 4 V20','M14.66 4 V20','M4 9.33 H20','M4 14.66 H20']},
+      {label:'defect',paths:[circ(12,12,9),'M8.8 8.8 L15.2 15.2','M15.2 8.8 L8.8 15.2']},
+      {label:'remedy',paths:['M12 20 V11','M12 13 C9 13 6.5 11 6.5 7.5 C10 7.5 12 9.5 12 12','M12 11.5 C15 11.5 17.5 9.5 17.5 6 C14 6 12 8 12 11']},
+      {label:'layout-change',paths:['M6 8.5 H17 L14 5.5','M18 15.5 H7 L10 18.5']},
+      {label:'provenance',paths:['M7 4 H17 V20 L12 16 L7 20 Z']},
+      {label:'pdf-export',paths:['M7 3 H14 L18 7 V17 H6 V3 Z','M14 3 V7 H18','M12 10 V15','M9.5 12.5 L12 15 L14.5 12.5']},
+      {label:'share',paths:[circ(6,12,2.1),circ(18,6,2.1),circ(18,18,2.1),'M7.9 11 L16 6.9','M7.9 13 L16 17.1']},
+      {label:'kitchen',paths:['M5 12 H19','M6 12 V19 H18 V12','M9 12 V9 A1.5 1.5 0 0 1 12 9 V12','M15 12 V8']},
+      {label:'toilet',paths:['M8 4 V11 C8 14 10 15 12 15 C15 15 16 13 16 11 V10 H8','M12 15 V19','M9 19 H15']},
+      {label:'pooja',paths:['M6 14 C6 16 9 17 12 17 C15 17 18 16 18 14 Z','M12 14 C12 11 10.5 10 12 6 C13.5 10 12 11 12 14']},
+      {label:'staircase',paths:['M5 19 V16 H9 V13 H13 V10 H17 V7 H20']},
+      {label:'bedroom',paths:['M4 11 V18','M4 14 H20 V18','M20 14 V11.5 A2 2 0 0 0 18 9.5 H8 A2 2 0 0 0 6 11.5 V14','M9 11 H15']},
+      {label:'living',paths:['M6 11 A1.8 1.8 0 0 1 8.5 12 V14 H15.5 V12 A1.8 1.8 0 0 1 18 11','M5 14 A1.5 1.5 0 0 1 6.5 15.4 V18 H17.5 V15.4 A1.5 1.5 0 0 1 19 14','M7 18 V20','M17 18 V20']},
+      {label:'study',paths:['M5 5 A1 1 0 0 1 6 4 H11 V18 H6 A1 1 0 0 0 5 19 Z','M19 5 A1 1 0 0 0 18 4 H13 V18 H18 A1 1 0 0 1 19 19 Z']},
+      {label:'store',paths:['M4 8 L12 4 L20 8 V17 L12 21 L4 17 Z','M4 8 L12 12 L20 8','M12 12 V21']},
+      {label:'balcony',paths:['M4 10 H20','M4 10 V20 H20 V10','M8 10 V20','M12 10 V20','M16 10 V20','M6 6.5 L12 3.5 L18 6.5']},
+      {label:'garage',paths:['M4 10 L12 5 L20 10 V20 H4 Z','M7 20 V13 H17 V20','M7 15.5 H17']},
+      {label:'home',paths:['M4 11 L12 4 L20 11','M6 9.8 V19 H18 V9.8','M10 19 V14 H14 V19']},
+      {label:'upload',paths:['M12 4 V15','M8 8 L12 4 L16 8','M5 17 V20 H19 V17']},
+      {label:'chat',paths:['M4 6 A2 2 0 0 1 6 4 H18 A2 2 0 0 1 20 6 V13 A2 2 0 0 1 18 15 H9 L5 19 V15 A2 2 0 0 1 4 13 Z']},
+      {label:'settings',paths:[circ(12,12,3.2),'M12 3.2 V6','M12 18 V20.8','M3.2 12 H6','M18 12 H20.8','M5.9 5.9 L7.9 7.9','M16.1 16.1 L18.1 18.1','M18.1 5.9 L16.1 7.9','M7.9 16.1 L5.9 18.1']},
+      {label:'lock',paths:['M7 11 H17 V20 H7 Z','M9 11 V8 A3 3 0 0 1 15 8 V11']},
+    ];
+
+    // ===== LOCALISATION (score screen strings) =====
+    const l10n=[
+      {lang:'English',dir:'ltr',sans:'DM Sans',ser:'Marcellus',eyebrow:'Your result · free',score:'46',verdict:'Workable, with real problems to fix while it is still on paper.',map:'Zone map',problems:'Biggest problems',defectTitle:'Kitchen is in the North-East',defectWhy:'The North-East is the water & clarity zone. Cooking fire here is a classic defect.',unlockTitle:'Unlock full report & remedies',unlockSub:'5 more issues · every fix & remedy, ranked',price:'₹699',oneTime:'ONE-TIME',cta:'Unlock full report & remedies · ₹699',foot:'One-time · price shown before you pay · no hidden wall'},
+      {lang:'हिन्दी',dir:'ltr',sans:'Noto Sans Devanagari',ser:'Noto Serif Devanagari',eyebrow:'आपका परिणाम · निःशुल्क',score:'46',verdict:'सुधार-योग्य — कागज़ पर रहते ही ठीक करने लायक असली समस्याएँ हैं।',map:'ज़ोन मानचित्र',problems:'सबसे बड़ी समस्याएँ',defectTitle:'रसोई ईशान (उत्तर-पूर्व) में है',defectWhy:'ईशान जल और स्पष्टता का क्षेत्र है। यहाँ रसोई की अग्नि एक प्रमुख दोष मानी जाती है।',unlockTitle:'पूरी रिपोर्ट और उपाय अनलॉक करें',unlockSub:'5 और समस्याएँ · हर सुधार व उपाय, क्रम में',price:'₹699',oneTime:'एक बार',cta:'पूरी रिपोर्ट और उपाय अनलॉक करें · ₹699',foot:'एक बार भुगतान · भुगतान से पहले मूल्य · कोई छिपी दीवार नहीं'},
+      {lang:'தமிழ்',dir:'ltr',sans:'Noto Sans Tamil',ser:'Noto Serif Tamil',eyebrow:'உங்கள் முடிவு · இலவசம்',score:'46',verdict:'சரிசெய்யக்கூடியது — காகிதத்தில் இருக்கும்போதே சரிசெய்யத்தக்க உண்மையான சிக்கல்கள்.',map:'மண்டல வரைபடம்',problems:'மிகப் பெரிய சிக்கல்கள்',defectTitle:'சமையலறை வடகிழக்கில் உள்ளது',defectWhy:'வடகிழக்கு நீர் மற்றும் தெளிவின் மண்டலம். இங்கு சமையல் நெருப்பு ஒரு முதன்மைக் குறைபாடு.',unlockTitle:'முழு அறிக்கை & பரிகாரங்களைத் திற',unlockSub:'மேலும் 5 சிக்கல்கள் · ஒவ்வொரு தீர்வும், வரிசையில்',price:'₹699',oneTime:'ஒரு முறை',cta:'முழு அறிக்கை & பரிகாரங்களைத் திற · ₹699',foot:'ஒரு முறை கட்டணம் · கட்டணத்திற்கு முன் விலை · மறைவான தடை இல்லை'},
+    ];
+
+    // ===== ACCESSIBILITY AUDIT =====
+    const auditRows=[
+      ['text-primary','color-paper',c.ink,P,4.5,'Body & headings'],
+      ['text-secondary','color-paper',c.textSecondary,P,4.5,'Supporting copy'],
+      ['text-tertiary','color-paper',c.textTertiary,P,4.5,'Captions, eyebrows'],
+      ['on-primary','color-primary',c.onPrimary,c.primary,4.5,'Button label — ink, not white'],
+      ['secondary-text','color-paper',c.secondaryText,P,4.5,'Gold-as-text · remedy copy'],
+      ['verdict-defect','color-paper',c.bad,P,4.5,'Defect text on ground'],
+      ['color-secondary','color-paper',c.secondary,P,3,'Gold accent — decorative, beside a label'],
+      ['verdict-ideal','color-paper',c.ideal,P,3,'Ideal marker (large/UI)'],
+      ['score-workable','color-paper',c.plain,P,3,'Amber number ≥18sp only'],
+      ['zone-e','color-paper',c.zoneE,P,3,'Weakest zone hue — carried by ink letter + position'],
+    ].map(([fg,bg,fh,bh,floor,use])=>{const r=this._ratio(fh,bh);const big=r>=3;return {fg,bg,ratio:r.toFixed(2),floor:floor.toFixed(1),pass:r>=floor,use,mark:r>=floor?'✓ Pass':(big?'◑ Large/UI':'○ Accent'),markBg:r>=floor?'#E4EEE0':(big?'#FBF1DE':'#EFEDE6'),markColor:r>=floor?'#2E6E40':(big?'#9A6407':'#6B7064')};});
+
+    // ===== REVIEW GATE =====
+    const gate=[
+      {h:'Tokens',items:['Every colour resolves to a theme token. Zero hardcoded hex literals in this file.','Every spacing value comes from VastuTheme.spacing. No raw .dp on padding, margin or gaps.','Every text style comes from VastuTheme.type. No ad-hoc fontSize or fontWeight.','Every corner radius comes from VastuTheme.shapes.','Every border width and colour comes from a border token.'],grep:true},
+      {h:'Components',items:['Every interactive component renders its correct pressed state.','Every interactive component renders its correct disabled state.','Loading, empty and error states exist where the screen can reach them.','No component is restyled inline; variants come from the component API.']},
+      {h:'Layout',items:['Screen matches the reference mockup at 412×915 dp.','Checked at 360 dp width with no clipping or overlap.']},
+      {h:'Accessibility',items:['Every touch target is at least 48×48 dp.','Body text ≥16 sp; nothing below 12 sp anywhere.','Every text/background pair meets its contrast floor (4.5:1 body, 3:1 large).','No information is conveyed by colour alone — label, icon or position also present.','Every interactive element has a content description.','Screen is usable at 200% font scale.']},
+      {h:'Localisation',items:['Renders without clipping in Hindi and Tamil, not only English.','No fixed-height container holds translatable text.']},
+      {h:'Product rules',items:['The compass centre is unobscured by any branding or decoration.','No affordance suggests North can be adjusted to improve the score.','Where a Vastu rule is shown, its provenance tag is shown with it.']},
+    ];
+
+    // ===== iOS ADAPTATION =====
+    const iosNotes=[
+      ['Navigation','System back button + predictive back gesture.','Swipe-from-edge back + nav-bar chevron. Same screen, platform back.'],
+      ['Safe areas','Status + nav-bar insets via WindowInsets.','Notch / Dynamic Island + home indicator. Content never under either.'],
+      ['Elevation','Shadow per elevation token.','Border + separator per token — no shadow. Both are already defined.'],
+      ['Controls','Owned switch, slider, dial, degree field — no Material control.','Identical owned controls. No UISwitch, no UISlider. Re-skin is mechanical.'],
+      ['Haptics','Tick on quick-set chips; soft detent every 15° on the dial; success on unlock.','Same map via UIImpactFeedbackGenerator (light / medium).'],
+      ['Type','Bundled Marcellus + DM + Noto faces; disable system font scaling override.','Same bundled faces. Respect Dynamic Type up to 200% via the ramp.'],
+      ['Share / export','Android share sheet for the PDF report.','iOS share sheet (UIActivityViewController). Same PDF payload.'],
+    ].map(([concern,android,ios])=>({concern,android,ios}));
+
+    this._c=c;
+    return {nav,heroStats,principles,colorGroups,
+      zoneRows,zoneMapWedges,zoneMapWedgesD,zoneMapWedgesP,zoneMapRooms,zoneCvdStrip,
+      score,band,bandName,verdictLine,north:G.north,northX:G.northX,northY:G.northY,markX:G.markX,markY:G.markY,knobLeft:G.knobLeft,knobTop:G.knobTop,sliderPct:G.sliderPct,zoneC:c.zoneC,line:c.line,inkFaint:c.inkFaint,
+      ramp,scripts,space,radii,elevation,borders,motionDur,motionEase,
+      compose,tokensJson,buttonRows,btnVariants,provenance,verdicts,icons,l10n,auditRows,gate,iosNotes,
+      reportItems,topDefects,top2,goodRooms,notAssessedRooms,restCount};
+  }
+}
+</script>
+</body>
+</html>

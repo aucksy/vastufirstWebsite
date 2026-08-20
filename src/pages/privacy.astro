@@ -1,0 +1,101 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+/**
+ * The same words the app shows under Settings → Privacy.
+ * Source of truth: VastuFirst/docs/PRIVACY-POLICY.md, which itself mirrors
+ * PrivacyScreen.kt. If one changes, change all three in the same week — the
+ * published page and the app must never say different things.
+ *
+ * Google Play requires this at a public address before the listing can go live.
+ */
+const updated = '15 August 2026';
+---
+<Base
+  title="Privacy — VastuFirst"
+  description="VastuFirst collects nothing about you. Your homes, scores and reports stay on your phone. No account, no sign-up, no phone number."
+  path="/privacy"
+>
+  <div class="page">
+    <Nav />
+    <main id="main" class="prose-page">
+      <article class="prose">
+        <h1>Privacy</h1>
+        <p class="prose__updated">Last updated {updated}</p>
+
+        <p>
+          These are the same words the app shows under <strong>Settings → Privacy</strong>. They are
+          kept in one place in the code so this page and the app can never say different things.
+        </p>
+
+        <h2>Your homes stay on your phone</h2>
+        <p>
+          Everything you draw, every score and every report is worked out on your device and saved
+          only on your device. There is no account, no sign-up and no phone number.
+        </p>
+
+        <h2>What we collect</h2>
+        <p>
+          Nothing about you. We do not ask for your name, email, phone number or location, and the
+          app has no account to sign in to. The homes you draw, their scores and their reports are
+          stored only in the app’s own private storage on your phone, where no other app can read
+          them.
+        </p>
+
+        <h2>The one thing that leaves your phone</h2>
+        <p>
+          If you choose to have a floor plan read for you, that one picture is sent to an AI service
+          to be turned into rooms, and the rooms come back. The app asks you before it does this,
+          every first time, and you can turn it off again in Settings. The picture is not stored by
+          us and is not linked to you — there is nothing to link it to. Drawing your home by hand
+          needs no internet at all and is scored by exactly the same rules.
+        </p>
+
+        <h2>When the app crashes</h2>
+        <p>
+          If the app closes unexpectedly, it writes what went wrong into its own private storage and
+          offers to email it to us the next time you open it. Nothing is sent unless you press send,
+          and you can read the whole message first. It contains only technical detail, your phone
+          model and the app version — never your homes, your scores or anything about you.
+        </p>
+
+        <h2>If you buy the full report</h2>
+        <p>
+          Payment is handled entirely by Google Play. We never see or store your card, and the app
+          does not receive your payment details at any point. Google tells us only that this device
+          has bought the report.
+        </p>
+
+        <h2>Deleting everything</h2>
+        <p>
+          <strong>Settings → Delete all my data</strong> removes every saved home from this device
+          immediately and permanently. Uninstalling the app removes everything too. Because nothing
+          is stored on our side, there is nothing left for us to delete and nothing you need to ask
+          us for.
+        </p>
+
+        <h2>Children</h2>
+        <p>VastuFirst is not aimed at children and collects nothing from anyone, of any age.</p>
+
+        <h2>If you join the launch list on this website</h2>
+        <p>
+          The email address you type into the “Notify me” box on this site is stored so that we can
+          send you one message when the app is released. It is not used for anything else, is never
+          sold or passed on, and you can ask us to delete it at any time by writing to the address
+          below. This is the only thing this website stores about anyone.
+        </p>
+
+        <h2>Contact</h2>
+        <p>
+          Questions about privacy, or anything else:
+          <a href="mailto:contact@vastufirst.com">contact@vastufirst.com</a>
+        </p>
+
+        <a class="prose__back" href="/">← Back to VastuFirst</a>
+      </article>
+    </main>
+    <Footer />
+  </div>
+</Base>
