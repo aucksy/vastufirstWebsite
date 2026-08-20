@@ -75,6 +75,24 @@ resolves to the right addresses but does not read as a CNAME, so verification si
 apex pointed at Cloudflare with no active custom domain is worse than useless: it answers **409** on
 http and fails the TLS handshake on https. Do not re-add it.
 
+**KNOWN BROKEN, and not fixable from this repo: `https://vastufirst.com` (no `www`).** Namecheap's
+URL Forward answers on **port 80 only**. Port 443 does not accept a connection at all, so the bare
+domain has no certificate and never will while the redirect is theirs. Typing `vastufirst.com` into
+Chrome or Safari now goes to https first, so the visitor gets "This site can't be reached" after a
+~20 second wait rather than the redirect. Measured 20 August 2026:
+
+| | |
+|---|---|
+| `http://vastufirst.com` | 302 to `https://www.vastufirst.com`, served by `namecheap-nginx` |
+| `https://vastufirst.com` | TCP 443 times out; TLS handshake failure |
+| typed `vastufirst.com` in a browser | Chrome error page, no fallback to http |
+
+The only fix is for the apex to be answered by something that holds a certificate for it, which
+means the zone has to be on Cloudflare — and Namecheap's free email forwarding stops the moment the
+nameservers move, so `contact@vastufirst.com` has to move to Cloudflare Email Routing in the same
+sitting. Both are the owner's to approve. `aakashpahuja.in` is already wired this way in the same
+Cloudflare account, apex and `www` both on Pages, so the pattern is proven here.
+
 **Two traps, both paid for:**
 
 - The apex redirect is **tied to Namecheap's parking service**. Changing the `www` CNAME away from

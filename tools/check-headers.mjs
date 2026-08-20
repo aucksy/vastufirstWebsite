@@ -86,22 +86,33 @@ ok(
 // site; skipped locally, and said out loud rather than passing silently.
 if (BASE.includes('vastufirst.com')) {
   try {
-    // http, not https: the bare domain's redirect is served by Namecheap, and
-    // whether they answer on 443 is their business, not ours. What must hold is
-    // that someone typing the bare domain lands on the site.
     const apex = await fetch('http://vastufirst.com/', { redirect: 'manual' });
     const to = apex.headers.get('location') || '';
     ok(
       apex.status >= 300 && apex.status < 400 && to.includes('www.vastufirst.com'),
-      'the bare domain redirects to www',
+      'the bare domain redirects to www over http',
       `${apex.status} -> ${to || 'no Location header'}`,
     );
-    // Reported, not asserted: Namecheap's redirect may or may not answer on 443.
+    // Asserted, not merely reported. This used to be a console note on the
+    // grounds that whether Namecheap answers on 443 is their business — which
+    // was wrong. Chrome and Safari send a typed bare domain to https FIRST, so
+    // a bare domain with no certificate is a visitor staring at "This site
+    // can't be reached", which is exactly what was reported on 20 Aug 2026.
+    // A quiet note let that sit behind an "all good". It fails now.
     try {
       const s = await fetch('https://vastufirst.com/', { redirect: 'manual' });
-      console.log(`      (https on the bare domain: ${s.status} ${s.headers.get('location') || ''})`);
+      const sTo = s.headers.get('location') || '';
+      ok(
+        s.status >= 300 && s.status < 400 && sTo.includes('www.vastufirst.com'),
+        'the bare domain answers on https too',
+        `${s.status} -> ${sTo || 'no Location header'}`,
+      );
     } catch (e) {
-      console.log(`      (https on the bare domain: not answering — ${e.cause?.code || e.message})`);
+      ok(
+        false,
+        'the bare domain answers on https too',
+        `${e.cause?.code || e.message} — see "KNOWN BROKEN" in README.md`,
+      );
     }
   } catch (e) {
     ok(false, 'the bare domain redirects to www', String(e.cause?.code || e.message));
