@@ -157,34 +157,12 @@ function initScroll() {
 
   let ticking = false;
   let zIdx = -1;
-  let scoreDone = false;
 
   const progressOf = (el: HTMLElement) => {
     const r = el.getBoundingClientRect();
     const span = r.height - window.innerHeight;
     if (span <= 0) return r.top <= 0 ? 1 : 0;
     return clamp01(-r.top / span);
-  };
-
-  const runScoreRing = (instant: boolean) => {
-    const arc = $('vfScoreArc');
-    const num = $('vfScoreNum');
-    const target = 78;
-    if (instant) {
-      if (num) num.textContent = String(target);
-      if (arc) arc.setAttribute('stroke-dashoffset', (163.4 * (1 - 0.78)).toFixed(1));
-      return;
-    }
-    const t0 = performance.now();
-    const dur = 1100;
-    const step = (t: number) => {
-      const q = clamp01((t - t0) / dur);
-      const e = 1 - Math.pow(1 - q, 3);
-      if (num) num.textContent = String(Math.round(target * e));
-      if (arc) arc.setAttribute('stroke-dashoffset', (163.4 * (1 - 0.78 * e)).toFixed(1));
-      if (q < 1) requestAnimationFrame(step);
-    };
-    requestAnimationFrame(step);
   };
 
   const update = () => {
@@ -234,10 +212,6 @@ function initScroll() {
         if (st) st.classList.toggle('is-active', k === i);
         const dot = $(`vfDot${k}`);
         if (dot) dot.classList.toggle('is-active', k === i);
-      }
-      if (i === 2 && !scoreDone) {
-        scoreDone = true;
-        runScoreRing(reduce);
       }
     }
 

@@ -1,12 +1,19 @@
 ---
 import PhoneShell from './PhoneShell.astro';
 
+/**
+ * The three screens are the app's OWN rendered screens, copied from the goldens
+ * the Android project records in CI (`app/src/androidUnitTest/roborazzi/`) and
+ * shrunk to a web size by `tools/make-images.mjs`. They were hand-drawn SVG
+ * approximations before, which is a lookalike of a product that exists: if a
+ * screen changes in the app, re-run that tool rather than redrawing anything.
+ */
 const steps = [
   {
     n: '01',
-    title: 'Sketch your plot',
+    title: 'Scan your plan',
     body:
-      'Drag rooms onto a simple grid, without CAD and without an architect. A farmhouse or a 2BHK takes two minutes. You can also photograph a printed plan and check what we read back.',
+      'Photograph a printed floor plan and the app reads the rooms straight off it. You check what it read before anything is scored. No plan yet? Draw one on a grid instead.',
   },
   {
     n: '02',
@@ -21,6 +28,21 @@ const steps = [
       'A room-by-room score with ranked fixes. Each fix is tagged with where its rule comes from, and anything that cannot move gets a remedy instead.',
   },
 ];
+
+const screens = [
+  {
+    src: '/screens/scan.webp',
+    alt: 'The app showing the rooms it read from a scanned floor plan, each with its direction and whether it is already right.',
+  },
+  {
+    src: '/screens/north.webp',
+    alt: 'The app asking which way is north, with a dial to drag over the plan.',
+  },
+  {
+    src: '/screens/report.webp',
+    alt: 'The app’s report: a score out of ten, how many rooms read well, and the first fix to make.',
+  },
+];
 ---
 <section id="vfHow">
   <div class="how__wrap" id="vfHowWrap">
@@ -31,79 +53,11 @@ const steps = [
           <div class="how__ring" id="vfHowRing" aria-hidden="true"></div>
 
           <PhoneShell id="vfHowPhone" class="how__phone">
-            {/* Screen 1 — Draw your plot */}
-            <div class="how__screen" id="vfScr0">
-              <div class="phone__step">Step 1 of 3 · Sketch</div>
-              <div class="phone__title" style="margin:6px 0 16px">Draw your plot</div>
-              <svg viewBox="0 0 100 110" style="width:100%;display:block" aria-hidden="true">
-                <rect x="6" y="6" width="88" height="98" rx="2" fill="#FDFCF8" stroke="#98A08C" stroke-width="1" />
-                <rect x="6" y="6" width="52" height="40" fill="#E4EBE1" stroke="#7A9E7E" stroke-width=".8" />
-                <text x="32" y="28" text-anchor="middle" style="font-family:'DM Mono',monospace;font-size:5px" fill="#4B5347">BEDROOM</text>
-                <rect x="58" y="6" width="36" height="40" fill="#F5EFDA" stroke="#C9A227" stroke-width=".8" />
-                <text x="76" y="28" text-anchor="middle" style="font-family:'DM Mono',monospace;font-size:5px" fill="#6F5410">KITCHEN</text>
-                <rect x="6" y="46" width="34" height="58" fill="#EFF2EA" stroke="#98A08C" stroke-width=".6" />
-                <text x="23" y="76" text-anchor="middle" style="font-family:'DM Mono',monospace;font-size:5px" fill="#4B5347">HALL</text>
-                <rect x="40" y="46" width="54" height="30" fill="#EFF2EA" stroke="#98A08C" stroke-width=".6" />
-                <text x="67" y="62" text-anchor="middle" style="font-family:'DM Mono',monospace;font-size:5px" fill="#4B5347">POOJA</text>
-                <rect x="40" y="76" width="54" height="28" fill="#FDFCF8" stroke="#98A08C" stroke-width=".6" stroke-dasharray="2 2" />
-                <text x="67" y="91" text-anchor="middle" style="font-family:'DM Mono',monospace;font-size:5px" fill="#98A08C">+ ADD ROOM</text>
-              </svg>
-              <div style="display:flex;gap:8px;margin-top:14px">
-                <span class="plan-chip plan-chip--sage">4 rooms placed</span>
-                <span class="plan-chip plan-chip--muted">30 × 40 ft</span>
+            {screens.map((s, i) => (
+              <div class="how__screen" id={`vfScr${i}`}>
+                <img src={s.src} alt={s.alt} width="620" height="1377" decoding="async" />
               </div>
-            </div>
-
-            {/* Screen 2 — Mark north */}
-            <div class="how__screen" id="vfScr1">
-              <div class="phone__step">Step 2 of 3 · Orient</div>
-              <div class="phone__title" style="margin:6px 0 16px">Mark north</div>
-              <svg viewBox="0 0 100 110" style="width:100%;display:block" aria-hidden="true">
-                <rect x="6" y="10" width="88" height="94" rx="2" fill="#FDFCF8" stroke="#98A08C" stroke-width="1" />
-                <circle cx="50" cy="57" r="40" fill="none" stroke="#C4D0BE" stroke-width=".7" stroke-dasharray="2 2" />
-                <line x1="50" y1="57" x2="76" y2="21" stroke="#7A9E7E" stroke-width="1.2" />
-                <path d="M76 21 L79 30 L76 27.5 L73 30 Z" fill="#7A9E7E" />
-                <circle cx="76" cy="16" r="6.5" fill="#F8F6F0" stroke="#7A9E7E" stroke-width="1" />
-                <text x="76" y="18.4" text-anchor="middle" style="font-family:'DM Mono',monospace;font-size:6px;font-weight:500" fill="#4C7355">N</text>
-                <circle cx="50" cy="57" r="3" fill="#C9A227" />
-                <text x="50" y="98" text-anchor="middle" style="font-family:'DM Mono',monospace;font-size:5.5px" fill="#6B7064">PLOT FACES 34° NE</text>
-              </svg>
-              <div class="info-card">
-                Compass locked. Every rule is computed against your plot’s true orientation, not an
-                assumed north.
-              </div>
-            </div>
-
-            {/* Screen 3 — Your result */}
-            <div class="how__screen" id="vfScr2">
-              <div class="phone__step">Step 3 of 3 · Verdict</div>
-              <div class="phone__title" style="margin:6px 0 14px">Your result</div>
-              <div class="score-row">
-                <svg viewBox="0 0 60 60" style="width:64px;height:64px;flex:0 0 64px" aria-hidden="true">
-                  <circle cx="30" cy="30" r="26" fill="none" stroke="#DDDED3" stroke-width="5" />
-                  <circle
-                    id="vfScoreArc"
-                    cx="30" cy="30" r="26"
-                    fill="none" stroke="#7A9E7E" stroke-width="5" stroke-linecap="round"
-                    stroke-dasharray="163.4" stroke-dashoffset="163.4"
-                    transform="rotate(-90 30 30)"
-                  />
-                  <text id="vfScoreNum" x="30" y="35" text-anchor="middle" style="font-family:'DM Mono',monospace;font-size:15px;font-weight:500" fill="#232A22">0</text>
-                </svg>
-                <div>
-                  <div class="score-verdict">Good, with 2 fixes</div>
-                  <div class="score-note">Both still free to make, because nothing is built yet.</div>
-                </div>
-              </div>
-              <div class="fix-card fix-card--gold">
-                <div class="fix-card__title">Kitchen — move to SE</div>
-                <div class="fix-card__body">Agni corner. One wall on the plan, zero cost on site.</div>
-              </div>
-              <div class="fix-card fix-card--sage">
-                <div class="fix-card__title">Pooja — keep in NE</div>
-                <div class="fix-card__body">Ishanya zone. Already well placed.</div>
-              </div>
-            </div>
+            ))}
           </PhoneShell>
         </div>
 

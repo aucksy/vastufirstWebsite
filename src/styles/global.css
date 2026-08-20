@@ -146,7 +146,7 @@ img, svg { max-width: 100%; }
 h1, h2 { font-family: var(--display); font-weight: 400; margin: 0; }
 
 /* Every paragraph on this page is a design element with a stated margin — the
-   badge pill, the kickers, the meta row, the zone counter. The browser's
+   kickers, the meta row, the zone counter. The browser's
    default 1em top and bottom silently added ~11px to each of them, which is
    drift against the handoff in a dozen places at once. Reset once here; the
    two that want spacing (`.prose p`, and the ones with an explicit margin
@@ -277,21 +277,6 @@ p { margin: 0; }
   align-items: center;
 }
 
-.badge-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  border: 1px solid var(--border-sage);
-  border-radius: 100px;
-  padding: 8px 18px;
-  font-family: var(--mono);
-  font-size: 11px;
-  letter-spacing: .18em;
-  text-transform: uppercase;
-  color: var(--sage-deep);
-  background: rgba(228, 235, 225, .5);
-}
-
 .hero h1 { margin: 26px 0 0; }
 .hero h1 em { font-style: normal; color: var(--sage); }
 
@@ -312,8 +297,17 @@ p { margin: 0; }
   flex-wrap: wrap;
 }
 
+/* Both badges, exactly one width. Two `1fr` columns in a shrink-to-fit grid
+   both take the width of the wider one, which is the point: sized to their own
+   content they differ by "Google Play" against "App Store". They drop to one
+   column on phones, where two would not fit. */
+.store-badges {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
 .store-badge {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   gap: 12px;
   background: var(--ink);
@@ -524,56 +518,16 @@ p { margin: 0; }
   transform-origin: top center;
 }
 
+/* No padding: these are the app's own screens, so they run to the edge of the
+   glass the way they do on a real phone. The shell clips whatever runs past
+   the bottom, which is exactly what a phone does to a scrollable page. */
 .how__screen {
   position: absolute;
   inset: 42px 0 0;
-  padding: 16px 22px;
+  overflow: hidden;
   transition: opacity .45s, transform .45s;
 }
-
-.plan-chip {
-  font-family: var(--mono);
-  font-size: 10px;
-  padding: 5px 10px;
-  border-radius: 100px;
-}
-.plan-chip--sage { background: var(--sage-tint); color: var(--sage-deep); }
-.plan-chip--muted { background: var(--sage-tint-3); color: var(--text-muted); }
-
-.info-card {
-  margin-top: 14px;
-  background: var(--sage-tint-2);
-  border-radius: 10px;
-  padding: 10px 12px;
-  font-size: 12px;
-  line-height: 1.45;
-  color: var(--text-secondary);
-}
-
-.score-row {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  background: var(--sage-tint-3);
-  border-radius: 14px;
-  padding: 14px 16px;
-}
-.score-verdict { font-family: var(--display); font-size: 18px; }
-.score-note { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
-
-.fix-card { border-radius: 10px; padding: 10px 12px; }
-.fix-card--gold {
-  margin-top: 10px;
-  background: var(--gold-tint);
-  border-left: 3px solid var(--gold);
-}
-.fix-card--sage {
-  margin-top: 8px;
-  background: var(--sage-tint-2);
-  border-left: 3px solid var(--sage);
-}
-.fix-card__title { font-size: 12.5px; font-weight: 600; }
-.fix-card__body { font-size: 11.5px; color: var(--text-muted); margin-top: 2px; }
+.how__screen img { width: 100%; height: auto; display: block; }
 
 .steps { display: flex; flex-direction: column; gap: 10px; margin-top: 36px; }
 .step {
@@ -1027,6 +981,10 @@ p { margin: 0; }
   .nav__cta-short { display: inline; }
 
   .hero__cols { grid-template-columns: 1fr; gap: 40px; }
+  .store-badges { grid-template-columns: 1fr; }
+  /* The badges stack here, and a link centred against a two-row stack reads as
+     if it belongs to neither row. Put it underneath instead. */
+  .hero__actions { flex-direction: column; align-items: flex-start; }
   .hero__phone-cell { justify-content: flex-start; }
   .hero__dial {
     width: 560px; height: 560px;

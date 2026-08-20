@@ -54,11 +54,28 @@ ok(a.wheel !== b.wheel, 'the zone wheel rotates on scroll', `${b.wheel} -> ${a.w
 ok(a.zone !== b.zone, 'the zone panel swaps on scroll', `${b.zone} -> ${a.zone}`);
 ok(a.bar !== b.bar, 'the progress hairline advances', `${b.bar} -> ${a.bar}`);
 
-// --- the score ring runs once and lands on 78 ------------------------------
+// --- the three app screens crossfade, and the last one wins ----------------
+// This replaced a check on a counting-up score ring. That ring lived on a
+// hand-drawn screen standing in for the app; the phone now shows the app's own
+// rendered screens, so there is no ring to count. The point of the check is the
+// same and it now also proves the pictures actually arrive.
 await tab.eval('window.scrollTo(0, document.getElementById("vfHowWrap").offsetTop + document.getElementById("vfHowWrap").offsetHeight - window.innerHeight - 40); 1');
-await sleep(1800);
-const score = await tab.eval('document.getElementById("vfScoreNum").textContent');
-ok(score === '78', 'the score ring animates to 78', score);
+await sleep(1200);
+const how = JSON.parse(await tab.eval(`
+  JSON.stringify({
+    third: vfScr2.style.opacity,
+    first: vfScr0.style.opacity,
+    step: vfStep2.className,
+    dash: vfDot2.className,
+    file: (vfScr2.querySelector('img').currentSrc || '').split('/').pop(),
+    px: vfScr2.querySelector('img').naturalWidth,
+  })
+`));
+ok(how.third === '1', 'the last of the three app screens is showing at the end', how.third);
+ok(how.first === '0', 'the first app screen has faded out', how.first);
+ok(/is-active/.test(how.step), 'step 03 is the highlighted row', how.step);
+ok(/is-active/.test(how.dash), 'the third progress dash is lit', how.dash);
+ok(how.px > 0, 'the app screenshot really loaded', `${how.file} at ${how.px}px`);
 
 // --- the last zone is the Brahmasthan centre, and it lights up -------------
 await tab.eval('window.scrollTo(0, document.getElementById("vfZoneWrap").offsetTop + document.getElementById("vfZoneWrap").offsetHeight - window.innerHeight - 5); 1');
