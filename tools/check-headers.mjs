@@ -93,12 +93,12 @@ if (BASE.includes('vastufirst.com')) {
       'the bare domain redirects to www over http',
       `${apex.status} -> ${to || 'no Location header'}`,
     );
-    // Asserted, not merely reported. This used to be a console note on the
-    // grounds that whether Namecheap answers on 443 is their business — which
-    // was wrong. Chrome and Safari send a typed bare domain to https FIRST, so
-    // a bare domain with no certificate is a visitor staring at "This site
-    // can't be reached", which is exactly what was reported on 20 Aug 2026.
-    // A quiet note let that sit behind an "all good". It fails now.
+    // Asserted, not merely reported. This was once a console note, on the
+    // grounds that whether the registrar answers on 443 is their business —
+    // which was wrong. Chrome and Safari send a typed bare domain to https
+    // FIRST, so a bare domain with no certificate is a visitor staring at
+    // "This site can't be reached". A quiet note let that sit behind an
+    // "all good" until someone typed the address by hand.
     try {
       const s = await fetch('https://vastufirst.com/', { redirect: 'manual' });
       const sTo = s.headers.get('location') || '';
@@ -111,7 +111,9 @@ if (BASE.includes('vastufirst.com')) {
       ok(
         false,
         'the bare domain answers on https too',
-        `${e.cause?.code || e.message} — see "KNOWN BROKEN" in README.md`,
+        // A stale local resolver fails this while the world sees it working.
+        // Check a public resolver before believing it: nslookup vastufirst.com 1.1.1.1
+        `${e.cause?.code || e.message} — check a public resolver before believing this`,
       );
     }
   } catch (e) {

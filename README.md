@@ -50,64 +50,45 @@ Static output goes to `dist/` and is served by Cloudflare's asset server. The on
 anywhere on this site is `functions/api/notify.ts`, which stores addresses in a Cloudflare KV
 namespace bound as `WAITLIST`. Every page and asset is a file.
 
-### How the domain is wired, and why it is wired that way
+### How the domain is wired
 
-`vastufirst.com` keeps its DNS at **Namecheap**, because the domain's **email forwarding** lives
-there — the MX records behind `contact@vastufirst.com`, the address the app's privacy policy
-publishes. Moving the zone's nameservers to Cloudflare would mean re-creating them, and a silent
-mail outage is not worth the tidiness. That is also why this is a **Pages** project rather than a
-Worker: a Pages custom domain attaches with a single CNAME, a Worker custom domain needs the whole
-zone.
+**DNS is at Cloudflare. Namecheap is now only the registrar.** Changed on 20 August 2026, and the
+reason is the whole point: Namecheap's URL forwarding answers on port 80 only, so `https://vastufirst.com`
+had no certificate and could never get one. Every modern browser sends a typed bare domain to https
+first, so the front door was a ~20 second wait and then "This site can't be reached".
 
-Two records at Namecheap, and nothing else in that zone is touched:
-
-| Host | Type | Value |
-|---|---|---|
-| `www` | CNAME | `vastufirst-website.pages.dev` — the site itself |
-| `@` | URL Redirect Record | `https://www.vastufirst.com` — set from the domain's **Redirect Domain** panel, not from Advanced DNS |
-
-`www.vastufirst.com` is the only custom domain on the Pages project, and the only canonical host.
-
-**Why the bare domain is NOT a Pages custom domain.** It was tried. Cloudflare verifies a custom
-domain by looking for a literal **CNAME** record, and an apex cannot have one — an ALIAS record
-resolves to the right addresses but does not read as a CNAME, so verification sits at
-`"CNAME record not set"` forever while `www`, which has a real CNAME, went active in minutes. An
-apex pointed at Cloudflare with no active custom domain is worse than useless: it answers **409** on
-http and fails the TLS handshake on https. Do not re-add it.
-
-**KNOWN BROKEN, and not fixable from this repo: `https://vastufirst.com` (no `www`).** Namecheap's
-URL Forward answers on **port 80 only**. Port 443 does not accept a connection at all, so the bare
-domain has no certificate and never will while the redirect is theirs. Typing `vastufirst.com` into
-Chrome or Safari now goes to https first, so the visitor gets "This site can't be reached" after a
-~20 second wait rather than the redirect. Measured 20 August 2026:
-
-| | |
+| Where | What |
 |---|---|
-| `http://vastufirst.com` | 302 to `https://www.vastufirst.com`, served by `namecheap-nginx` |
-| `https://vastufirst.com` | TCP 443 times out; TLS handshake failure |
-| typed `vastufirst.com` in a browser | Chrome error page, no fallback to http |
+| Namecheap | registrar only. Nameservers set to **Custom DNS**: `fatima.ns.cloudflare.com`, `kipp.ns.cloudflare.com` |
+| Cloudflare DNS | `vastufirst.com` A, **proxied** · `www` CNAME to `vastufirst-website.pages.dev`, **proxied** · Email Routing's three MX and two TXT |
+| Cloudflare rule | single redirect **"Bare domain to www"**: `https://vastufirst.com/*` → `https://www.vastufirst.com/${1}`, 301, query string preserved |
+| Cloudflare SSL | **Always Use HTTPS** on, so `http://` is upgraded first and then caught by the rule. Encryption mode **Full** |
 
-The only fix is for the apex to be answered by something that holds a certificate for it, which
-means the zone has to be on Cloudflare — and Namecheap's free email forwarding stops the moment the
-nameservers move, so `contact@vastufirst.com` has to move to Cloudflare Email Routing in the same
-sitting. Both are the owner's to approve. `aakashpahuja.in` is already wired this way in the same
-Cloudflare account, apex and `www` both on Pages, so the pattern is proven here.
+`www.vastufirst.com` is still the only canonical host and the only Pages custom domain. The apex is
+not a Pages custom domain and does not need to be — it never reaches an origin at all, because the
+redirect rule answers it at the edge. The apex A record is therefore a placeholder; its address is
+never contacted, and it is the one untidy thing left in this zone.
 
-**Two traps, both paid for:**
+**Email now works, and it never did before.** Namecheap had MX records pointing at its forwarding
+servers but **no forwarder was ever defined**, so `contact@vastufirst.com` — the address the app's
+privacy policy publishes and Google Play reads — silently went nowhere. It is now a Cloudflare Email
+Routing rule: `contact@vastufirst.com` → `vastufirst13@gmail.com`. The stale Namecheap MX and SPF
+records were deleted; Email Routing refuses to configure itself while another MX exists.
 
-- The apex redirect is **tied to Namecheap's parking service**. Changing the `www` CNAME away from
-  `parkingpage.namecheap.com` silently withdrew the apex's address record with it, and the bare
-  domain stopped resolving at all. If the bare domain ever goes dark, re-add the redirect from the
-  **Domain** tab's *Redirect Domain* panel — the record-type dropdown in Advanced DNS is a custom
-  widget that resists automation, and that panel writes the same record without it.
-- The zone's negative-cache time is **3601 seconds**. Any resolver that asked while a record was
-  missing keeps answering "no such name" for up to an hour after the fix, so a checker can call the
-  bare domain broken while the authoritative nameserver is already correct. Check the source of
-  truth before believing a resolver:
+**Two traps, if this ever has to be redone:**
+
+- **Cloudflare will not configure Email Routing until the zone is active AND no other MX records
+  exist.** Its "Add missing records" button fails silently on both counts, which reads as a broken
+  button rather than a precondition.
+- **A stale local resolver will call this broken when it is fine.** The old apex record carried a
+  ~30 minute TTL, so a machine that asked during the switch keeps answering with the old Namecheap
+  address well after the change. Check a public resolver, or the certificate itself, before
+  believing the machine in front of you:
 
 ```bash
-nslookup -type=A vastufirst.com dns1.registrar-servers.com
+nslookup vastufirst.com 1.1.1.1
 ```
+
 
 ---
 
