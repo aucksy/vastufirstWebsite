@@ -67,6 +67,17 @@ records:
 
 Everything else in that zone — the MX records and the SPF line — is untouched.
 
+Both hostnames are registered as custom domains on the Pages project. `www` validated immediately.
+The apex takes longer, because Cloudflare's verifier looks for a literal **CNAME** and an apex cannot
+have one — the ALIAS resolves to the right addresses but does not read as a CNAME, so its
+verification sits at "CNAME record not set" while the certificate is issued by the HTTP challenge
+instead. `functions/_middleware.ts` is what sends the apex to `www` once it is live.
+
+**If the apex never goes active**, the fallback needs no code: at Namecheap, change the `@` record
+from ALIAS to a **URL Redirect Record** pointing at `https://www.vastufirst.com` with type
+**Permanent (301)**, and remove `vastufirst.com` from the Pages project. Then delete
+`functions/_middleware.ts`, which becomes dead weight that costs a function call on every request.
+
 **One trap, paid for once.** The apex was originally a Namecheap *URL Redirect Record* pointing at
 `www`. Changing the `www` CNAME away from Namecheap's parking page silently withdrew the apex's
 address record with it, and `vastufirst.com` stopped resolving at all. The ALIAS record above does
