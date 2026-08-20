@@ -57,6 +57,11 @@ const ogUrl = new URL(ogImage, site).href;
     />
 
     <slot name="head" />
+
+    <!-- Reveal-on-scroll hides these until an observer shows them. With no
+         JavaScript nothing ever would, and the page — the signup form with it —
+         would render blank. -->
+    <noscript><style>[data-reveal] { opacity: 1 !important; transform: none !important; }</style></noscript>
   </head>
   <body>
     <a class="skip-link sr-only" href="#main">Skip to content</a>

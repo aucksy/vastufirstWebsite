@@ -13,10 +13,13 @@ const total = String(zones.length).padStart(2, '0');
           <p class="kicker kicker--gold">The nine zones</p>
           <h2 class="h2">Every direction<br />has a duty.</h2>
 
-          <div class="zones__live" id="vfZoneMin" aria-live="polite">
+          {/* Deliberately NOT aria-live: this text changes nine times as the wheel
+              turns, and announcing each change reads the whole panel aloud nine
+              times over. The same nine zones are listed once, quietly, below. */}
+          <div class="zones__live" id="vfZoneMin">
             <div class="zones__name-row">
               <span class="zones__name" id="vfZName">{first.name}</span>
-              <span class="zones__deva" id="vfZDeva">{first.deva}</span>
+              <span class="zones__deva" id="vfZDeva" lang="sa">{first.deva}</span>
             </div>
             <div class="zones__chips">
               <span class="chip chip--sage" id="vfZElem">{first.attribution}</span>
@@ -28,6 +31,18 @@ const total = String(zones.length).padStart(2, '0');
           <p class="zones__counter">
             <span id="vfZIdx">01</span> / {total} — keep scrolling to turn the dial
           </p>
+
+          {/* The panel above is a scroll toy. This is the same nine zones as
+              plain, static text — the only copy a screen reader, a search
+              engine, or a visitor with JavaScript off will ever get. */}
+          <ul class="sr-only">
+            {zones.map((z) => (
+              <li>
+                {z.name} — <span lang="sa">{z.deva}</span>, {z.sanskrit}. {z.attribution},
+                {' '}{z.measure}. {z.desc}
+              </li>
+            ))}
+          </ul>
         </div>
 
         <div class="zones__wheel-cell">

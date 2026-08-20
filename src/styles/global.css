@@ -154,6 +154,7 @@ h1, h2 { font-family: var(--display); font-weight: 400; margin: 0; }
 .h2 {
   font-size: clamp(36px, 3.6vw, 54px);
   line-height: 1.08;
+  margin: 14px 0 0;
   text-wrap: balance;
 }
 
@@ -579,7 +580,10 @@ h1, h2 { font-family: var(--display); font-weight: 400; margin: 0; }
 .step__num {
   font-family: var(--mono);
   font-size: 13px;
-  color: var(--gold);
+  /* Bronze, not gold: gold on this cream measures 2.09:1 and is unreadable.
+     The handoff says the same thing — gold is decorative, gold-family text
+     is bronze, which measures 6.14:1. */
+  color: var(--bronze);
   padding-top: 3px;
 }
 .step__title { font-family: var(--display); font-size: 22px; }
@@ -604,6 +608,8 @@ h1, h2 { font-family: var(--display); font-weight: 400; margin: 0; }
    4. The zones — scroll-driven mandala
    ========================================================================== */
 
+/* 360vh, where the design source has 320vh: nine stops instead of eight, at
+   the same 40vh of scroll per stop. */
 .zones__wrap { height: 360vh; }
 .zones__pane {
   position: sticky;
@@ -625,7 +631,7 @@ h1, h2 { font-family: var(--display); font-weight: 400; margin: 0; }
   gap: 80px;
   align-items: center;
 }
-.zones__pane h2 { color: var(--ivory); margin: 14px 0 0; }
+.zones__pane h2 { color: var(--ivory); }
 
 .zones__live { margin-top: 36px; min-height: 200px; }
 .zones__name-row { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; }
@@ -657,7 +663,7 @@ h1, h2 { font-family: var(--display); font-weight: 400; margin: 0; }
 .zones__counter {
   font-family: var(--mono);
   font-size: 11px;
-  color: var(--text-muted);
+  color: var(--text-faint); /* 5.43:1 on ink; --text-muted was 2.89:1 */
   margin-top: 18px;
 }
 
@@ -752,6 +758,7 @@ h1, h2 { font-family: var(--display); font-weight: 400; margin: 0; }
   font-size: clamp(36px, 4vw, 56px);
   line-height: 1.1;
   margin: 22px 0 0;
+  text-wrap: balance;
 }
 .cta__promise {
   font-size: 17px;
@@ -781,8 +788,14 @@ h1, h2 { font-family: var(--display); font-weight: 400; margin: 0; }
   outline: none;
   transition: border-color .2s;
 }
-.notify-form input::placeholder { color: var(--text-faint); }
+.notify-form input::placeholder { color: var(--text-muted); } /* 4.71:1; faint was 2.51:1 */
 .notify-form input:focus { border-color: var(--sage-deep); }
+/* The input sets outline:none, which out-specifies the global :focus-visible
+   rule and left this the only control on the page with no keyboard ring. */
+.notify-form input:focus-visible {
+  outline: 2px solid var(--sage-deep);
+  outline-offset: 2px;
+}
 .notify-form input.is-error { border-color: var(--error-border); }
 .notify-form button {
   font-family: var(--body);
@@ -833,7 +846,7 @@ h1, h2 { font-family: var(--display); font-weight: 400; margin: 0; }
   gap: 8px;
   font-family: var(--mono);
   font-size: 11px;
-  color: var(--text-muted);
+  color: var(--text-secondary); /* 6.92:1 on the warm ivory; --text-muted was 4.39:1 */
   border: 1px solid var(--border);
   border-radius: 100px;
   padding: 7px 16px;
@@ -878,7 +891,7 @@ h1, h2 { font-family: var(--display); font-weight: 400; margin: 0; }
   border-top: 1px solid rgba(211, 214, 201, .14);
   font-size: 12.5px;
   line-height: 1.6;
-  color: #7C836F;
+  color: var(--text-faint); /* 5.43:1 on ink; #7C836F was 3.74:1 */
   max-inline-size: 78ch;
 }
 
@@ -966,9 +979,17 @@ h1, h2 { font-family: var(--display); font-weight: 400; margin: 0; }
     align-items: center;
   }
 
-  .zones__wrap { height: auto; }
+  /* The zones section KEEPS its pin and KEEPS its full scroll runway at every
+     size. Only the panel's own sizing relaxes.
+
+     This is not a style choice. Scroll progress through the nine zones is
+     measured as (runway height - viewport height); collapse the runway to one
+     screen and that span is zero, so progress can only ever read 0 or 1. The
+     wheel then snaps 315 degrees in a single frame and the panel jumps from
+     North straight to the Brahmasthan — seven zones unreachable, on phones and
+     on any window under 800px tall. Releasing this pin the way the "How it
+     works" pin is released is exactly the bug. */
   .zones__pane {
-    position: relative;
     height: auto;
     min-height: 100vh;
     min-height: 100svh;
@@ -976,7 +997,6 @@ h1, h2 { font-family: var(--display); font-weight: 400; margin: 0; }
     overflow: visible;
     padding: 78px var(--gutter) 36px;
   }
-  .zones__live { min-height: 0; }
 }
 
 /* ---- Phone layout: width <= 900px --------------------------------------- */
@@ -1009,7 +1029,7 @@ h1, h2 { font-family: var(--display); font-weight: 400; margin: 0; }
 
   .zones__cols { grid-template-columns: 1fr; gap: 20px; }
   .zones__pane h2 { font-size: clamp(27px, 4.6vh, 34px); }
-  .zones__live { margin-top: 22px; }
+  .zones__live { margin-top: 22px; min-height: 0; }
   .zones__name { font-size: clamp(30px, 5vh, 40px); }
   .zones__desc { font-size: clamp(13.5px, 2vh, 15.5px); margin-top: 12px; }
   /* Sized in vh on purpose, so it survives short and landscape viewports. */

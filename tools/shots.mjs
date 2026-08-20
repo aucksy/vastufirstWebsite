@@ -125,6 +125,28 @@ for (const vp of VIEWPORTS) {
   const f = JSON.parse(fonts);
   if (!f.loaded) problems.push(`${vp.name}: Marcellus did not load (h1 is ${f.h1})`);
 
+  // Every one of the nine zones must be reachable by scrolling. This is the
+  // check that would have caught the released-pin bug: collapse the zones
+  // runway and progress can only read 0 or 1, so the wheel snaps from the
+  // first zone to the last and seven are never shown. A screenshot at a fixed
+  // percentage will happily photograph a working-looking panel while seven
+  // zones are unreachable — only walking the section finds it.
+  const wrapBox = await tab.eval(
+    '(() => { const e = document.getElementById("vfZoneWrap"); return JSON.stringify({ top: e.offsetTop, h: Math.round(e.getBoundingClientRect().height) }); })()',
+  );
+  const { top: zTop, h: zH } = JSON.parse(wrapBox);
+  const seen = new Set();
+  for (let i = 0; i <= 40; i++) {
+    await tab.eval(`window.scrollTo(0, ${Math.round(zTop + ((zH - vp.h) * i) / 40)}); 1`);
+    await sleep(70);
+    seen.add(await tab.eval('document.getElementById("vfZIdx").textContent'));
+  }
+  if (seen.size !== 9) {
+    problems.push(
+      `${vp.name}: only ${seen.size} of the 9 zones can be reached (${[...seen].sort().join(',')})`,
+    );
+  }
+
   console.log(`${vp.name}: ${STOPS.length} shots, page ${height + vp.h}px tall`);
 }
 

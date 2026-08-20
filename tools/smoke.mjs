@@ -118,6 +118,29 @@ ok(R.dial === '', 'reduced motion: the hero dial is not rotated', JSON.stringify
 ok(R.deg === '0°', 'reduced motion: the degree ticker does not run', R.deg);
 ok(R.bar !== '0%' && R.bar !== '', 'reduced motion: the progress bar still works', R.bar);
 
+// --- with JavaScript off, the page must still be readable ------------------
+// Reveal-on-scroll hides most of the page until an observer shows it. Without
+// the noscript override a visitor with JavaScript off gets a blank page and no
+// signup form at all.
+await tab.send('Emulation.setScriptExecutionDisabled', { value: true });
+await tab.goto(BASE + '/', 1800);
+const off = await tab.eval(`
+  (() => {
+    const vis = (sel) => {
+      const el = document.querySelector(sel);
+      if (!el) return 'missing';
+      const r = el.getBoundingClientRect();
+      return getComputedStyle(el).opacity + '|' + Math.round(r.height);
+    };
+    return JSON.stringify({ h1: vis('.h1'), form: vis('#vfForm'), card: vis('.card') });
+  })()
+`);
+const O = JSON.parse(off);
+ok(O.h1.startsWith('1|'), 'no JavaScript: the headline is visible', O.h1);
+ok(O.form.startsWith('1|'), 'no JavaScript: the signup form is visible', O.form);
+ok(O.card.startsWith('1|'), 'no JavaScript: the cards are visible', O.card);
+await tab.send('Emulation.setScriptExecutionDisabled', { value: false });
+
 // --- console must be clean under the live CSP ------------------------------
 const real = noise.filter((n) => !/favicon|DevTools|Autofocus/i.test(n));
 ok(real.length === 0, 'no console errors or CSP violations', real.slice(0, 4).join(' | '));

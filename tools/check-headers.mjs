@@ -82,5 +82,23 @@ ok(
   'the plain-form reply is a readable page, not JSON',
 );
 
+// The bare domain must reach the www one. Only meaningful against the live
+// site; skipped locally, and said out loud rather than passing silently.
+if (BASE.includes('vastufirst.com')) {
+  try {
+    const apex = await fetch('https://vastufirst.com/', { redirect: 'manual' });
+    const to = apex.headers.get('location') || '';
+    ok(
+      apex.status >= 300 && apex.status < 400 && to.includes('www.vastufirst.com'),
+      'the bare domain redirects to www',
+      `${apex.status} -> ${to || 'no Location header'}`,
+    );
+  } catch (e) {
+    ok(false, 'the bare domain redirects to www', String(e.cause?.code || e.message));
+  }
+} else {
+  console.log('SKIP  the bare-domain redirect (only testable against the live site)');
+}
+
 console.log(failures ? `\n${failures} failure(s)` : '\nall good');
 process.exit(failures ? 1 : 0);

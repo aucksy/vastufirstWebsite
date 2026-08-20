@@ -87,15 +87,10 @@ export const onRequest: PagesFunction<Env> = async ({ request, env }) => {
   const key = `email:${email}`;
   const existing = await env.WAITLIST.get(key);
   if (!existing) {
-    await env.WAITLIST.put(
-      key,
-      JSON.stringify({
-        email,
-        at: new Date().toISOString(),
-        country: (request as Request & { cf?: IncomingRequestCfProperties }).cf?.country ?? null,
-        ref: request.headers.get('referer') ?? null,
-      }),
-    );
+    // The address and the date it arrived, and nothing else. The privacy page
+    // says this is the only thing the site stores about anyone, so it has to be
+    // true — country and referrer used to be written here and were not needed.
+    await env.WAITLIST.put(key, JSON.stringify({ email, at: new Date().toISOString() }));
   }
 
   return wantsJson

@@ -47,7 +47,7 @@ export const zones: Zone[] = [
     sanskrit: 'Ishanya',
     attribution: 'Water · Ishana',
     measure: '9 of 81 padas',
-    desc: 'The head of the Purusha, and the corner tradition guards most closely. A pooja room is ideal here; a toilet, a kitchen or a staircase is a major defect.',
+    desc: 'The head of the Purusha, and the corner tradition guards most closely. A pooja room is ideal here; a toilet or a kitchen is a major defect, a staircase a lesser one.',
   },
   {
     ab: 'E',

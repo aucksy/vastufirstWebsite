@@ -119,6 +119,14 @@ function initForm() {
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
         body: JSON.stringify({ email }),
       });
+      if (res.status === 400) {
+        // The server rejected the address itself. "Try again in a moment" would
+        // send them round the same loop forever.
+        btn.disabled = false;
+        btn.textContent = label;
+        flashError('That does not look like an email address.');
+        return;
+      }
       if (!res.ok) throw new Error(String(res.status));
       form.hidden = true;
       ok.hidden = false;

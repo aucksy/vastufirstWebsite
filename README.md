@@ -73,6 +73,16 @@ address record with it, and `vastufirst.com` stopped resolving at all. The ALIAS
 not depend on Namecheap's parking service, so it cannot fail the same way. If the apex ever goes
 dark again, that is the first thing to look at.
 
+**And the tail of that trap:** the zone's negative-cache time is 3601 seconds. Any resolver that
+asked for the apex during the minutes it had no record will keep answering "no such name" for up to
+an hour after the fix, so `check-headers.mjs` can report the bare domain as broken while the
+authoritative nameserver is already answering correctly. Check the source of truth before believing
+a resolver:
+
+```bash
+nslookup -type=A vastufirst.com dns1.registrar-servers.com
+```
+
 ---
 
 ## How it is put together
