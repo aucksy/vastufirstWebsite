@@ -973,19 +973,8 @@ p { margin: 0; }
     overflow: visible; /* an overflow:hidden ancestor would kill the sticky below */
     padding: 64px var(--gutter) 76px;
   }
-  /* The device holds its place while the step cards scroll past beneath it. */
-  .how__phone-cell {
-    position: sticky;
-    top: 72px;
-    z-index: 2;
-  }
   .how__ring { display: none; }
-  /* Taller rows buy the scroll travel a released pin no longer gets for free. */
-  .step {
-    padding: 16px 18px;
-    min-height: 38vh;
-    align-items: center;
-  }
+  .step { padding: 16px 18px; }
 
   /* The zones section KEEPS its pin and KEEPS its full scroll runway at every
      size. Only the panel's own sizing relaxes.
@@ -1004,6 +993,24 @@ p { margin: 0; }
     align-items: flex-start;
     overflow: visible;
     padding: 78px var(--gutter) 36px;
+  }
+}
+
+/* ---- Short but still WIDE (over 900px): the released pin keeps its sticky
+   device, exactly as the handoff specifies and exactly as it shipped. Here it
+   is safe, because the layout is still two columns: the device sits in the left
+   column and the step cards in the right, so they never share horizontal space
+   and can never overlap. Narrow screens get the block below instead. -------- */
+@media (min-width: 901px) and (max-height: 800px) {
+  .how__phone-cell {
+    position: sticky;
+    top: 72px;
+    z-index: 2;
+  }
+  /* Taller rows buy the scroll travel a released pin no longer gets for free. */
+  .step {
+    min-height: 38vh;
+    align-items: center;
   }
 }
 
@@ -1030,10 +1037,48 @@ p { margin: 0; }
 
   .marquee__row { font-size: 14px; gap: 44px; }
 
-  /* Block flow, not a one-column grid: a sticky grid item is bounded by its own
-     grid area, so in a stacked grid the phone would unstick immediately. */
-  .how__cols { display: block; }
-  .how__copy { margin-top: 26px; }
+  /* DEPARTURE FROM THE HANDOFF, on purpose.
+     The handoff's "Responsive behaviour" says that below 900px the released pin
+     keeps the phone `position: sticky; top: 72px; z-index: 2` so "the device
+     holds its place while the step cards scroll past beneath it". On a real
+     ~412dp phone that reads as broken, not deliberate: there is no second
+     column to hold the text clear, so the headline and step 01 slide up BEHIND
+     the device and are chopped in half by it. Two things scrolling over each
+     other is exactly what the owner reported.
+     So on narrow screens the device does not stick. It sits in normal flow, one
+     item in a plain column, and nothing can overlap anything because nothing is
+     pinned. Wider windows keep the sticky device (see the short-but-wide block
+     above), where two columns make it safe.
+
+     Order: headline, the three step cards, then the device LAST — measured, not
+     guessed. A device placed above the cards is off the top of the screen by the
+     time the third screen arrives, so the score ring would count to 78 where
+     nobody can see it. Below the cards it rises INTO view as the section runs,
+     and at each switch the live step card and the matching phone screen are on
+     screen together, which is the whole point of the section.
+
+     `display: contents` on the copy column dissolves it, so its four children
+     become items of the same column as the device and can be ordered around it.
+     It is a plain wrapper div with no role of its own, so nothing is lost. */
+  /* `align-items: stretch` undoes the two-column rule's `center`. In a column
+     the cross axis is horizontal, so `center` would shrink the kicker, the
+     headline and the dashes to their text width and centre them — the section
+     is left-aligned everywhere else. */
+  .how__cols { display: flex; flex-direction: column; align-items: stretch; gap: 0; }
+  .how__copy { display: contents; }
+  .how__copy > .kicker { order: 1; }
+  .how__copy > .h2 { order: 2; }
+  .how__copy > .steps { order: 3; }
+  /* 18px, not the desktop 22px: it lines the dashes up with the step numbers,
+     whose cards use the narrower padding set above. */
+  .how__copy > .dashes { order: 4; margin-left: 18px; }
+  .how__phone-cell { order: 5; margin-top: 34px; }
+  /* Travel insurance, and the only reason this number exists. Progress through
+     the three screens is measured as (section height - viewport height); on a
+     tall screen with short cards — a portrait tablet — that span shrinks toward
+     zero and the screens would snap from the first to the last. This floor only
+     bites where the cards are short and the screen is tall. */
+  .step { min-height: 20vh; }
 
   .zones__cols { grid-template-columns: 1fr; gap: 20px; }
   .zones__pane h2 { font-size: clamp(27px, 4.6vh, 34px); }

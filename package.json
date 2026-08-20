@@ -10,7 +10,7 @@
     "preview": "astro preview",
     "check": "astro check",
     "deploy": "astro build && wrangler pages deploy",
-    "cf:dev": "astro build && wrangler pages dev"
+    "cf:dev": "astro build && wrangler pages dev --port 8799"
   },
   "dependencies": {
     "@cloudflare/workers-types": "^5.20260820.1",

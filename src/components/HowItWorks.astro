@@ -6,19 +6,19 @@ const steps = [
     n: '01',
     title: 'Sketch your plot',
     body:
-      'Drag rooms onto a simple grid — no CAD, no architect. A farmhouse or a 2BHK, it takes two minutes. Or photograph a printed plan and check what we read back.',
+      'Drag rooms onto a simple grid, without CAD and without an architect. A farmhouse or a 2BHK takes two minutes. You can also photograph a printed plan and check what we read back.',
   },
   {
     n: '02',
     title: 'Mark north',
     body:
-      'Point your phone at the road or type the bearing. Which way the house faces earns nothing and costs nothing — it is where your front door falls, on 32 named positions, that counts.',
+      'Point your phone at the road or type the bearing. Which way the house faces earns nothing and costs nothing. What counts is where the front door falls, on one of 32 named positions.',
   },
   {
     n: '03',
     title: 'Get the verdict',
     body:
-      'A room-by-room score with ranked fixes, each one tagged with where its rule comes from — and remedies for whatever cannot move.',
+      'A room-by-room score with ranked fixes. Each fix is tagged with where its rule comes from, and anything that cannot move gets a remedy instead.',
   },
 ];
 ---
@@ -69,7 +69,7 @@ const steps = [
                 <text x="50" y="98" text-anchor="middle" style="font-family:'DM Mono',monospace;font-size:5.5px" fill="#6B7064">PLOT FACES 34° NE</text>
               </svg>
               <div class="info-card">
-                Compass locked. Every rule is computed against your plot’s true orientation — not an
+                Compass locked. Every rule is computed against your plot’s true orientation, not an
                 assumed north.
               </div>
             </div>
@@ -92,7 +92,7 @@ const steps = [
                 </svg>
                 <div>
                   <div class="score-verdict">Good, with 2 fixes</div>
-                  <div class="score-note">Both still free to make — nothing is built yet.</div>
+                  <div class="score-note">Both still free to make, because nothing is built yet.</div>
                 </div>
               </div>
               <div class="fix-card fix-card--gold">

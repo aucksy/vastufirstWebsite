@@ -20,3 +20,6 @@ Thumbs.db
 
 # the original handoff archive — the unpacked copy in handoff/ is what we read
 *.zip
+
+# screenshots from tools/shots.mjs — regenerate them, never commit them
+shots/

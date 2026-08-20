@@ -38,7 +38,7 @@ export const zones: Zone[] = [
     sanskrit: 'Uttara',
     attribution: 'Kubera',
     measure: '9 of 81 padas',
-    desc: 'Kubera’s quarter, read for wealth and work. Nothing is barred from the north — a living room or a balcony scores as ideal here.',
+    desc: 'Kubera’s quarter, read for wealth and work. Nothing is barred from the north, and a living room or a balcony scores as ideal.',
   },
   {
     ab: 'NE',
@@ -56,7 +56,7 @@ export const zones: Zone[] = [
     sanskrit: 'Purva',
     attribution: 'Indra',
     measure: '9 of 81 padas',
-    desc: 'Indra’s quarter, read for vitality and standing. Whether a toilet may sit here is one of the ten questions the app refuses to settle for you.',
+    desc: 'Indra rules the east, read for vitality and standing. Whether a toilet may sit here is one of the ten questions the app refuses to settle for you.',
   },
   {
     ab: 'SE',
@@ -65,7 +65,7 @@ export const zones: Zone[] = [
     sanskrit: 'Agneya',
     attribution: 'Fire · Agni',
     measure: '9 of 81 padas',
-    desc: 'Agni’s corner — fire’s own quarter. The kitchen is ideal here, and so is the garage. A bedroom is not, and stored water is read against the fire.',
+    desc: 'Agni’s corner, and fire’s own quarter. The kitchen is ideal here, and so is the garage. A bedroom is not, and stored water is read against the fire.',
   },
   {
     ab: 'S',
@@ -83,7 +83,7 @@ export const zones: Zone[] = [
     sanskrit: 'Nairritya',
     attribution: 'Earth · Nirriti',
     measure: '9 of 81 padas',
-    desc: 'The feet of the Purusha, and the heaviest ground on the grid. The master bedroom belongs here — a kitchen, a toilet or an open balcony is a defect.',
+    desc: 'The feet of the Purusha, and the heaviest ground on the grid. The master bedroom belongs here. A kitchen, a toilet or an open balcony is a defect.',
   },
   {
     ab: 'W',
@@ -92,7 +92,7 @@ export const zones: Zone[] = [
     sanskrit: 'Paschima',
     attribution: 'Varuna',
     measure: '9 of 81 padas',
-    desc: 'Varuna’s quarter, read for gains, savings and learning. A settled zone that takes a great deal — dining, study, bedrooms, even the toilet.',
+    desc: 'Varuna’s quarter, read for gains, savings and learning. A settled zone that takes a great deal: dining, study, bedrooms, even the toilet.',
   },
   {
     ab: 'NW',
@@ -101,7 +101,7 @@ export const zones: Zone[] = [
     sanskrit: 'Vayavya',
     attribution: 'Air · Vayu',
     measure: '9 of 81 padas',
-    desc: 'Vayu’s quarter — the zone of movement: guests, vehicles, things meant to leave. Guest rooms, the garage and the toilet are at home here.',
+    desc: 'Vayu’s quarter, and the zone of movement: guests, vehicles, things meant to leave. Guest rooms, the garage and the toilet are at home here.',
   },
   {
     ab: 'C',
@@ -110,7 +110,7 @@ export const zones: Zone[] = [
     sanskrit: 'Brahmasthan',
     attribution: 'Space · Brahma',
     measure: 'the centre 9 padas',
-    desc: 'The nine squares at the dead centre, held by Brahma. The texts say they must stay open — heavy weight here is the one defect taken straight from the classical source.',
+    desc: 'The nine squares at the dead centre, held by Brahma. The texts say they must stay open, and heavy weight here is the one defect taken straight from the classical source.',
   },
 ];
 

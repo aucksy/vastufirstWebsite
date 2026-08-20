@@ -29,7 +29,12 @@ function fitPhone() {
   if (!ph) return;
   const narrow = window.innerWidth <= 900;
   const unpinned = narrow || window.innerHeight <= 800;
-  const cap = narrow ? 0.66 : 0.86; // a step card must still show beneath the pinned device
+  // The handoff's 0.66, kept. Its original reason is gone — nothing is pinned
+  // on a narrow screen any more, so there is no step card to leave room under
+  // (see global.css) — but 0.66 is still the right number: it is the largest
+  // scale at which the whole device and the step card above it fit on a 740px
+  // screen at once. Photographed at 0.80 the device ran to 71% of that screen.
+  const cap = narrow ? 0.66 : 0.86;
   const s = unpinned
     ? Math.max(0.52, Math.min(cap, (window.innerHeight - 170) / 680))
     : Math.min(1, (window.innerHeight - 150) / 680);
