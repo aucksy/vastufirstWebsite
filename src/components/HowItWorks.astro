@@ -25,7 +25,11 @@ const steps = [
     n: '03',
     title: 'Get the verdict',
     body:
-      'A room-by-room score with ranked fixes. Each fix is tagged with where its rule comes from, and anything that cannot move gets a remedy instead.',
+      // ⚠ REWRITTEN for v0.22.0. The old line said "anything that cannot move gets a remedy
+      // instead", which was true of an object and quietly untrue of a whole class of reader: a
+      // flat owner was being handed instructions to move the building. The app now asks house or
+      // flat, and says so where it cannot offer a change.
+      'A room-by-room score with ranked fixes, each tagged with where its rule comes from. Tell it your home is a flat and it stops suggesting changes to the building around you — it still reports every one of them, and says whose they are.',
   },
 ];
 
@@ -63,7 +67,8 @@ const screens = [
 
         <div class="how__copy">
           <p class="kicker">How it works</p>
-          <h2 class="h2">Three steps.<br />Before one brick.</h2>
+          {/* ⚠ "Before one brick" was the building case again, and it is the minority one. */}
+          <h2 class="h2">Three steps.<br />No sign-up.</h2>
 
           <div class="steps">
             {steps.map((s, i) => (

@@ -23,5 +23,9 @@ Thumbs.db
 
 # screenshots from tools/shots.mjs — regenerate them, never commit them
 shots/
+shots-*/
 how-shots*/
+
+# the local preview/dev-server config, which is a machine setting, not the site
+.claude/
 how-new/

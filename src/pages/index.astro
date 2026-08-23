@@ -9,26 +9,31 @@ import WhyVastuFirst from '../components/WhyVastuFirst.astro';
 import NotifyCta from '../components/NotifyCta.astro';
 import Footer from '../components/Footer.astro';
 
-const title = 'VastuFirst — vastu before you build';
+const title = 'VastuFirst — read your home’s vastu from its floor plan';
 const description =
-  'A room-by-room vastu verdict on your floor plan, before a single brick is laid. Photograph the plan, mark north, and read your score on the 81-pada grid, with every rule sourced. Android app, launching soon.';
+  'Photograph your floor plan and the app reads the rooms off it, or draw one by hand. You check every room before anything is scored. A room-by-room vastu verdict on the 81-pada grid, house or flat, with every rule sourced. Android app, launching soon.';
 
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'SoftwareApplication',
   name: 'VastuFirst',
   applicationCategory: 'LifestyleApplication',
+  // ⚠ ANDROID ONLY, and it stays that way until the owner decides otherwise. iPhone is not
+  // scheduled, so it must not appear here either — structured data is a promise made to a machine
+  // that then repeats it in search results, where nobody will see the caveat we did not write.
   operatingSystem: 'Android',
   url: 'https://www.vastufirst.com',
   description:
-    'A vastu app for a home you are buying, building or already living in. Photograph a floor plan and it reads the rooms back, or draw one by hand. Mark north, and get a room-by-room vastu verdict with ranked layout changes. The score is computed on the device.',
+    'A vastu app for a home you are buying, building or already living in, and for a flat as well as a house. Photograph a floor plan and it reads the rooms back for you to check, or draw one by hand. Mark north, and get a room-by-room vastu verdict with ranked fixes. The score is computed on the device.',
   inLanguage: 'en-IN',
   featureList: [
-    'Reads a photographed or printed floor plan into rooms',
-    'Room-by-room vastu verdict on the 81-pada mandala grid',
+    'Reads a photographed or printed floor plan into rooms, which you confirm before scoring',
+    'Draw a home by hand on a grid instead, if there is no plan to photograph',
+    'Room-by-room vastu verdict on the 81-pada mandala grid — eight directions and the centre',
     '32-position entrance analysis',
     'Provenance tag on every rule',
-    'Both readings shown where the schools disagree',
+    'Both readings shown where serious sources disagree, and which one your score follows',
+    'A flat is never told to change the building around it',
     'Works offline, with the score computed on the phone',
   ],
 };

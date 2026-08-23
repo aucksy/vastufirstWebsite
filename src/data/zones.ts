@@ -56,7 +56,11 @@ export const zones: Zone[] = [
     sanskrit: 'Purva',
     attribution: 'Indra',
     measure: '9 of 81 padas',
-    desc: 'Indra rules the east, read for vitality and standing. Whether a toilet may sit here is one of the ten questions the app refuses to settle for you.',
+    // ⚠ THIS LINE WENT STALE ON 23 AUG 2026 AND HAD TO BE CHECKED, not assumed. It said a
+    // toilet in the east was "one of the ten questions the app refuses to settle for you". The
+    // app now shows both readings AND states that its own number marks an eastern toilet down —
+    // so "refuses to settle" had become the opposite of what the report says.
+    desc: 'Indra rules the east, read for vitality and standing. Whether a toilet may sit here is one of the ten questions where serious sources disagree — you are shown both readings, and told which one your score follows.',
   },
   {
     ab: 'SE',

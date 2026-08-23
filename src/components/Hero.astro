@@ -22,28 +22,31 @@ import PhoneShell from './PhoneShell.astro';
 
   <div class="hero__cols">
     <div>
-      <h1 class="h1" data-reveal="1">India’s No. 1<br /><em>Vastu</em> App</h1>
+      {/* "India's No. 1 Vastu App" is gone. The app has not launched, so there is no ranking
+          it could be first in — and this site's whole argument is that our advice can be traced
+          to a source. Opening on a claim nobody can check undercuts every honest line below it. */}
+      <h1 class="h1" data-reveal="1">Read your home’s<br /><em>Vastu</em></h1>
 
+      {/* ⚠ "before a single brick is laid" described the ONE person in three the app is not
+          mostly for. Its own first screen leads with "I am buying a home", because most people
+          open it holding a plan somebody else has already built. The sentence now covers what it
+          actually does, and says house-or-flat, which became true in v0.22.0. */}
       <p class="hero__sub" data-reveal="2">
-        A room-by-room vastu verdict on your floor plan — before a single brick is laid. Photograph
-        the plan, mark north, and read your score. Every rule names where it comes from.
+        Photograph your floor plan and the app reads the rooms off it — or draw one by hand. You
+        check every room before anything is scored. House or flat, and every rule names where it
+        comes from.
       </p>
 
       <div class="hero__actions" data-reveal="3">
         {/* The two badges live in their own grid so they are exactly the same
             width. Left to themselves they size to their own text and glyph,
             and "Google Play" is wider than "App Store". */}
+        {/* ⛔ THE APP STORE BADGE IS GONE. iPhone is not a decision the owner has made — not
+            "later", not "after Android", not decided. A store badge is the strongest promise a
+            landing page can make, and this one was promising a product nobody has agreed to build.
+            The grid keeps its two-column rule and simply has one child, which is what it already
+            does at narrow widths. */}
         <div class="store-badges">
-        <div class="store-badge">
-          <svg viewBox="0 0 24 24" style="width:24px;height:24px;fill:#F8F6F0;flex:0 0 24px" aria-hidden="true">
-            <path d="M17.05 12.04c-.03-2.4 1.96-3.55 2.05-3.61-1.12-1.63-2.86-1.86-3.47-1.88-1.47-.15-2.88.87-3.63.87-.75 0-1.9-.85-3.13-.83-1.61.02-3.1.94-3.92 2.38-1.68 2.9-.43 7.2 1.2 9.56.8 1.15 1.75 2.45 3 2.4 1.2-.05 1.66-.78 3.12-.78 1.45 0 1.86.78 3.13.75 1.3-.02 2.12-1.17 2.91-2.33.92-1.34 1.3-2.64 1.32-2.7-.03-.02-2.54-.98-2.58-3.83zM14.66 4.9c.66-.8 1.1-1.92.98-3.03-.95.04-2.1.63-2.78 1.43-.61.7-1.15 1.84-1 2.92 1.05.08 2.13-.53 2.8-1.32z" />
-          </svg>
-          <div>
-            <div class="store-badge__over">Coming later on</div>
-            <div class="store-badge__name">App Store</div>
-          </div>
-        </div>
-
         <div class="store-badge">
           <svg viewBox="0 0 24 24" style="width:24px;height:24px;flex:0 0 24px" aria-hidden="true">
             <path d="M4 3.5 L15.5 12 L4 20.5 Z" fill="none" stroke="#F8F6F0" stroke-width="1.6" stroke-linejoin="round" />
@@ -71,9 +74,18 @@ import PhoneShell from './PhoneShell.astro';
     <div class="hero__phone-cell" data-reveal="2">
       <div class="float-wrap" id="vfFloatWrap">
         <PhoneShell>
+          {/* ⚠ THIS MOCK SHOWED A SCREEN THE APP DOES NOT HAVE. Three inventions in four lines:
+              a "Step 2 of 3" counter, which the app deliberately REMOVED because it was wrong on
+              every path (a scanned home is five screens, a drawn one is four); a heading reading
+              "Face the road, hold steady"; and a "Lock north" button. The real screen asks "Which
+              way is North?", explains the dial, and its button reads "Read my home".
+
+              The three screens under "How it works" are the app's own recorded screenshots for
+              exactly this reason. This one is hand-built HTML because the compass animates on
+              scroll — so its WORDS have to be checked against the app by hand. They now match. */}
           <div class="mn__head">
-            <div class="phone__step">Step 2 of 3 · Mark north</div>
-            <div class="phone__title">Face the road,<br />hold steady</div>
+            <div class="phone__step">Mark north</div>
+            <div class="phone__title">Which way<br />is North?</div>
             <div class="mn__deg">
               <span class="mn__deg-num" id="vfDeg">0°</span>
               <span class="mn__deg-dir" id="vfDir">N</span>
@@ -84,7 +96,7 @@ import PhoneShell from './PhoneShell.astro';
             <CompassDial variant="phone" groupId="vfPhoneDial" />
           </div>
 
-          <div class="phone__cta">Lock north</div>
+          <div class="phone__cta">Read my home</div>
         </PhoneShell>
       </div>
     </div>
