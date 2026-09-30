@@ -45,7 +45,9 @@ await render('icon-source.html', 'apple-touch-icon.png', 180, 180);
    ------------------------------------------------------------------------- */
 const GOLDENS = resolve(here, '..', '..', 'app', 'src', 'androidUnitTest', 'roborazzi');
 const SCREENS = [
-  ['scan-review-printed/scan-review-printed__baseline.png', 'scan.webp'],
+  // The scan result, "We read N rooms" with North asked on the same screen. Until 30 Sep 2026 this
+  // was 'scan-review-printed' ("Check what we read"), a screen the app deleted in v0.35.0.
+  ['scan-placed/scan-placed__baseline.png', 'scan.webp'],
   ['marknorth-photo/marknorth-photo__baseline.png', 'north.webp'],
   ['report-free/report-free__baseline.png', 'report.webp'],
 ];
